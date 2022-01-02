@@ -9,6 +9,9 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\This;
+ use Saidjon\InertiaCrudGenerator\Traits\CrudList;
+ use Saidjon\InertiaCrudGenerator\Traits\CrudCreate;
+ use Saidjon\InertiaCrudGenerator\Traits\CrudController;
 
 class InertiaCrudGenerator
 {

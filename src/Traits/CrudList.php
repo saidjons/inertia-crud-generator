@@ -1,7 +1,7 @@
 <?php 
 
 
- namespace Saidjon\InertiaCrudGenerator;
+ namespace Saidjon\InertiaCrudGenerator\Traits;
 trait CrudList {
 
  public  $VUE_PATH="js/Pages/"; //with trailing slash

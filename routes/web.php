@@ -1,6 +1,7 @@
 <?php 
 
-use CrudGeneratorController;
+ namespace Saidjon\InertiaCrudGenerator;
+
 use Illuminate\Support\Facades\Route;
 
 ##########      Generator

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Saidjon\InertiaCrudGenerator;
+namespace Saidjon\InertiaCrudGenerator\Traits;
 
 use Illuminate\Support\Facades\Log;
 
