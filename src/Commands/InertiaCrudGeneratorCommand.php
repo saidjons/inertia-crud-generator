@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Saidjon\InertiaCrudGenerator\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class InertiaCrudGeneratorCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'inertia-crud-generator';
 
     public $description = 'My command';
 
