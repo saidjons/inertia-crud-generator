@@ -2,6 +2,7 @@
 
 namespace Saidjon\InertiaCrudGenerator;
 
+use Illuminate\Support\Facades\Artisan;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Saidjon\InertiaCrudGenerator\Commands\InertiaCrudGeneratorCommand;
@@ -25,10 +26,12 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
 
     public function boot()
     {
+        
+  
            $this->publishes([
-            __DIR__.'../resources/Components' => resource_path('js/Components'),
-            __DIR__.'../resources/Pages' => resource_path('js/Pages'),
-            __DIR__.'../resources/plugins' => resource_path('js/plugins'),
+            __DIR__.'/../resources/js/Components' => resource_path('js/Components'),
+            __DIR__.'/../resources/js/Pages' => resource_path('js/Pages'),
+            __DIR__.'/../resources/js/plugins' => resource_path('js/plugins'),
         ]);
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
