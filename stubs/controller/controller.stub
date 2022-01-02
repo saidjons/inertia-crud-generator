@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class {{controllerName}} extends Controller
+{
+     
+     public function index()
+     {
+         return Inertia::render('{{upModel}}/List');
+     }
+
+     public function show($id)
+     {
+         return Inertia::render('{{upModel}}/View');
+     }
+
+
+     public function create()
+     {
+         return Inertia::render('{{upModel}}/Create');
+         
+     }
+}

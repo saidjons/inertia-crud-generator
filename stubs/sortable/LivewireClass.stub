@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Livewire\{{folderName}};
+
+use App\Models\{{model}};
+use Livewire\Component;
+
+class {{livewireClassName}} extends Component
+{
+    public ${{table_name}};
+   
+
+    public function store($data)
+    {
+        $data = json_decode($data);
+
+        foreach ($data as $key =>  $d) {
+           $video = {{model}}::find($d->id);
+           $video->order=$key;
+           $video->save();
+        }
+    }
+
+    
+    public function mount()
+    {
+        $this->{{table_name}}={{model}}::select(['id','order','{{identifier2}}'])->get()->sortBy('order')->toArray();
+        $this->{{table_name}}=json_encode(array_values($this->{{table_name}}));
+    }
+    public function render()
+    {
+        return view('livewire.{{folderName}}.sortable');
+    }
+}

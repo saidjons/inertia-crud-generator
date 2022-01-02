@@ -1,0 +1,157 @@
+
+<script>
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
+import Button from '@/Components/Button.vue'
+import { GithubIcon } from '@/Components/Icons/brands.jsx'
+import { Head } from '@inertiajs/inertia-vue3'
+ import TextareaField from '@/Components/Fields/Textarea.vue';
+import InputField from '@/Components/Fields/Input.vue';
+import OptionsField from '@/Components/Fields/Options.vue';
+import CheckboxField from '@/Components/Fields/Checkbox.vue';
+import CkeditorComponent from '@/Components/Fields/CkeditorImage.vue';
+import FilePondImageUpload from '@/Components/Fields/FilePondImageUpload.vue';
+import stringToSlug from '@/plugins/stringToSlug';
+import ErrorMessage from '@/Components/Error/Message.vue'
+ 
+
+
+export default {
+    props:['token'],
+    components: {
+        BreezeAuthenticatedLayout,
+        Button,
+        GithubIcon,
+        Head,
+    TextareaField,
+    InputField,
+    OptionsField,
+    CkeditorComponent,
+    CheckboxField,
+    FilePondImageUpload,
+		stringToSlug,
+			ErrorMessage
+    },
+     	mounted() {
+           window.csrf = this.$page.props.token
+           window.token = this.$page.props.csrf
+					  
+		
+	},
+  methods: {
+				setErrors(d){
+				 
+						let errors = this.flattenObject(d)
+					let values = Object.values(errors)
+					values = [...values]
+			 			this.errors = values 
+				},
+				 flattenObject(ob) {
+					var toReturn = {};
+
+					for (var i in ob) {
+							if (!ob.hasOwnProperty(i)) continue;
+
+							if ((typeof ob[i]) == 'object' && ob[i] !== null) {
+									var flatObject = this.flattenObject(ob[i]);
+									for (var x in flatObject) {
+											if (!flatObject.hasOwnProperty(x)) continue;
+
+											toReturn[i + '.' + x] = flatObject[x];
+									}
+							} else {
+									toReturn[i] = ob[i];
+							}
+					}
+					return toReturn;
+			},
+
+				
+				{{setFunctions}}
+     
+    store(){
+			this.errors = null
+			 window.axios.post('/api/{{modelPl}}',{
+				headers: { 
+					'Accept':'application/json',
+					'X-CSRF-TOKEN' : window.csrf,
+      'Authorization' : 'Bearer ' + window.token
+			
+			} ,
+					{{postFields}}
+			}) 
+				.then(res=> { 
+					console.log(res);
+					   if (res.status ==200) {
+						 window.notify(res.message)
+					 }else{
+						 this.setErrors(res.data)
+					 }
+			  }) 
+			.catch(error=> {
+				this.errors = Object.values(this.flattenObject(error.response.data.errors));
+				if(this.errors){
+					window.notify(this.errors[0],'tip')
+
+				}
+
+			 });
+    
+			 
+		 
+    }
+  },
+  
+  
+  data() {
+    return {
+			{{dataFields}}
+			errors:[]
+    }
+  },
+}
+</script>
+
+
+<template>
+    <Head title="Dashboard" />
+
+    <BreezeAuthenticatedLayout>
+        <template #header>
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <h2 class="text-xl font-semibold leading-tight">
+                    {{modelPl}}
+                </h2>
+
+               
+            </div>
+        </template>
+
+        <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
+            <div class="w-4/5 justify-center text-left mx-5 ">
+  <div class="bg-white rounded px-2 pt-6 pb-8 mb-4">
+	<template v-if='errors' v-for='error in errors' :key='error'>
+	<error-message :error='error' />
+	</template>
+ 
+	 	{{createFields}}
+
+  </div><!-- end of wrapper-->
+
+  <!-- buttons start -->
+      <div class="flex items-center justify-between">
+      <button 
+            @click='store'
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+        Create post
+      </button>
+      <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+        cancel
+      </a>
+    </div>
+  <!-- buttons end -->
+ 
+</div>
+
+        </div>
+    </BreezeAuthenticatedLayout>
+</template>

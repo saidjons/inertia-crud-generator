@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@inertiajs/inertia": "^0.10.1",
+    "@inertiajs/inertia-vue3": "^0.5.2",
+    "awesome-notifications": "^3.1.2"
+  }
+}

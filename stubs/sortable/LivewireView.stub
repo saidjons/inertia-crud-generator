@@ -1,0 +1,93 @@
+ <div>
+     <div>
+  <link rel="stylesheet" href="/css/tabs.css">  
+  <link rel="stylesheet" href="/css/build.css">  
+  <link href="https://unpkg.com/tabulator-tables@4.9.3/dist/css/tabulator.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.9.3/dist/js/tabulator.min.js"></script>
+
+
+{{-- x-data=tabs start --}}
+<div x-data="{ tab: window.location.hash ? window.location.hash.substring(1) : '{{table_name}}' }" id="tab_wrapper">
+  <!-- The tabs navigation -->
+  <nav class="flex flex-row mx-10  my-5 p-1 space-x-4">
+    <a class="border-b-2  py-1 px-2"
+
+     :class="{ 'active': tab === 'playlist' ,'border-green-400':tab=='playlist'}" @click.prevent="tab = 'playlist'; window.location.hash = 'playlist'" href="#">playlist</a>
+     
+    <a class="border-b-2 py-1 px-2" 
+    
+    :class="{ 'active': tab === '{{table_name}}' ,'border-green-400':tab=='{{table_name}}'}" @click.prevent="tab = '{{table_name}}'; window.location.hash = '{{table_name}}'" href="#">{{table_name}}</a>
+  </nav>
+
+  <!-- The tabs content -->
+ 
+  
+      <div class="tab-content flex flex-col mx-10 ">
+      <div   class="flex justify-items-center flex-col   my-5 " x-show="tab === '{{table_name}}'">
+     {{-- {{table_name}} tab --}}
+     <div class="  " id="{{table_name}}"></div>
+
+      </div>
+    
+    </div>
+	 	<div class=" flex justify-items-center my-5">
+			<button 
+				 id="storeBtn"
+			 class=" ml-10   m-1 p-2 mx-5 px-5 border-2 border-gray-500 bg-white text-gray-900 opacity-30 hover:bg-green-200 rounded-md   ">store</button>
+        {{-- {{table_name}} tab end --}}
+		</div>
+        <input type='hidden' value='{{ ${{table_name}}  }}' id='{{table_name}}Data'  />
+</div>
+{{-- x-data=tabs end --}}
+
+ 
+{{-- tabs end  --}}
+
+
+<script>
+
+let storeBtn= document.getElementById('storeBtn')
+storeBtn.addEventListener('click',()=>{
+			 let data=JSON.stringify({{table_name}}.getData())
+			@this.store(data)
+  location.reload();
+
+ 
+ 
+})
+ 
+ 
+let {{table_name}}Data =document.getElementById('{{table_name}}Data')
+ {{table_name}}Data = JSON.parse({{table_name}}Data.value)
+console.log({{table_name}}Data);
+
+let orders = document.getElementById('orders')
+let {{table_name}} = new Tabulator("#{{table_name}}", {
+   
+    movableRows:true,
+    data:{{table_name}}Data,
+    // groupBy:"title",
+    columns:[
+        {rowHandle:true, formatter:"handle", headerSort:false, frozen:true, width:100, minWidth:30},
+        {{{identifier2}}:"Name", field:"{{identifier2}}",editor:"input", width:400,headerSort:false},
+        
+    ],
+     rowMoved:function(row){
+        data = {{table_name}}.getData();
+     
+       data.forEach((el,index)=>{
+        el.order=index
+        {{table_name}}.updateData([{id:el.id, order:index}]); //update data
+         
+      })
+			orders.value=JSON.stringify({{table_name}}.getData())
+		 
+    }
+});
+
+
+</script>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.2.1/cdn.js'></script>
+</div>
