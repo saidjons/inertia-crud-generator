@@ -1,8 +1,9 @@
 <template>
-    <Head title="Dashboard" />
+    
 
-    <BreezeAuthenticatedLayout>
+    <admin-layout>
      
+    <template v-slot:content>
 
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <!-- <generator-create  /> -->
@@ -61,14 +62,14 @@
             <!-- generator end -->
 
         </div>
-    </BreezeAuthenticatedLayout>
+    </template>
+
+    </admin-layout>
 </template>
 
 <script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
-import Button from '@/Components/Button.vue'
-import { GithubIcon } from '@/Components/Icons/brands.jsx'
-import { Head } from '@inertiajs/inertia-vue3'
+import AdminLayout from '@/Layouts/AdminLayout.vue';
+
 import TextareaField from '@/Components/Fields/Textarea.vue';
 import InputField from '@/Components/Fields/Input.vue';
 import OptionsField from '@/Components/Fields/Options.vue';
@@ -80,14 +81,11 @@ import notify from '@/plugins/notify';
 export default {
     props:['token'],
     components: {
-        BreezeAuthenticatedLayout,
-        Button,
-        GithubIcon,
-        Head,
         TextareaField,
         InputField,
         OptionsField,
         ForeignKeyField,
+        AdminLayout,
     },
      methods: {
    
