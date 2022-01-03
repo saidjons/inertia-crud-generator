@@ -1,0 +1,125 @@
+<script>
+import SidebarItem from './SidebarItem.vue';
+export default {
+    components:{
+        SidebarItem,
+    },
+     methods: {
+         sidebarHandler(){
+              
+             this.hidden = !this.hidden
+         },
+     },
+     data() {
+         return {
+             hidden:false,
+              sidebarItems:[
+                  {
+                      title:'Dummy',
+                      link:'/admin',
+                      nested:true,
+                      badgeNumber:2,
+                      icon:'',
+                      subs:[
+                          { title:'create',
+                            link:'/admin/article/create',
+                            badgeNumber:2,
+                          },
+                           { title:'List',
+                            link:'/admin/article/list',
+                            badgeNumber:10,
+                          }
+                      ]
+                  },
+                    {
+                        title:'Generator',
+                      link:'/admin/generator/create',
+                      nested:false,
+                      badgeNumber:'',
+                      icon:'',
+
+                     
+                  },
+                   
+              ],
+
+         }
+     }
+}
+</script>
+<template>
+
+ <!-- Sidebar starts  start
+    to hide  .hidden flex
+    to show sm:flex  
+ 
+ -->
+                    <!-- Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] -->
+       <div style="min-height: 716px" class="w-64 absolute sm:relative bg-gray-800 shadow md:h-full flex-col justify-between     "
+       
+       :class="[hidden==true ? 'hidden flex':'sm:flex ']"
+       >
+                        <div class="px-8">
+                            <div class="h-16 w-full flex items-center">
+                              <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg1.svg" alt="Logo">
+                            </div>
+                            <ul class="mt-12">
+                                <template  v-for="(item,itemIndex) in sidebarItems" :key="itemIndex">
+                                <sidebar-item  :item='item'/>
+                                </template >
+                            </ul>
+                            <div class="flex justify-center mt-48 mb-4 w-full">
+                                <div class="relative">
+                                    <div class="text-gray-300 absolute ml-4 inset-0 m-auto w-4 h-4">
+                                      <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg2.svg" alt="Search">
+                                    </div>
+                                    <input class="bg-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-100 rounded w-full text-sm text-gray-300 placeholder-gray-400 bg-gray-100 pl-10 py-2" type="text" placeholder="Search">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-8 border-t border-gray-700">
+                            <ul class="w-full flex items-center justify-between bg-gray-800">
+                                <li class="cursor-pointer text-white pt-5 pb-3">
+                                    <button aria-label="show notifications" class="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                                       <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg3.svg" alt="notifications">
+                                    </button>
+                                </li>
+                                <li class="cursor-pointer text-white pt-5 pb-3">
+                                    <button aria-label="open chats" class="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg4.svg" alt="chat">
+                                    </button>
+                                </li>
+                                <li class="cursor-pointer text-white pt-5 pb-3">
+                                    <button aria-label="open settings" class="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                                      <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg5.svg" alt="settings">
+                                    </button>
+                                </li>
+                                <li class="cursor-pointer text-white pt-5 pb-3">
+                                    <button aria-label="open logs" class="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                                       <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg6.svg" alt="drawer">
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+        </div>
+
+
+        <!-- second part start -->
+            <div class="w-64 z-40 absolute bg-gray-800 shadow md:h-full flex-col justify-between lg:hidden transition duration-150 ease-in-out" id="mobile-nav" style="transform: translateX(-260px);">
+            <button aria-label="toggle sidebar" id="openSideBar" class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800" @click="sidebarHandler">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg7.svg" alt="toggler">
+            </button>
+                        <button aria-label="Close sidebar" id="closeSideBar" class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white" @click="sidebarHandler">
+                          <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg8.svg" alt="cross">
+                        </button>
+                        <div class="px-8">
+                            <div class="h-16 w-full flex items-center">
+                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg1.svg" alt="Logo">
+                            </div>
+                           
+                         
+                        </div>
+                      
+                    </div>
+        <!-- second part end -->
+</template>
