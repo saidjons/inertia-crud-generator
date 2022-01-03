@@ -3,6 +3,7 @@
 namespace Saidjon\InertiaCrudGenerator;
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Saidjon\InertiaCrudGenerator\Commands\InertiaCrudGeneratorCommand;
@@ -36,7 +37,8 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
            __DIR__.'/../routes/inertia-crud.php' => base_path('routes/'),
         ]);
 
-        file_put_contents(base_path('routes/web.php'),"include_once('inertia-crud.php');");
+
+    // Storage::append(base_path('routes/web.php'),"include_once('inertia-crud.php');");
 
         // $this->loadRoutesFrom(__DIR__.'/../routes/inertia-crud.php');
 
