@@ -33,9 +33,12 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
             __DIR__.'/../resources/js/Pages' => resource_path('js/Pages'),
             __DIR__.'/../resources/js/plugins' => resource_path('js/plugins'),
             __DIR__.'/../resources/js/Layouts' => resource_path('js/Layouts'),
+           __DIR__.'/../routes/inertia-crud.php' => base_path('routes/'),
         ]);
 
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        file_put_contents(base_path('routes/web.php'),"include_once('inertia-crud.php');");
+
+        // $this->loadRoutesFrom(__DIR__.'/../routes/inertia-crud.php');
 
     }
 }
