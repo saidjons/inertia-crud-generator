@@ -1,9 +1,7 @@
 
 <script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
-import Button from '@/Components/Button.vue'
-import { GithubIcon } from '@/Components/Icons/brands.jsx'
-import { Head } from '@inertiajs/inertia-vue3'
+import AdminLayout from '@/Layouts/AdminLayout.vue';
+
  import TextareaField from '@/Components/Fields/Textarea.vue';
 import InputField from '@/Components/Fields/Input.vue';
 import OptionsField from '@/Components/Fields/Options.vue';
@@ -18,10 +16,7 @@ import ErrorMessage from '@/Components/Error/Message.vue'
 export default {
     props:['token'],
     components: {
-        BreezeAuthenticatedLayout,
-        Button,
-        GithubIcon,
-        Head,
+			AdminLayout
     TextareaField,
     InputField,
     OptionsField,
@@ -113,18 +108,10 @@ export default {
 
 
 <template>
-    <Head title="Dashboard" />
 
-    <BreezeAuthenticatedLayout>
-        <template #header>
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <h2 class="text-xl font-semibold leading-tight">
-                    {{modelPl}}
-                </h2>
-
-               
-            </div>
-        </template>
+    <AdminLayout>
+         <template v-slot:content>
+     
 
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <div class="w-4/5 justify-center text-left mx-5 ">
@@ -153,5 +140,7 @@ export default {
 </div>
 
         </div>
-    </BreezeAuthenticatedLayout>
+  </template>
+
+    </AdminLayout>
 </template>

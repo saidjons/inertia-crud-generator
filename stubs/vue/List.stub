@@ -1,6 +1,6 @@
 <script>
-    import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
-    import Button from '@/Components/Button.vue'
+import AdminLayout from '@/Layouts/AdminLayout.vue';
+
     import {
         TrashIcon,
         PencilIcon
@@ -9,22 +9,11 @@
     import Heading from '@/Components/Tables/TableUI/Heading.vue';
     import TableRow from '@/Components/Tables/TableUI/TableRow.vue';
     import CellCheckbox from '@/Components/Tables/TableUI/CellCheckbox.vue';
-    
-    import {
-        Head
-    } from '@inertiajs/inertia-vue3'
-   
-
-
     export default {
         components: {
-            BreezeAuthenticatedLayout,
-            Button,
-         
-            Head,
+            AdminLayout
             TrashIcon,
             PencilIcon,
-
             UpHeading,
             Heading,
             TableRow,
@@ -175,11 +164,11 @@
 
 <template>
 
-    <Head title="Dashboard" />
 
-    <BreezeAuthenticatedLayout>
+    <AdminLayout>
 
-
+  <admin-layout >
+      <template v-slot:content>
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <div>
                 <!-- table -->
@@ -228,5 +217,7 @@
 
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+  </template>
+
+    </AdminLayout>
 </template>
