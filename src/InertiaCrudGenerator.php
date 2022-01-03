@@ -135,7 +135,7 @@ use CrudController;
     {
         
 
-        $template= $this->filesystem->get(base_path($this->stub_path.$type.'.stub'));
+        $template= $this->filesystem->get(__DIR__.$type.'.stub');
         return  $template;
 
     }

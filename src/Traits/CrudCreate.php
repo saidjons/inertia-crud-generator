@@ -146,7 +146,7 @@ trait CrudCreate {
       }
     public function generateCreateVue($replacements):string
     {
-           $createVue=$this->getStub("vue/Create");
+           $createVue=$this->getStub("/../stubs/vue/Create");
         $createVue= $this->replace($createVue,$replacements);
         
  

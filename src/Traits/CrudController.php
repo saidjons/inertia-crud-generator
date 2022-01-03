@@ -21,7 +21,7 @@ trait CrudController {
       
     public function generateController($replacements):string
     {
-           $ctl=$this->getStub("controller/controller");
+           $ctl=$this->getStub("/../stubs/controller/controller");
         $ctl= $this->replace($ctl,$replacements);
         
  

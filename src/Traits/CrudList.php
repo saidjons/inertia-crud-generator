@@ -45,7 +45,7 @@ trait CrudList {
       
     public function generateListVue($replacements):string
     {
-           $listVue=$this->getStub("vue/List");
+           $listVue=$this->getStub("/../stubs/vue/List");
         $listVue= $this->replace($listVue,$replacements);
         
  
