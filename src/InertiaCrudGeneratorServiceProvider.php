@@ -39,7 +39,7 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
 
 
     
-        file_put_contents(base_path('routes/web.php'), "include_once('inertia-crud.php');".PHP_EOL , FILE_APPEND | LOCK_EX);
+        // file_put_contents(base_path('routes/web.php'), "include_once('inertia-crud.php');".PHP_EOL , FILE_APPEND | LOCK_EX);
 
         // $this->loadRoutesFrom(__DIR__.'/../routes/inertia-crud.php');
 
