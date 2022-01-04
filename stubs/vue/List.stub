@@ -4,14 +4,14 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
     import {
         TrashIcon,
         PencilIcon
-    } from '../../Components/Icons/hero'
+    } from '@/Components/Icons/hero'
     import UpHeading from '@/Components/Tables/TableUI/UpHeading.vue';
     import Heading from '@/Components/Tables/TableUI/Heading.vue';
     import TableRow from '@/Components/Tables/TableUI/TableRow.vue';
     import CellCheckbox from '@/Components/Tables/TableUI/CellCheckbox.vue';
     export default {
         components: {
-            AdminLayout
+            AdminLayout,
             TrashIcon,
             PencilIcon,
             UpHeading,
@@ -167,7 +167,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 
     <AdminLayout>
 
-  <admin-layout >
+  
       <template v-slot:content>
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <div>

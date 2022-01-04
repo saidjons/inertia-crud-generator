@@ -115,10 +115,30 @@ use CrudController;
         $rCreate = $this->fileWriterCreate($replacements,$generatedCreateFile,$this->VUE_PATH,'Create.vue');
         $rList = $this->fileWriterList($replacements,$generatedListFile,$this->VUE_PATH,'List.vue');
          $rController =  $this->fileWriterController($replacements,$generatedCreateCtl,$this->CTL_PATH,$replacements['controllerName'].'.php');
-         
+
+        $route = `Route::resource('`.$replacements['model'].`', 'App\Http\Controllers\Admin\\`.$replacements['modelUp'].`Controller', [
+            'only' => ['index', 'create', 'show']
+        ]);`;
+
+        
+         $this->fileAppend(base_path('routes/inertia-crud.php'),$route);
 
             return  [$rCreate,$rList,$rController];
      
+    }
+
+    public function fileAppend($file,$txt)
+    {
+        
+        try {
+            file_put_contents($file,$txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+            return true;
+
+        } catch (\Throwable $th) {
+            return false;
+        }
+        
+
     }
     public function setModelName()
     {

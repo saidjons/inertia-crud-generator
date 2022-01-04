@@ -2,6 +2,13 @@
   "dependencies": {
     "@inertiajs/inertia": "^0.10.1",
     "@inertiajs/inertia-vue3": "^0.5.2",
-    "awesome-notifications": "^3.1.2"
+       "awesome-notifications": "^3.1.2",
+        "filepond-plugin-file-validate-type": "^1.2.6",
+        "@vue/babel-plugin-jsx": "^1.1.1",
+
+        "filepond-plugin-image-preview": "^4.6.10",
+        "vue-filepond": "^7.0.2",
+        "vuedraggable": "^4.1.0",
+        "vuex": "^4.0.2"
   }
 }

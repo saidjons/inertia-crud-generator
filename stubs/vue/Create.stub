@@ -16,7 +16,7 @@ import ErrorMessage from '@/Components/Error/Message.vue'
 export default {
     props:['token'],
     components: {
-			AdminLayout
+			AdminLayout,
     TextareaField,
     InputField,
     OptionsField,

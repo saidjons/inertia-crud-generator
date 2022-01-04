@@ -30,17 +30,17 @@ trait CrudController {
         //     $this->fileWriter($replacements,$lwTable,$this->VIEW_PATH,$filePath);
        
     }
-      public function fileWriterController($replacements,$template,$PATH,$fileNameWithExt)
+      public function fileWriterController($replacements,$template,$path,$fileNameWithExt)
     {
         
-        // if (!$this->filesystem->exists(base_path($PATH.$replacements['folderName']))) {
+        if (!$this->filesystem->exists(base_path($path.'Admin'))) {
 
-        //     $this->filesystem->makeDirectory(base_path($PATH).$replacements["folderName"],0755);
+            $this->filesystem->makeDirectory(base_path($path).'Admin',0755);
 
-        // }
-        if (!$this->filesystem->exists(base_path($PATH.$fileNameWithExt))) {
+        }
+        if (!$this->filesystem->exists(base_path($path.$fileNameWithExt))) {
 
-                $this->filesystem->put(base_path($PATH.$fileNameWithExt),$template);
+                $this->filesystem->put(base_path($path.'Admin/'.$fileNameWithExt),$template);
                 // Storage::disk('rjs')->put($fileNameWithExt,$template);
                 return ['message'=> 'Controller file created'];
             }else{

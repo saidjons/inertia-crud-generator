@@ -1,8 +1,6 @@
 
 <script>
-import Button from '../Button.vue'
 export default {
-  components: { Button },
   props:['name','label','initialValue','action'],
 
   mounted() {
