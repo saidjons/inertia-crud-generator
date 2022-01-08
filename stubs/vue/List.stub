@@ -1,6 +1,4 @@
 <script>
-import AdminLayout from '@/Layouts/AdminLayout.vue';
-
     import {
         TrashIcon,
         PencilIcon
@@ -11,7 +9,6 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
     import CellCheckbox from '@/Components/Tables/TableUI/CellCheckbox.vue';
     export default {
         components: {
-            AdminLayout,
             TrashIcon,
             PencilIcon,
             UpHeading,

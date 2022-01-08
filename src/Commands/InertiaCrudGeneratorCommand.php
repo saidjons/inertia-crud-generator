@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class InertiaCrudGeneratorCommand extends Command
 {
-    public $signature = 'inertia-crud-generator';
+    public $signature = 'saidjon:crud';
 
     public $description = 'My command';
 
