@@ -4,7 +4,34 @@ export default {
     components:{
         SidebarItem,
     },
+    mounted() {
+        this.setData()
+    },
      methods: {
+         setData() {
+             this.errors = null
+			 window.axios.post('/admin/getMenus',{
+				headers: { 
+					'Accept':'application/json',
+					'X-CSRF-TOKEN' : window.csrf,
+      'Authorization' : 'Bearer ' + window.token
+			
+			} ,
+					 			 
+ 			 menuName : 'admin' ,
+ 
+			}) 
+				.then(res=> { 
+				res.data.data.forEach(el => {
+                    console.info(JSON.parse(el.data));
+                    this.sidebarItems.push(JSON.parse(el.data))
+                });	 
+			  }) 
+			.catch(error=> {
+			 
+
+			 });
+            },
          sidebarHandler(){
               
              this.hidden = !this.hidden

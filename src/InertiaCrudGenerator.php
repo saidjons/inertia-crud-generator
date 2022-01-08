@@ -1,24 +1,25 @@
 <?php 
  namespace Saidjon\InertiaCrudGenerator;
 
- 
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\This;
+
+
  use Saidjon\InertiaCrudGenerator\Traits\CrudList;
  use Saidjon\InertiaCrudGenerator\Traits\CrudCreate;
  use Saidjon\InertiaCrudGenerator\Traits\CrudController;
 
 class InertiaCrudGenerator
 {
+    use CrudList,CrudCreate,CrudController;
 
-use CrudCreate;
-use CrudList;
-use CrudController;
 
     public string $model_path="App\Models";
     protected string $model_name='';
@@ -115,11 +116,11 @@ use CrudController;
         $rCreate = $this->fileWriterCreate($replacements,$generatedCreateFile,$this->VUE_PATH,'Create.vue');
         $rList = $this->fileWriterList($replacements,$generatedListFile,$this->VUE_PATH,'List.vue');
          $rController =  $this->fileWriterController($replacements,$generatedCreateCtl,$this->CTL_PATH,$replacements['controllerName'].'.php');
-
-        $route = `Route::resource('`.$replacements['model'].`', 'App\Http\Controllers\Admin\\`.$replacements['modelUp'].`Controller', [
+        
+        $route = "Route::resource('".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
             'only' => ['index', 'create', 'show']
-        ]);`;
-
+        ]);";
+ 
         
          $this->fileAppend(base_path('routes/inertia-crud.php'),$route);
 

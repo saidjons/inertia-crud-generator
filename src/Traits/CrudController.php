@@ -3,6 +3,7 @@
 namespace Saidjon\InertiaCrudGenerator\Traits;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 trait CrudController {
 
@@ -33,9 +34,9 @@ trait CrudController {
       public function fileWriterController($replacements,$template,$path,$fileNameWithExt)
     {
         
-        if (!$this->filesystem->exists(base_path($path.'Admin'))) {
+        if (!File::exists(base_path('app/Http/Controllers/Admin'))) {
 
-            $this->filesystem->makeDirectory(base_path($path).'Admin',0755);
+          File::makeDirectory(base_path('app/Http/Controllers/Admin'), 0777, true, true);
 
         }
         if (!$this->filesystem->exists(base_path($path.$fileNameWithExt))) {

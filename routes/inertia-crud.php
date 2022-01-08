@@ -6,14 +6,23 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
 ##########    Inertia Crud  Generator
-Route::get('/admin', function () {
+
+Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
+    
+Route::get('/', function () {
     return Inertia::render('Admin');
 })->name('admin');
 
 
-Route::post('/admin/crud/generator', [CrudGeneratorController::class,'generate'])->name('crud-generator-generate');
+Route::post('/crud/generator', [CrudGeneratorController::class,'generate'])->name('crud-generator-generate');
 
-Route::post('/admin/generator/get-table', [CrudGeneratorController::class,'getColumnsofTable'])->name('crud-generator-columns');
+Route::post('/generator/get-table', [CrudGeneratorController::class,'getColumnsofTable'])->name('crud-generator-columns');
 
-Route::get('/admin/generator/create', [CrudGeneratorController::class,'create'])->name('crud-generator');
+Route::get('/generator/create', [CrudGeneratorController::class,'create'])->name('crud-generator');
 
+ 
+Route::resource('/menu', 'Saidjon\InertiaCrudGenerator\Controllers\Admin\MenuCrudController', [
+            'only' => ['index', 'create', 'show']
+        ]);
+Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API','getMenus']);
+});

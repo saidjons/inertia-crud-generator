@@ -1,7 +1,7 @@
 
 <script>
 export default {
-  props:['name','fieldType','label','initalValue','action'],
+  props:['name','fieldType','label','initialValue','action'],
   mounted() {
     if(this.initialValue){
       this.content = true
@@ -43,26 +43,27 @@ export default {
       >
         {{label}}
       </label>
-
-      <div class="flex flex-row justify-between"
+<!-- checkbox starts  -->
+<div class="flex justify-center mt-3">
+ 
+    <div 
        v-show="visible"
-        >
-      <input 
-     
-      :name="name"
+
+    class="form-check">
+      <input
+         :name="name"
       v-model="content"
         @change="inputChanged"
-      type="checkbox"
-        class="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      >
-      <button v-if="showBtn" 
-        @click="$emit('btnClicked')"
-      class="  bg-green-300   mx-2 w-1/5   rounded-sm
-        
-        ">
-        {{action}}
-      </button>
-      </div>
+
+       class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox"   id="flexCheckChecked" :checked='initalValue'>
+      <label class="form-check-label inline-block text-gray-800" for="flexCheckChecked">
+        {{label}}
+      </label>
+    </div>
+  
+</div>
+
+<!-- checkbox ends  -->
        
     </div>
 </template>

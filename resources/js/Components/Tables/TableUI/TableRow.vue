@@ -57,7 +57,7 @@
 
        
 
-            <template v-if="heading.cell=='string'">
+            <template v-if="heading.cell=='text'">
                 <cell-text  :text='item[heading.value]'/>
             </template>
             <template v-if="heading.cell=='number'">
@@ -67,6 +67,7 @@
                 <cell-image  :text='item[heading.value]'/>
                 <!-- {{item[heading.value]}} -->
             </template>
+           
        </template>
 
         </template>
