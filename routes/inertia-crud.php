@@ -22,7 +22,7 @@ Route::get('/generator/create', [CrudGeneratorController::class,'create'])->name
 
  
 Route::resource('/menu', 'Saidjon\InertiaCrudGenerator\Controllers\Admin\MenuCrudController', [
-            'only' => ['index', 'create', 'show']
+            'only' => ['index', 'create', 'show','edit',]
         ]);
-Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API','getMenus']);
+Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIController','getMenus']);
 });

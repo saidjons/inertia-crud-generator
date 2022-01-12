@@ -1,6 +1,6 @@
 <?php
 
-use Saidjon\InertiaCrudGenerator\Models;
+namespace Saidjon\InertiaCrudGenerator\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
 

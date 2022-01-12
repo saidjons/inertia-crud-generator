@@ -2,13 +2,14 @@
 
 namespace Saidjon\InertiaCrudGenerator\Controllers\API;
 
-use Menu;
+ 
 use Response;
  
-use Illuminate\Http\Request;
+use Saidjon\InertiaCrudGenerator\Models\Menu;
  
-use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
   
+use App\Http\Controllers\AppBaseController;
 use Saidjon\InertiaCrudGenerator\Resources\MenuResource;
 use Saidjon\InertiaCrudGenerator\Repositories\MenuRepository;
 use Saidjon\InertiaCrudGenerator\Requests\API\CreateMenuAPIRequest;

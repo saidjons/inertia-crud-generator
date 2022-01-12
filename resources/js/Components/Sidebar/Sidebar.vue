@@ -14,7 +14,7 @@ export default {
 				headers: { 
 					'Accept':'application/json',
 					'X-CSRF-TOKEN' : window.csrf,
-      'Authorization' : 'Bearer ' + window.token
+                    'Authorization' : 'Bearer ' + window.token
 			
 			} ,
 					 			 
@@ -41,32 +41,7 @@ export default {
          return {
              hidden:false,
               sidebarItems:[
-                  {
-                      title:'Dummy',
-                      link:'/admin',
-                      nested:true,
-                      badgeNumber:2,
-                      icon:'',
-                      subs:[
-                          { title:'create',
-                            link:'/admin/article/create',
-                            badgeNumber:2,
-                          },
-                           { title:'List',
-                            link:'/admin/article/list',
-                            badgeNumber:10,
-                          }
-                      ]
-                  },
-                    {
-                        title:'Generator',
-                      link:'/admin/generator/create',
-                      nested:false,
-                      badgeNumber:'',
-                      icon:'',
-
-                     
-                  },
+               
                    
               ],
 

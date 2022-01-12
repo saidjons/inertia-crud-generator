@@ -4,7 +4,7 @@ export default function getEditorSettings(type){
           "theme":"tailwind",
             "format": "grid",
         schema: {
-    'title': 'Person',
+    'title': 'admin',
     'type': 'object',
     'required': [
       'title',
@@ -49,7 +49,9 @@ export default function getEditorSettings(type){
               'enum': [
                 'Create',
                 'Edit',
-                'List'
+                'List',
+                'View',
+                'Other'
               ],
               'default': 'Create'
             },
