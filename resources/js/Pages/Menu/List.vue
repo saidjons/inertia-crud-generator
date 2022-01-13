@@ -33,7 +33,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
         methods: {
             deleteItem(data){
                    
-                   axios.delete('/api/menus/'+data, { 
+                   axios.delete('/admin/menu/'+data, { 
                      headers:{
                          'Accept': 'application/json',
                             'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ Route::post('/generator/get-table', [CrudGeneratorController::class,'getColumnso
 Route::get('/generator/create', [CrudGeneratorController::class,'create'])->name('crud-generator');
 
  
-Route::resource('/menu', 'Saidjon\InertiaCrudGenerator\Controllers\Admin\MenuCrudController', [
+Route::resource('menu', 'Saidjon\InertiaCrudGenerator\Controllers\Admin\MenuCrudController', [
             'only' => ['index', 'create', 'show','edit',]
         ]);
 Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIController','getMenus']);
