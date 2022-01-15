@@ -69,7 +69,7 @@
             // integration to choose the right communication channel. This example uses
             // a POST request with JSON as a data structure but your configuration
             // could be different.
-            xhr.open( 'POST', '/api/upload/image/articleContent', true );
+            xhr.open( 'POST', '/admin/upload/article-image', true );
             xhr.setRequestHeader('x-csrf-token', window.csrf);
             xhr.setRequestHeader('Authorization','Bearer '+ window.token);
             xhr.responseType = 'json';

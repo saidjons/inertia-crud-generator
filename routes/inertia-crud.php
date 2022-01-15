@@ -4,6 +4,7 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use Saidjon\InertiaCrudGenerator\Controllers\Admin\ImageUploadController;
 
 ##########    Inertia Crud  Generator
 
@@ -25,4 +26,9 @@ Route::resource('menu', 'Saidjon\InertiaCrudGenerator\Controllers\Admin\MenuCrud
             'only' => ['index', 'create', 'show','edit',]
         ]);
 Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIController','getMenus']);
+ Route::post('upload/article-image',[ImageUploadController::class,
+ 'articleImageUpload']);
+ 
 });
+
+

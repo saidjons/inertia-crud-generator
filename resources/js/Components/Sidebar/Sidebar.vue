@@ -33,7 +33,6 @@ export default {
 			 });
             },
          sidebarHandler(){
-              
              this.hidden = !this.hidden
          },
      },
@@ -41,10 +40,7 @@ export default {
          return {
              hidden:false,
               sidebarItems:[
-               
-                   
               ],
-
          }
      }
 }
