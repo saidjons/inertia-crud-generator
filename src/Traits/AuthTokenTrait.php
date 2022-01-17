@@ -3,6 +3,7 @@
 namespace Saidjon\InertiaCrudGenerator\Traits;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
@@ -56,4 +57,20 @@ trait AuthTokenTrait{
             Cookie::forget('auth_token')
          );
     }
+       public function getFromCacheOrNewToken(int $userId)
+    {
+          $token = Cache::get(`${userId}-token`);
+          if($token){
+             return $token;
+          }
+          $token = $this->ensureSessionSameWithAuthtokenCookie();
+         
+         Cache::put(`${userId}-token`,$token);
+         
+         return $token;
+
+
+    }
 }
+
+ 

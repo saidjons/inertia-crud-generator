@@ -18,13 +18,7 @@ use Illuminate\Database\Eloquent\Model as Model;
  */
 class Menu extends Model
 {
-
-
     public $table = 'menus';
-    
-
-
-
     public $fillable = [
         'title',
         'data',

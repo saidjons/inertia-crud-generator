@@ -34,7 +34,10 @@ class ImageUploadController extends Controller
 
          }else{
              
-                return false;
+               
+                return response()->json([
+                       'message' => 'No File attached'
+                ],203);
          }
      }
 

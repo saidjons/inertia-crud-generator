@@ -117,7 +117,7 @@ class InertiaCrudGenerator
         $rList = $this->fileWriterList($replacements,$generatedListFile,$this->VUE_PATH,'List.vue');
          $rController =  $this->fileWriterController($replacements,$generatedCreateCtl,$this->CTL_PATH,$replacements['controllerName'].'.php');
         
-        $route = "Route::resource('".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
+        $route = "Route::resource('/admin/".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
             'only' => ['index', 'create', 'show']
         ]);";
  

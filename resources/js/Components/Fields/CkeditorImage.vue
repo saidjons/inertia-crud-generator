@@ -70,8 +70,8 @@
             // a POST request with JSON as a data structure but your configuration
             // could be different.
             xhr.open( 'POST', '/admin/upload/article-image', true );
-            xhr.setRequestHeader('x-csrf-token', window.csrf);
-            xhr.setRequestHeader('Authorization','Bearer '+ window.token);
+            xhr.setRequestHeader('x-csrf-token', this.$page.props.csrf_token);
+            xhr.setRequestHeader('Authorization','Bearer '+ this.$page.props.user.token);
             xhr.responseType = 'json';
         }
         // Initializes XMLHttpRequest listeners.

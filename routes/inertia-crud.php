@@ -26,9 +26,14 @@ Route::resource('menu', 'Saidjon\InertiaCrudGenerator\Controllers\Admin\MenuCrud
             'only' => ['index', 'create', 'show','edit',]
         ]);
 Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIController','getMenus']);
- Route::post('upload/article-image',[ImageUploadController::class,
- 'articleImageUpload']);
+
  
 });
 
+ Route::post('/admin/upload/article-image',[ImageUploadController::class,
+ 'articleImageUpload'])->middleware(['auth:sanctum']);
 
+Route::resource('admin/article', 'App\Http\Controllers\Admin\ArticleCrudController', [
+            'only' => ['index', 'create', 'show']
+        ]);
+ 
