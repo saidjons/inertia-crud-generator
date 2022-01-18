@@ -48,7 +48,7 @@ export default {
 
 				
 							 
-   			setTitle(data){
+   			setRole(data){
 
      			this.title = data.value 
 
@@ -76,7 +76,7 @@ export default {
       'Authorization' : 'Bearer ' + window.token
 			
 			} ,
-					 			 title : this.title ,
+					 			 role : this.role ,
  			 data : this.data ,
  			 published : this.published ,
  
@@ -105,7 +105,7 @@ export default {
   data() {
     return {
 			menuEditor:null,
-			title : null ,
+			role : null ,
  			 data : null ,
  			 published : null ,
  
@@ -129,7 +129,7 @@ export default {
 	<error-message :error='error' />
 	</template>
  
-	 				 <input-field  name='title' label='Enter title'  fieldType='text'  @inputChanged='setTitle'/> 
+	 				 <input-field  name='role' label='Enter role'  fieldType='text'  @inputChanged='setRole'/> 
  			 <!-- <textarea-field name='data' label='Enter data' @inputChanged='setData' />  -->
 			 	<json-editor-component 
 				 	name='data' 

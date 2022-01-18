@@ -20,7 +20,7 @@ class Menu extends Model
 {
     public $table = 'menus';
     public $fillable = [
-        'title',
+        'role',
         'data',
         'published',
         'permissions'
@@ -32,7 +32,7 @@ class Menu extends Model
      * @var array
      */
     protected $casts = [
-        'title' => 'string'
+        'role' => 'string'
     ];
 
     /**
@@ -41,7 +41,7 @@ class Menu extends Model
      * @var array
      */
     public static $rules = [
-        'title' => 'required|unique:menus',
+        'role' => 'required',
         'data' => 'required|json',
         'published' => 'boolean|sometimes',
         'permissions' => 'sometimes|json'

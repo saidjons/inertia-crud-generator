@@ -17,7 +17,7 @@ class MenuRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'title',
+        'role',
         'data',
         'published',
         'permissions'
