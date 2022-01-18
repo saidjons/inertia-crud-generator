@@ -10,6 +10,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\This;
+use Saidjon\InertiaCrudGenerator\Models\Menu;
 
 
  use Saidjon\InertiaCrudGenerator\Traits\CrudList;
@@ -120,12 +121,37 @@ class InertiaCrudGenerator
         $route = "Route::resource('/admin/".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
             'only' => ['index', 'create', 'show']
         ]);";
- 
+        $this->addToDB($replacements);
         
          $this->fileAppend(base_path('routes/inertia-crud.php'),$route);
 
             return  [$rCreate,$rList,$rController];
      
+    }
+
+    public function addToDB($data)
+    {
+          Menu::create([
+            'role' =>'admin',
+            'published' =>1,
+            'data' =>json_encode([
+                'title' =>$data['upModel'],
+                 'link' =>'',
+                'nested' => true,
+                'badgeNumber' => '',
+                'icon' =>'',
+                   'subs' =>[
+                        [ 'title'=>'create',
+                            'link'=>"/admin/${data['model']}/create",
+                            'badgeNumber' =>2,
+                        ],
+                           [ 'title' =>'List',
+                            'link' =>"/admin/${data['model']}",
+                            'badgeNumber' =>10,
+                           ]
+                      ]
+            ]),
+        ]);
     }
 
     public function fileAppend($file,$txt)

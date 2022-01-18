@@ -68,7 +68,7 @@ class MenuAPIController extends AppBaseController
     {
         $input = $request->input('menuName');
 
-        $menu = Menu::where('title',$input)->get();
+        $menu = Menu::where('role',$input)->get();
 
         return $this->sendResponse($menu, 'Menus retrieved successfully');
     }

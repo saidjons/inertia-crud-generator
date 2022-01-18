@@ -16,7 +16,7 @@ class CreateMenusTable extends Migration
     {
          Schema::create('menus', function (Blueprint $table) {
             $table->id('id');
-            $table->string('title');
+            $table->string('role');
             $table->json('data');
             $table->boolean('published')->nullable();
             $table->json('permissions')->nullable();
@@ -24,7 +24,7 @@ class CreateMenusTable extends Migration
         });
 
         Menu::create([
-            'title' =>'admin',
+            'role' =>'admin',
             'published' =>1,
             'data' =>json_encode([
                 'title' =>'Generator',
@@ -35,7 +35,7 @@ class CreateMenusTable extends Migration
             ]),
         ]);
         Menu::create([
-            'title' =>'admin',
+            'role' =>'admin',
             'published' =>1,
             'data' =>json_encode([
                 'title' =>'Menu',
