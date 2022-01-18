@@ -2,7 +2,7 @@
 
 namespace Saidjon\InertiaCrudGenerator\Requests\API;
 
-use App\Models\Menu;
+use Saidjon\InertiaCrudGenerator\Models\Menu;
 use InfyOm\Generator\Request\APIRequest;
 
 class CreateMenuAPIRequest extends APIRequest

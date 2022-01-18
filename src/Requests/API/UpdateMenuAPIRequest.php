@@ -2,7 +2,7 @@
 
 namespace Saidjon\InertiaCrudGenerator\Requests\API;
 
-use App\Models\Menu;
+use Saidjon\InertiaCrudGenerator\Models\Menu;
 use InfyOm\Generator\Request\APIRequest;
 
 class UpdateMenuAPIRequest extends APIRequest
@@ -25,7 +25,7 @@ class UpdateMenuAPIRequest extends APIRequest
     public function rules()
     {
         $rules = Menu::$rules;
-        $rules['title'] = $rules['title'].",".$this->route("menu");
+        $rules['role'] = $rules['role'].",".$this->route("menu");
         return $rules;
     }
 }

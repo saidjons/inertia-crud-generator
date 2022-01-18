@@ -10,8 +10,7 @@ export default {
     },
      	mounted() {
 			 
-           window.csrf = this.$page.props.token
-           window.token = this.$page.props.csrf
+        
 	 
 	},
   methods: {
@@ -72,8 +71,8 @@ export default {
 			 window.axios.post('/api/menus',{
 				headers: { 
 					'Accept':'application/json',
-					'X-CSRF-TOKEN' : window.csrf,
-      'Authorization' : 'Bearer ' + window.token
+				'X-CSRF-TOKEN' : this.$page.props.csrf,
+      'Authorization' : 'Bearer ' + this.$page.props.user.token
 			
 			} ,
 					 			 role : this.role ,
