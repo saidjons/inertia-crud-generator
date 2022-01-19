@@ -11,6 +11,12 @@ trait CrudCreate {
   public $createFileName = 'Create';
   public $postFieldTemplate = "\t\t\t {{field}} : this.{{field}} ,\n ";
   public $dataFieldTemplate = "\t\t\t {{field}} : null ,\n ";
+  public $dataOptionsTemplate = "\t\t\t {{fieldName}} : {
+                                    \t\t\t\t  visibleField:'{{visibleField}}',
+                                    \t\t\t\t  valueField:'{{valueField}}',
+                                    \t\t\t\t  items:[
+                                    \t\t\t\t  
+                                    \t\t\t\t  ] ,\n ";
 
   public $inputTemplate = "\t\t\t <input-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}'  @inputChanged='set{{fieldNameUp}}'/> \n "; 
   public $checkboxTemplate = "\t\t\t <checkbox-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}'  @inputChanged='set{{fieldNameUp}}'/> \n "; 
@@ -33,7 +39,8 @@ trait CrudCreate {
     {
          $temp = '';
         foreach ($this->columns as  $v) {
-          $t = $this->whichTemplateToUse($v['type']);
+          // $t = $this->whichTemplateToUse($v['type']);
+
             $temp.= $this->replace($this->setFunctionTemplate,[
                 'fieldName'=>$v['fieldName'],
                  'fieldNameUp'=>ucfirst($v['fieldName']),
@@ -48,10 +55,12 @@ trait CrudCreate {
     {
        
 
-
+// this code won't be used for now
       $temp = '';
         foreach ($this->columnsAndTypes as  $v) {
+
           $t = $this->whichTemplateToUse($v['type']);
+          
             $temp.= $this->replace($t['temp'],[
                 'fieldName'=>$v['fieldName'],
                 'fieldNameUp'=>ucfirst($v['fieldName']),
@@ -71,6 +80,17 @@ trait CrudCreate {
       $temp = '';
         foreach ($this->columns as  $v) {
           $t = $this->whichTemplateToUse($v['type']);
+           if ($v['type'] == 'options') {
+             $temp.= $this->replace($t['temp'],[
+                'fieldName'=>$v['fieldName'],
+                'fieldNameUp'=>ucfirst($v['fieldName']),
+                'fieldType' =>$t['fieldType'],
+                'label' => 'Enter '.$v['fieldName'],
+                'options'=>"${v['fieldName']}_options",
+                ]);
+
+          } else {
+
             $temp.= $this->replace($t['temp'],[
                 'fieldName'=>$v['fieldName'],
                  'fieldNameUp'=>ucfirst($v['fieldName']),
@@ -78,6 +98,8 @@ trait CrudCreate {
                 'label' => 'Enter '.$v['fieldName'],
                 
                 ]);
+            
+          }
 
         }
         return $temp;
@@ -97,7 +119,20 @@ trait CrudCreate {
         $temp = ' ';
 
         foreach ($this->columns as  $f) {
+          if ($f['fieldType'] == 'options') {
+               $r = $this->replace($this->dataOptionsTemplate,[
+                 'fieldName'=>"${f['fieldName']}_options",
+                 'valueField'=>"${f['valueField']}",
+                 'visibleField'=>"${f['visibleField']}",
+                 
+                 ]);
+          
+              $temp .= $r;
+
+          }
+
               $r = $this->replace($this->dataFieldTemplate,['field'=>$f['fieldName']]);
+          
               $temp .= $r;
         }
         return $temp;
@@ -138,7 +173,7 @@ trait CrudCreate {
         
           
           default:
-          return ['temp'=>$this->inputTemplate,'fieldType'=>'number'];
+          return ['temp'=>$this->inputTemplate,'fieldType'=>'text'];
             
             break;
             // boolean

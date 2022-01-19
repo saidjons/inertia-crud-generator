@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Saidjon\InertiaCrudGenerator\Controllers\Admin\ImageUploadController;
 
 ##########    Inertia Crud  Generator
-Route::resource('/api/menus', Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIController::class)->middleware(['auth:sanctum']);
+Route::resource('/api/menus', \Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIController::class)->middleware(['auth:sanctum']);
 
 
 Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {

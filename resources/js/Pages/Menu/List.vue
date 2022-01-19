@@ -37,8 +37,8 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
                      headers:{
                          'Accept': 'application/json',
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': window.csrf,
-                            'Authorization': 'Bearer ' + window.token,
+                            'X-CSRF-TOKEN': this.$page.props.csrf,
+                            'Authorization': 'Bearer ' + this.$page.props.user.token,
                      },
                       id:data,
                      }
@@ -146,7 +146,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 					 
 
                		headings: [
-									 			{ key:'title',cell:'text',visible:true, value: 'title'},
+									 			{ key:'role',cell:'text',visible:true, value: 'role'},
 
 			{ key:'data',cell:'text',visible:true, value: 'data'},
 
