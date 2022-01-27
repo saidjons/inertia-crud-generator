@@ -13,13 +13,14 @@ use phpDocumentor\Reflection\Types\This;
 use Saidjon\InertiaCrudGenerator\Models\Menu;
 
 
+use Saidjon\InertiaCrudGenerator\Traits\CrudView;
  use Saidjon\InertiaCrudGenerator\Traits\CrudList;
  use Saidjon\InertiaCrudGenerator\Traits\CrudCreate;
  use Saidjon\InertiaCrudGenerator\Traits\CrudController;
 
 class InertiaCrudGenerator
 {
-    use CrudList,CrudCreate,CrudController;
+    use CrudList,CrudCreate, CrudView, CrudController;
 
 
     public string $model_path="App\Models";
@@ -109,23 +110,32 @@ class InertiaCrudGenerator
             'controllerName'  => $this->makeControllerName(),
             'setFunctions'  => $this->makeSetFunctions(),
 
+            'setFields'       =>  $this->makeSetFields(),
+
         ];
 
+        // generate file contents 
         $generatedCreateCtl = $this->generateController($replacements);
         $generatedCreateFile = $this->generateCreateVue($replacements);
         $generatedListFile = $this->generateListVue($replacements);
+        $generatedViewFile = $this->generateViewVue($replacements);
+
+        // write file-contents to file 
         $rCreate = $this->fileWriterCreate($replacements,$generatedCreateFile,$this->VUE_PATH,'Create.vue');
         $rList = $this->fileWriterList($replacements,$generatedListFile,$this->VUE_PATH,'List.vue');
          $rController =  $this->fileWriterController($replacements,$generatedCreateCtl,$this->CTL_PATH,$replacements['controllerName'].'.php');
+         $rView =  $this->fileWriterList($replacements,$generatedViewFile,$this->VUE_PATH,'View.vue');
         
+        // generate route for view 
         $route = "Route::resource('/admin/".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
             'only' => ['index', 'create', 'show']
         ]);";
+        
         $this->addToDB($replacements);
         
          $this->fileAppend(base_path('routes/inertia-crud.php'),$route);
 
-            return  [$rCreate,$rList,$rController];
+            return  [$rCreate,$rList,$rController,$rView];
      
     }
 

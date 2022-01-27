@@ -15,6 +15,7 @@ import CkeditorComponent from '@/Components/Fields/CkeditorImage.vue';
 import FilePondImageUpload from '@/Components/Fields/FilePondImageUpload.vue';
 import JsonEditorComponent from '@/Components/Fields/JsonEditor';
 import ForeignKeyField from '@/Components/Fields/ForeignKeyField.vue';
+import TextView from '@/Components/Fields/TextView.vue';
 
 import ErrorMessage from '@/Components/Error/Message.vue'
 import AdminLayout from '@/Layouts/AdminLayout.vue';
@@ -39,6 +40,7 @@ createInertiaApp({
          vueApp.component("FilePondImageUpload", FilePondImageUpload); 
          vueApp.component("JsonEditorComponent", JsonEditorComponent); 
          vueApp.component("ForeignKeyField", ForeignKeyField); 
+         vueApp.component("TextView", TextView); 
          vueApp.component("ErrorMessage", ErrorMessage); 
         return vueApp.use(plugin)
             .mixin({ methods: { route } })

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\{{upModel}};
 
 class {{controllerName}} extends Controller
 {
@@ -14,9 +15,11 @@ class {{controllerName}} extends Controller
          return Inertia::render('{{upModel}}/List');
      }
 
-     public function show($id)
+     public function show({{upModel}} $model)
      {
-         return Inertia::render('{{upModel}}/View');
+         return Inertia::render('{{upModel}}/View',[
+             "model" =>$model,
+         ]);
      }
 
 
