@@ -8,7 +8,7 @@ export default {
 		stringToSlug,
     },
      	mounted() {
-       {{setFieldTemplate}}
+       {{setFields}}
 		
 	},
   methods: {
@@ -38,41 +38,9 @@ export default {
 					}
 					return toReturn;
 			},
-
-				
-				{{setFunctions}}
+ 
      
-    getData(){
-			this.errors = null
-			 window.axios.get('/api/{{modelPl}}',{
-				headers: { 
-					'Accept':'application/json',
-					'X-CSRF-TOKEN' : this.$page.props.csrf,
-      'Authorization' : 'Bearer ' + this.$page.props.user.token
-			
-			} ,
-					{{getFields}}
-			}) 
-				.then(res=> { 
-					console.log(res);
-					   if (res.status ==200) {
-						 window.notify(res.message)
-					 }else{
-						 this.setErrors(res.data)
-					 }
-			  }) 
-			.catch(error=> {
-				this.errors = Object.values(this.flattenObject(error.response.data.errors));
-				if(this.errors){
-					window.notify(this.errors[0],'tip')
-
-				}
-
-			 });
     
-			 
-		 
-    }
   },
   
   

@@ -130,7 +130,7 @@ class InertiaCrudGenerator
         $route = "Route::resource('/admin/".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
             'only' => ['index', 'create', 'show']
         ]);";
-        
+
         $this->addToDB($replacements);
         
          $this->fileAppend(base_path('routes/inertia-crud.php'),$route);
@@ -158,7 +158,8 @@ class InertiaCrudGenerator
                            [ 'title' =>'List',
                             'link' =>"/admin/${data['model']}",
                             'badgeNumber' =>10,
-                           ]
+                           ], 
+                           
                       ]
             ]),
         ]);
