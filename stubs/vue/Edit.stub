@@ -3,7 +3,7 @@
 
 import stringToSlug from '@/plugins/stringToSlug';
 export default {
-    props:['token'],
+  
     components: {
 		stringToSlug,
     },

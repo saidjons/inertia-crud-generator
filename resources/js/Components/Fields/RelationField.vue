@@ -17,9 +17,9 @@ export default {
         id:this.id ?? '',
         name:this.name,
         value:{
-          modelNamespace:this.model,
+          tableName:this.model,
           modelId:this.modelId,
-          modelShowCol:this.modelShowCol,
+          modelText:this.modelShowCol,
         },
         
       }

@@ -1,5 +1,5 @@
 <script>
-import AdminLayout from '@/Layouts/AdminLayout.vue';
+ 
 
     import {
         TrashIcon,

@@ -92,14 +92,14 @@ trait CrudCreate {
     {
          $temp = '';
         foreach ($this->columns as  $v) {
-              if ($v['fieldName']=='relation') {
+              if ($v['fieldType']=='relation') {
                  $temp.= $this->replace($this->setRelationFunctionTemplate,[
                 'fieldName'=>$v['fieldName'],
-                 'tableNamePl'=>Str::plural($this->table_name,2),
+                 'tableNamePl'=>$v['tableName'],
                 
                 
                 ]);
-                continue;
+                
               }
 
             $temp.= $this->replace($this->setFunctionTemplate,[
@@ -161,11 +161,12 @@ trait CrudCreate {
         $temp = ' ';
 
         foreach ($this->columns as  $column) {
-          if ($column['type'] == 'relation') {
+          if ($column['fieldType'] == 'relation') {
+            
                $r = $this->replace($this->relationDataOptionsTemplate,[
-                 'fieldName'=>"${column['fieldName']}_options",
-                 'valueField'=>"${column['valueField']}",
-                 'visibleField'=>"${column['visibleField']}",
+                 'fieldName'=>"${column['fieldName']}",
+                 'valueField'=>$column['relation']['modelId'],
+                 'visibleField'=>$column['relation']['modelText'],
                  
                  ]);
           

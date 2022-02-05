@@ -71,13 +71,9 @@
  
  
 export default {
-    props:['token'],
+     
     components: {
-        TextareaField,
-        InputField,
-        OptionsField,
-        RelationField,
-        AdminLayout,
+      
     },
      methods: {
    
@@ -100,7 +96,7 @@ export default {
     processResponseColumns(r){
           if(r.status == 200){
              window.notify( r.data.message)
-             console.log(r.data.columns);
+           
             this.dbTableColumns = r.data.columns
            }else{
 
@@ -119,7 +115,7 @@ export default {
       let r = false
       this.postColumns.forEach(el=>{
        
-        if (d == el.fieldName && el.type == 'relation') {
+        if (d == el.fieldName && el.fieldType == 'relation') {
           r = true
         }
         
