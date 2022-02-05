@@ -2,6 +2,7 @@
 
 namespace Saidjon\InertiaCrudGenerator\Traits;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
 trait CrudCreate {
@@ -19,6 +20,8 @@ trait CrudCreate {
                                     \t\t\t\t  ] ,\n ";
 
   public $inputTemplate = "\t\t\t <input-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}'  @inputChanged='set{{fieldNameUp}}'/> \n "; 
+
+
   public $checkboxTemplate = "\t\t\t <checkbox-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}'  @inputChanged='set{{fieldNameUp}}'/> \n "; 
 
   public $optionsTemplate = "\t\t\t <options-field name='{{fieldName}}' :options='{{options}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}'/> \n"; 
@@ -35,11 +38,69 @@ trait CrudCreate {
      \t\t\t},\n"; 
 
 
+  
+
+/*
+
+  $relationDataTemplate is appended with datafields and inserted into 	{{dataFields}}
+*/
+  public $relationDataOptionsTemplate = "\t\t\t 	{{fieldName}}RelationOptions:{
+                      \t\t\t	visibleField:'{{visibleField}}',
+                      \t\t\t	valueField:'{{valueField}}',
+                        \t\t\t	items:[]
+                      \t\t\t},  \n ";
+
+
+  /*
+  $setRelationFunctionTemplate is appended to setFunctionTemplate and 
+   inserted into {{setFunctions}} 
+*/
+
+
+
+  public $setRelationFunctionTemplate = "\t\t\t set{{fieldName}}(){
+					 (async () => {
+					 const rawResponse = await fetch('/api/{{tableNamePl}}', {
+						method: 'GET',
+					 headers: {
+					 'Accept': 'application/json',
+					 'Content-Type': 'application/json',
+					 'X-CSRF-TOKEN' :this.\$page.props.csrf,
+					 'Authorization' : 'Bearer ' + this.\$page.props.token,
+					 }
+						});
+						 const content = await rawResponse.json();
+						 this.{{fieldName}}Options.items = content
+					 })();
+			 },";
+
+  /*
+    $relationComponentTemplate is appended to createFields 
+    and inserted into {{createFields}}
+  */
+       public $relationInputTemplate	= "\t\t\t  <options-field name='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldName}}'/> 
+       
+       ";
+
+
+       /*
+       also create $onMountFunctionTemplate and append to onMountActions
+       */
+
+
     public function makeSetFunctions()
     {
          $temp = '';
         foreach ($this->columns as  $v) {
-          // $t = $this->whichTemplateToUse($v['type']);
+              if ($v['fieldName']=='relation') {
+                 $temp.= $this->replace($this->setRelationFunctionTemplate,[
+                'fieldName'=>$v['fieldName'],
+                 'tableNamePl'=>Str::plural($this->table_name,2),
+                
+                
+                ]);
+                continue;
+              }
 
             $temp.= $this->replace($this->setFunctionTemplate,[
                 'fieldName'=>$v['fieldName'],
@@ -51,27 +112,8 @@ trait CrudCreate {
         }
         return $temp;
     }
-    public function makeInputFieldsFromTerminal()
-    {
-       
-
-// this code won't be used for now
-      $temp = '';
-        foreach ($this->columnsAndTypes as  $v) {
-
-          $t = $this->whichTemplateToUse($v['type']);
-          
-            $temp.= $this->replace($t['temp'],[
-                'fieldName'=>$v['fieldName'],
-                'fieldNameUp'=>ucfirst($v['fieldName']),
-                'fieldType' =>$t['fieldType'],
-                'label' => 'Enter '.$v['fieldName'],
-                
-                ]);
-
-        }
-        return $temp;
-    }
+    
+    
     public function makeInputFields()
     {
        
@@ -79,17 +121,18 @@ trait CrudCreate {
 
       $temp = '';
         foreach ($this->columns as  $v) {
-          $t = $this->whichTemplateToUse($v['type']);
-           if ($v['type'] == 'options') {
-             $temp.= $this->replace($t['temp'],[
-                'fieldName'=>$v['fieldName'],
-                'fieldNameUp'=>ucfirst($v['fieldName']),
-                'fieldType' =>$t['fieldType'],
-                'label' => 'Enter '.$v['fieldName'],
-                'options'=>"${v['fieldName']}_options",
-                ]);
+          $t = $this->whichTemplateToUse($v['fieldType']);
 
-          } else {
+          //  if ($v['fieldType'] == 'relation') {
+          //    $temp.= $this->replace($t['temp'],[
+          //       'fieldName'=>$v['fieldName'],
+          //       'fieldNameUp'=>ucfirst($v['fieldName']),
+          //       'fieldType' =>$t['fieldType'],
+          //       'label' => 'Enter '.$v['fieldName'],
+                
+          //       ]);
+
+          
 
             $temp.= $this->replace($t['temp'],[
                 'fieldName'=>$v['fieldName'],
@@ -98,8 +141,7 @@ trait CrudCreate {
                 'label' => 'Enter '.$v['fieldName'],
                 
                 ]);
-            
-          }
+         
 
         }
         return $temp;
@@ -118,12 +160,12 @@ trait CrudCreate {
     {
         $temp = ' ';
 
-        foreach ($this->columns as  $f) {
-          if ($f['fieldType'] == 'options') {
-               $r = $this->replace($this->dataOptionsTemplate,[
-                 'fieldName'=>"${f['fieldName']}_options",
-                 'valueField'=>"${f['valueField']}",
-                 'visibleField'=>"${f['visibleField']}",
+        foreach ($this->columns as  $column) {
+          if ($column['type'] == 'relation') {
+               $r = $this->replace($this->relationDataOptionsTemplate,[
+                 'fieldName'=>"${column['fieldName']}_options",
+                 'valueField'=>"${column['valueField']}",
+                 'visibleField'=>"${column['visibleField']}",
                  
                  ]);
           
@@ -131,7 +173,7 @@ trait CrudCreate {
 
           }
 
-              $r = $this->replace($this->dataFieldTemplate,['field'=>$f['fieldName']]);
+              $r = $this->replace($this->dataFieldTemplate,['field'=>$column['fieldName']]);
           
               $temp .= $r;
         }
@@ -165,6 +207,9 @@ trait CrudCreate {
           case 'enum':
           case 'options':
           return ['temp'=>$this->optionsTemplate,'fieldType'=>'options'];
+            break;
+          case 'relation':
+          return ['temp'=>$this->relationInputTemplate,'fieldType'=>'relation'];
             break;
           case 'textarea':
           case 'mediumText':

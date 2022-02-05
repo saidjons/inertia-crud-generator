@@ -12,6 +12,9 @@ export default {
 		
 	},
   methods: {
+    edit(){
+
+    },
 				setErrors(d){
 				 
 						let errors = this.flattenObject(d)
@@ -67,16 +70,16 @@ export default {
 	<error-message :error='error' />
 	</template>
  
-	 	{{createFields}}
+	 	{{viewFields}}
 
   </div><!-- end of wrapper-->
 
   <!-- buttons start -->
       <div class="flex items-center justify-between">
       <button 
-            @click='store'
+            @click='edit'
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-        Create post
+        Edit 
       </button>
       <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
         cancel

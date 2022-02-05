@@ -8,7 +8,7 @@ trait CrudView {
 
 
   public $viewFileName = 'View';
-  public $setFieldTemplate = "\t\t\t  this.{{field}} : this.\$page.props.model.{{field}} ; \n ";
+  public $setFieldTemplate = "\t\t\t  this.{{field}} = this.\$page.props.model.{{field}} ; \n ";
 
   public $textTemplate = "\t\t\t <text-view  name='{{fieldName}}' label='{{label}}'     :initialValue='{{fieldName}}'/> \n "; 
   
@@ -17,7 +17,7 @@ trait CrudView {
 
       $temp = '';
         foreach ($this->columns as  $v) {
-          $t =['temp'=>$this->inputTemplate,'fieldType'=>'text'];;
+          $t =['temp'=>$this->textTemplate,'fieldType'=>'text'];;
            
              $temp.= $this->replace($t['temp'],[
                 'fieldName'=>$v['fieldName'],

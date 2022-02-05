@@ -28,12 +28,12 @@
           @inputChanged='setColumns' :id="col" :initialValue="dbTableColumns[col]"
         />
        
-        <foreign-key-field  
-          v-if="isOptionsField(col)"
+        <relation-field  
+          v-if="isRelationField(col)"
           :name="col" 
-          label="Foreign Key Options  "
+          label="Relation data  "
           :id="col"
-          @inputChanged='setOptionsForColumn'
+          @inputChanged='setRelationForColumn'
          />
 
        
@@ -68,23 +68,15 @@
 </template>
 
 <script>
-import AdminLayout from '@/Layouts/AdminLayout.vue';
-
-import TextareaField from '@/Components/Fields/Textarea.vue';
-import InputField from '@/Components/Fields/Input.vue';
-import OptionsField from '@/Components/Fields/Options.vue';
-import ForeignKeyField from '@/Components/Fields/ForeignKeyField.vue';
  
-import notify from '@/plugins/notify';
  
-
 export default {
     props:['token'],
     components: {
         TextareaField,
         InputField,
         OptionsField,
-        ForeignKeyField,
+        RelationField,
         AdminLayout,
     },
      methods: {
@@ -107,12 +99,12 @@ export default {
     },
     processResponseColumns(r){
           if(r.status == 200){
-             notify( r.data.message)
+             window.notify( r.data.message)
              console.log(r.data.columns);
             this.dbTableColumns = r.data.columns
            }else{
 
-              notify( r.data.message,'warning')
+              window.notify( r.data.message,'warning')
            }
     },
     setTableNameInput(d){
@@ -122,12 +114,12 @@ export default {
     iterateTableColumNames(){
       return Object.keys(this.dbTableColumns)
     },
-    isOptionsField(d){
+    isRelationField(d){
 
       let r = false
       this.postColumns.forEach(el=>{
        
-        if (d == el.fieldName && el.type == 'foreignkey') {
+        if (d == el.fieldName && el.type == 'relation') {
           r = true
         }
         
@@ -146,19 +138,19 @@ export default {
           this.postColumns[el] = this.dbTableColumns[el] 
         this.postColumns.push({
            fieldName:el,
-          type:this.dbTableColumns[el],
-          options:null,
+          fieldType:this.dbTableColumns[el],
+          relation:null,
         })
         
       });
        
     },
-    setOptionsForColumn(d){
+    setRelationForColumn(d){
      
 
        this.postColumns.forEach((el,i)=>{
          if (el.fieldName == d.name) {
-            el.options = d.value
+            this.postColumns[i].relation = d.value
              
          } 
        })
@@ -181,14 +173,14 @@ export default {
               if (res.data.messages) {
                  for (let index = 0; index < res.data.messages.length; index++) {
                    const element = res.data.messages[index];
-                  notify(element.message)
+                  window.notify(element.message)
                    
                  }
 
                  
               }
             }else{
-              notify(res.data.message,'warning')
+              window.notify(res.data.message,'warning')
             }
           }) 
         .catch(error=> {
@@ -234,7 +226,7 @@ export default {
 
         },
         {
-        name:'foreignkey',
+        name:'relation',
 
         },
         {

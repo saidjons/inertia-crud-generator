@@ -17,6 +17,7 @@ use Saidjon\InertiaCrudGenerator\Traits\CrudView;
  use Saidjon\InertiaCrudGenerator\Traits\CrudList;
  use Saidjon\InertiaCrudGenerator\Traits\CrudCreate;
  use Saidjon\InertiaCrudGenerator\Traits\CrudController;
+use Saidjon\InertiaCrudGenerator\Traits\CrudRelation;
 
 class InertiaCrudGenerator
 {
@@ -33,8 +34,8 @@ class InertiaCrudGenerator
     public object $filesystem;
     protected string $stub_path='../stubs/';
     protected string  $CLASS_PATH="resources/js/paka/";
-
-   
+    public $onMountActions = '';
+    protected $onMountFunctionTemplate = "\t\t\t this.{{fieldName}}();\n";
 
      protected $unwantedColumns = [
         'id',
@@ -111,6 +112,8 @@ class InertiaCrudGenerator
             'setFunctions'  => $this->makeSetFunctions(),
 
             'setFields'       =>  $this->makeSetFields(),
+            'viewFields'       =>  $this->makeViewFields(),
+            'onMountActions'       =>  $this->onMountActions,
 
         ];
 

@@ -14,7 +14,7 @@ import CheckboxField from '@/Components/Fields/Checkbox.vue';
 import CkeditorComponent from '@/Components/Fields/CkeditorImage.vue';
 import FilePondImageUpload from '@/Components/Fields/FilePondImageUpload.vue';
 import JsonEditorComponent from '@/Components/Fields/JsonEditor';
-import ForeignKeyField from '@/Components/Fields/ForeignKeyField.vue';
+import RelationField from '@/Components/Fields/RelationField.vue';
 import TextView from '@/Components/Fields/TextView.vue';
 
 import ErrorMessage from '@/Components/Error/Message.vue'
@@ -39,7 +39,7 @@ createInertiaApp({
          vueApp.component("CkeditorComponent", CkeditorComponent); 
          vueApp.component("FilePondImageUpload", FilePondImageUpload); 
          vueApp.component("JsonEditorComponent", JsonEditorComponent); 
-         vueApp.component("ForeignKeyField", ForeignKeyField); 
+         vueApp.component("RelationField", RelationField); 
          vueApp.component("TextView", TextView); 
          vueApp.component("ErrorMessage", ErrorMessage); 
         return vueApp.use(plugin)

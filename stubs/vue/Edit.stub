@@ -7,8 +7,8 @@ export default {
     components: {
 		stringToSlug,
     },
-     	mounted() {
-        {{onMountActions}}
+     	beforeMount() {
+        {{setFields}}
 		
 	},
   methods: {
