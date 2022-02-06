@@ -48,6 +48,13 @@ class InertiaCrudGenerator
         'uuid',
     ];
 
+    public function addFunctionToMount($name)
+    {
+        $this->onMountActions .= $this->replace($this->onMountFunctionTemplate,
+        [
+            'fieldName' =>strtoupper($name),
+            ]);
+    }
     public function setColumns($d)
     {
         $this->columns = $d;
@@ -231,7 +238,7 @@ class InertiaCrudGenerator
    
  
    
-    public function replace($template,$replacements)
+    public function replace(string $template, array $replacements )
     {
         foreach ($replacements as $key => $replacement) {
                 $template=str_replace('{{'.$key.'}}',$replacement,$template);

@@ -11,7 +11,7 @@
     import CellCheckbox from '@/Components/Tables/TableUI/CellCheckbox.vue';
     export default {
         components: {
-            AdminLayout,
+     
             TrashIcon,
             PencilIcon,
             UpHeading,

@@ -58,7 +58,7 @@ trait CrudCreate {
 
 
 
-  public $setRelationFunctionTemplate = "\t\t\t set{{fieldName}}(){
+  public $setRelationFunctionTemplate = "\t\t\t get{{fieldNamePl}}(){
 					 (async () => {
 					 const rawResponse = await fetch('/api/{{tableNamePl}}', {
 						method: 'GET',
@@ -70,7 +70,7 @@ trait CrudCreate {
 					 }
 						});
 						 const content = await rawResponse.json();
-						 this.{{fieldName}}Options.items = content
+						 this.{{fieldName}}RelationOptions.items = content.data
 					 })();
 			 },";
 
@@ -78,7 +78,7 @@ trait CrudCreate {
     $relationComponentTemplate is appended to createFields 
     and inserted into {{createFields}}
   */
-       public $relationInputTemplate	= "\t\t\t  <options-field name='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldName}}'/> 
+       public $relationInputTemplate	= "\t\t\t  <options-field name='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldNamePl}}'/> 
        
        ";
 
@@ -95,11 +95,12 @@ trait CrudCreate {
               if ($v['fieldType']=='relation') {
                  $temp.= $this->replace($this->setRelationFunctionTemplate,[
                 'fieldName'=>$v['fieldName'],
+                'fieldNamePl'=>strtoupper($v['fieldName']),
                  'tableNamePl'=>$v['tableName'],
                 
                 
                 ]);
-                
+                $this->addFunctionToMount($v['fieldName']);
               }
 
             $temp.= $this->replace($this->setFunctionTemplate,[
