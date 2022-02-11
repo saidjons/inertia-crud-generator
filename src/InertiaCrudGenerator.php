@@ -13,15 +13,16 @@ use phpDocumentor\Reflection\Types\This;
 use Saidjon\InertiaCrudGenerator\Models\Menu;
 
 
-use Saidjon\InertiaCrudGenerator\Traits\CrudView;
+use Saidjon\InertiaCrudGenerator\Traits\CrudEdit;
  use Saidjon\InertiaCrudGenerator\Traits\CrudList;
  use Saidjon\InertiaCrudGenerator\Traits\CrudCreate;
  use Saidjon\InertiaCrudGenerator\Traits\CrudController;
+use Saidjon\InertiaCrudGenerator\Traits\CrudView;
 use Saidjon\InertiaCrudGenerator\Traits\CrudRelation;
 
 class InertiaCrudGenerator
 {
-    use CrudList,CrudCreate, CrudView, CrudController;
+    use CrudList,CrudCreate, CrudView,CrudEdit, CrudController;
 
 
     public string $model_path="App\Models";
@@ -127,13 +128,13 @@ class InertiaCrudGenerator
         // generate file contents 
         $generatedController = $this->generateController($replacements);
         $generatedCreateFile = $this->generateCreateVue($replacements);
-        $generatedEditFile = $this->generateCreateVue($replacements);
+        $generatedEditFile = $this->generateEditVue($replacements);
         $generatedListFile = $this->generateListVue($replacements);
         $generatedViewFile = $this->generateViewVue($replacements);
 
         // write file-contents to file 
         $rCreate = $this->fileWriterCreate($replacements,$generatedCreateFile,$this->VUE_PATH,'Create.vue');
-        $rCreate = $this->fileWriterCreate($replacements,$generatedEditFile,$this->VUE_PATH,'Edit.vue');
+        $rEdit = $this->fileWriterCreate($replacements,$generatedEditFile,$this->VUE_PATH,'Edit.vue');
 
         $rList = $this->fileWriterList($replacements,$generatedListFile,$this->VUE_PATH,'List.vue');
         

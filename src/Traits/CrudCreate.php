@@ -19,26 +19,23 @@ trait CrudCreate {
                                     \t\t\t\t  
                                     \t\t\t\t  ] ,\n ";
 
-  public $inputTemplate = "\t\t\t <input-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}'  @inputChanged='set{{fieldNameUp}}'/> \n "; 
+  public $inputTemplate = "\t\t\t <input-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}' :initialValue='{{fieldName}}' @inputChanged='set{{fieldNameUp}}'/> \n "; 
 
 
-  public $checkboxTemplate = "\t\t\t <checkbox-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}'  @inputChanged='set{{fieldNameUp}}'/> \n "; 
+  public $checkboxTemplate = "\t\t\t <checkbox-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}' :initialValue='{{fieldName}}' @inputChanged='set{{fieldNameUp}}'/> \n "; 
 
-  public $optionsTemplate = "\t\t\t <options-field name='{{fieldName}}' :options='{{options}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}'/> \n"; 
+  public $optionsTemplate = "\t\t\t <options-field name='{{fieldName}}' :options='{{options}}' label='{{label}}' :initialValue='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}'/> \n"; 
   
-  public $textareaTemplate = "\t\t\t <textarea-field name='{{fieldName}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}' /> \n"; 
-  public $ckeditorTemplate = "\t\t\t  <ckeditor-component name='{{fieldName}}' label='Enter  {{fieldName}}'   @inputChanged='set{{fieldNameUp}}' /> \n"; 
+  public $textareaTemplate = "\t\t\t <textarea-field name='{{fieldName}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}' :initialValue='{{fieldName}}' /> \n"; 
+  public $ckeditorTemplate = "\t\t\t  <ckeditor-component name='{{fieldName}}' label='Enter  {{fieldName}}' :initialValue='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}' /> \n"; 
   public $imageUploadTemplate = "\t\t\t 
   <file-pond-image-upload  name='{{fieldName}}' label='Upload Image' 
-    @imageUploaded='set{{fieldNameUp}}'
+    @imageUploaded='set{{fieldNameUp}}' :initialValue='{{fieldName}}'
   /> \n"; 
   public $setFunctionTemplate = "\t\t\t 
    \t\t\tset{{fieldNameUp}}(data){\n
      \t\t\tthis.{{fieldName}} = data.value \n
      \t\t\t},\n"; 
-
-
-  
 
 /*
 
