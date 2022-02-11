@@ -7,8 +7,12 @@ export default {
     components: {
 		stringToSlug,
     },
-     	mounted() {
+     
+   	beforeMount() {
+       
        {{setFields}}
+
+ 
 		
 	},
   methods: {

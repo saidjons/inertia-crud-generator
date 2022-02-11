@@ -52,7 +52,7 @@ class InertiaCrudGenerator
     {
         $this->onMountActions .= $this->replace($this->onMountFunctionTemplate,
         [
-            'fieldName' =>strtoupper($name),
+            'fieldName' =>ucfirst($name),
             ]);
     }
     public function setColumns($d)
@@ -125,20 +125,25 @@ class InertiaCrudGenerator
         ];
 
         // generate file contents 
-        $generatedCreateCtl = $this->generateController($replacements);
+        $generatedController = $this->generateController($replacements);
         $generatedCreateFile = $this->generateCreateVue($replacements);
+        $generatedEditFile = $this->generateCreateVue($replacements);
         $generatedListFile = $this->generateListVue($replacements);
         $generatedViewFile = $this->generateViewVue($replacements);
 
         // write file-contents to file 
         $rCreate = $this->fileWriterCreate($replacements,$generatedCreateFile,$this->VUE_PATH,'Create.vue');
+        $rCreate = $this->fileWriterCreate($replacements,$generatedEditFile,$this->VUE_PATH,'Edit.vue');
+
         $rList = $this->fileWriterList($replacements,$generatedListFile,$this->VUE_PATH,'List.vue');
-         $rController =  $this->fileWriterController($replacements,$generatedCreateCtl,$this->CTL_PATH,$replacements['controllerName'].'.php');
+        
+         $rController =  $this->fileWriterController($replacements,$generatedController,$this->CTL_PATH,$replacements['controllerName'].'.php');
+        
          $rView =  $this->fileWriterList($replacements,$generatedViewFile,$this->VUE_PATH,'View.vue');
         
         // generate route for view 
         $route = "Route::resource('/admin/".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
-            'only' => ['index', 'create', 'show']
+            'only' => ['index', 'create', 'show','edit']
         ]);";
 
         $this->addToDB($replacements);
