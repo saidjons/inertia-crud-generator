@@ -8,6 +8,8 @@ export default {
 		stringToSlug,
     },
      	beforeMount() {
+				 
+        {{beforeMountActions}}
         {{setFields}}
 		
 	},

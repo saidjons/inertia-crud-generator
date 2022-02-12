@@ -6,16 +6,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
 trait CrudEdit{
-      public function generateEditVue($replacements):string
+
+    public function generateVueEdit()
     {
-           $createVue=$this->getStub("/../stubs/vue/Edit");
-        $createVue= $this->replace($createVue,$replacements);
-        
- 
-  return $createVue;
-        //  $filePath=base_path($this->VIEW_PATH.$replacements["folderName"]).'/table.blade.php';
-        //     $this->fileWriter($replacements,$lwTable,$this->VIEW_PATH,$filePath);
-       
+        $generatedEditFile = $this->generateTemplateFrom($this->replacements,'vue','Edit');
+        $message = $this->createVueFile($this->replacements,$generatedEditFile,$this->VUE_PATH,'Edit.vue');
+          $this->messages[] = $message;
+        return $this;
     }
+
 
 }

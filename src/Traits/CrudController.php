@@ -15,37 +15,30 @@ trait CrudController {
         
         return ucfirst($this->model_name).'CrudController';
     }
-     
-    
-     
-
       
-    public function generateController($replacements):string
+    public function generateController():self
     {
-           $ctl=$this->getStub("/../stubs/controller/controller");
-        $ctl= $this->replace($ctl,$replacements);
-        
- 
-        return $ctl;
-        //  $filePath=base_path($this->VIEW_PATH.$replacements["folderName"]).'/table.blade.php';
-        //     $this->fileWriter($replacements,$lwTable,$this->VIEW_PATH,$filePath);
+        $generatedController = $this->generateTemplateFrom($this->replacements,'controller','controller');
+
+          $message =  $this->createController($this->replacements,$generatedController,$this->CTL_PATH,$this->replacements['controllerName'].'.php');
+          $this->messages[] = $message;
+          return $this;
        
     }
-      public function fileWriterController($replacements,$template,$path,$fileNameWithExt)
+      public function createController($replacements,$template,$path,$fileNameWithExt)
     {
         
-        if (!File::exists(base_path('app/Http/Controllers/Admin'))) {
+        if (!File::exists(base_path($path))) {
 
-          File::makeDirectory(base_path('app/Http/Controllers/Admin'), 0777, true, true);
+          File::makeDirectory(base_path($path), 0777, true, true);
 
         }
         if (!$this->filesystem->exists(base_path($path.$fileNameWithExt))) {
 
-                $this->filesystem->put(base_path($path.'Admin/'.$fileNameWithExt),$template);
-                // Storage::disk('rjs')->put($fileNameWithExt,$template);
-                return ['message'=> 'Controller file created'];
+                $this->filesystem->put(base_path($path.$fileNameWithExt),$template);
+                return ['message'=> $fileNameWithExt .' file created'];
             }else{
-                return ['message'=> 'Controller exist . Not Created'];
+                return ['message'=> $fileNameWithExt .' exist . Not Created'];
 
             }
        

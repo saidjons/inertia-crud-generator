@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Log;
 trait CrudCreate {
 
  public  $VUE_PATH="js/Pages/"; //with trailing slash
-
-  public $createFileName = 'Create';
+ 
   public $postFieldTemplate = "\t\t\t {{field}} : this.{{field}} ,\n ";
   public $dataFieldTemplate = "\t\t\t {{field}} : null ,\n ";
   public $dataOptionsTemplate = "\t\t\t {{fieldName}} : {
@@ -85,6 +84,17 @@ trait CrudCreate {
        */
 
 
+  public function generateVueCreate()
+  {
+    
+        $generatedCreateFile = $this->generateTemplateFrom($this->replacements,'vue','Create');
+
+           $message = $this->createVueFile($this->replacements,$generatedCreateFile,$this->VUE_PATH,'Create.vue');
+          $this->messages[] = $message;
+           
+           return $this;
+
+  }
     public function makeSetFunctions()
     {
          $temp = '';
@@ -97,7 +107,7 @@ trait CrudCreate {
                 
                 
                 ]);
-                $this->addFunctionToMount($v['fieldName']);
+                $this->addFunctionToBeforeMount("set".ucfirst($v['fieldName']));
               }
 
             $temp.= $this->replace($this->setFunctionTemplate,[
@@ -223,18 +233,8 @@ trait CrudCreate {
             // boolean
         }
       }
-    public function generateCreateVue($replacements):string
-    {
-           $createVue=$this->getStub("/../stubs/vue/Create");
-        $createVue= $this->replace($createVue,$replacements);
-        
- 
-  return $createVue;
-        //  $filePath=base_path($this->VIEW_PATH.$replacements["folderName"]).'/table.blade.php';
-        //     $this->fileWriter($replacements,$lwTable,$this->VIEW_PATH,$filePath);
-       
-    }
-      public function fileWriterCreate($replacements,$template,$PATH,$fileNameWithExt)
+  
+      public function createVueFile($replacements,$template,$PATH,$fileNameWithExt)
     {
         
         if (!$this->filesystem->exists(resource_path($PATH.$replacements['folderName']))) {
@@ -245,10 +245,9 @@ trait CrudCreate {
         if (!$this->filesystem->exists(resource_path($PATH.$replacements['folderName'].'/'.$fileNameWithExt))) {
 
                 $this->filesystem->put(resource_path($PATH.$replacements['folderName'].'/'.$fileNameWithExt),$template);
-                // Storage::disk('rjs')->put($fileNameWithExt,$template);
-                return ['message'=> 'Create.vue file created'];
+                return ['message'=> $fileNameWithExt .' file created'];
           }else{
-                return ['message'=> 'Create.vue exists . Not created'];
+                return ['message'=> $fileNameWithExt .' exists . Not created'];
 
           }
        

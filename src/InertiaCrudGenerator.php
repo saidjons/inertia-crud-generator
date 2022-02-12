@@ -24,7 +24,7 @@ class InertiaCrudGenerator
 {
     use CrudList,CrudCreate, CrudView,CrudEdit, CrudController;
 
-
+    public $messages=[];
     public string $model_path="App\Models";
     protected string $model_name='';
     protected string $table_name;
@@ -33,10 +33,11 @@ class InertiaCrudGenerator
     protected $connectionParams;
     protected object $conn,$sm;
     public object $filesystem;
+    public $replacements=[];
     protected string $stub_path='../stubs/';
     protected string  $CLASS_PATH="resources/js/paka/";
-    public $onMountActions = '';
-    protected $onMountFunctionTemplate = "\t\t\t this.{{fieldName}}();\n";
+    public $beforeMountActions = '';
+    protected $runFunctionTemplate = "\t\t\t this.{{fieldName}}();\n";
 
      protected $unwantedColumns = [
         'id',
@@ -49,11 +50,11 @@ class InertiaCrudGenerator
         'uuid',
     ];
 
-    public function addFunctionToMount($name)
+    public function addFunctionToBeforeMount($name)
     {
-        $this->onMountActions .= $this->replace($this->onMountFunctionTemplate,
+        $this->beforeMountActions .= $this->replace($this->runFunctionTemplate,
         [
-            'fieldName' =>ucfirst($name),
+            'fieldName' =>$name,
             ]);
     }
     public function setColumns($d)
@@ -105,12 +106,12 @@ class InertiaCrudGenerator
 		// 		->buildViews();
 	 
 
-        $replacements=[
+        $this->replacements[]=[
             'folderName'     =>    ucfirst(strtolower($this->model_name)),
             'model'     =>  strtolower($this->model_name),//lowercase
             'modelPl'   =>  Str::plural(strtolower($this->model_name), 2),
             'upModel'       =>  $this->model_name,
-            'mountRelatedFields'       =>  '',
+             
             'createFields'       =>  $this->makeInputFields(),
             'dataFields'       =>  $this->makeDataFields(),
             'postFields'       =>  $this->makePostFields(),
@@ -121,37 +122,20 @@ class InertiaCrudGenerator
 
             'setFields'       =>  $this->makeSetFields(),
             'viewFields'       =>  $this->makeViewFields(),
-            'onMountActions'       =>  $this->onMountActions,
+            'beforeMountActions'       =>  $this->beforeMountActions,
 
         ];
 
-        // generate file contents 
-        $generatedController = $this->generateController($replacements);
-        $generatedCreateFile = $this->generateCreateVue($replacements);
-        $generatedEditFile = $this->generateEditVue($replacements);
-        $generatedListFile = $this->generateListVue($replacements);
-        $generatedViewFile = $this->generateViewVue($replacements);
-
-        // write file-contents to file 
-        $rCreate = $this->fileWriterCreate($replacements,$generatedCreateFile,$this->VUE_PATH,'Create.vue');
-        $rEdit = $this->fileWriterCreate($replacements,$generatedEditFile,$this->VUE_PATH,'Edit.vue');
-
-        $rList = $this->fileWriterList($replacements,$generatedListFile,$this->VUE_PATH,'List.vue');
-        
-         $rController =  $this->fileWriterController($replacements,$generatedController,$this->CTL_PATH,$replacements['controllerName'].'.php');
-        
-         $rView =  $this->fileWriterList($replacements,$generatedViewFile,$this->VUE_PATH,'View.vue');
-        
-        // generate route for view 
-        $route = "Route::resource('/admin/".$replacements['model']."', 'App\Http\Controllers\Admin\\".$replacements['upModel']."CrudController', [
+       
+        $route = "Route::resource('/admin/".$this->replacements['model']."', 'App\Http\Controllers\Admin\\".$this->replacements['upModel']."CrudController', [
             'only' => ['index', 'create', 'show','edit']
         ]);";
 
-        $this->addToDB($replacements);
+        $this->addToDB($this->replacements);
         
          $this->fileAppend(base_path('routes/inertia-crud.php'),$route);
 
-            return  [$rCreate,$rList,$rController,$rView];
+            return $this->messages;
      
     }
 
@@ -199,11 +183,15 @@ class InertiaCrudGenerator
         $this->model_name=Str::studly(Str::singular('users'));;
     }
 
-    public function modelReplacements()
+     public function generateTemplateFrom($replacements,$folder,$stubname):string
     {
+           $stub=$this->getStub("/../stubs/${folder}/${stubname}");
+        $template= $this->replace($stub,$replacements);
+        
+ 
+            return $template;
+      
        
-
-
     }
      public function getStub($type)
     {
