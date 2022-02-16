@@ -125,6 +125,12 @@ class InertiaCrudGenerator
             'beforeMountActions'       =>  $this->beforeMountActions,
 
         ];
+        
+        $this->generateVueCreate()
+        ->generateVueEdit()
+        ->generateVueList()
+        ->generateVueView()
+        ->generateController();
 
        
         $route = "Route::resource('/admin/".$this->replacements['model']."', 'App\Http\Controllers\Admin\\".$this->replacements['upModel']."CrudController', [
@@ -167,6 +173,9 @@ class InertiaCrudGenerator
 
     public function fileAppend($file,$txt)
     {
+         if(strpos(file_get_contents($file),$txt)){
+            return false;
+        }
         
         try {
             file_put_contents($file,$txt.PHP_EOL , FILE_APPEND | LOCK_EX);

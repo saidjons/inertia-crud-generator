@@ -7,8 +7,10 @@ export default {
     components: {
 		stringToSlug,
     },
-     	mounted() {
-        {{onMountActions}}
+     	beforeMount() {
+				 
+        {{beforeMountActions}}
+        
 		
 	},
   methods: {
