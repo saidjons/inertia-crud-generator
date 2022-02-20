@@ -106,7 +106,7 @@ class InertiaCrudGenerator
 		// 		->buildViews();
 	 
 
-        $this->replacements[]=[
+        $this->replacements=[
             'folderName'     =>    ucfirst(strtolower($this->model_name)),
             'model'     =>  strtolower($this->model_name),//lowercase
             'modelPl'   =>  Str::plural(strtolower($this->model_name), 2),
@@ -126,11 +126,13 @@ class InertiaCrudGenerator
 
         ];
         
-        $this->generateVueCreate()
+        
+        $this
+        ->generateVueCreate()
         ->generateVueEdit()
-        ->generateVueList()
         ->generateVueView()
-        ->generateController();
+        ->generateVueList();
+        // ->generateController();
 
        
         $route = "Route::resource('/admin/".$this->replacements['model']."', 'App\Http\Controllers\Admin\\".$this->replacements['upModel']."CrudController', [
@@ -241,12 +243,14 @@ class InertiaCrudGenerator
    
  
    
-    public function replace(string $template, array $replacements )
+    public function replace($template,  $replacements )
     {
         foreach ($replacements as $key => $replacement) {
+
+           
                 $template=str_replace('{{'.$key.'}}',$replacement,$template);
-                
             }
+             
             return $template;
     }
 

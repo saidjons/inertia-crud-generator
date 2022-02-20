@@ -171,6 +171,7 @@ trait CrudCreate {
         foreach ($this->columns as  $column) {
           if ($column['fieldType'] == 'relation') {
             
+           
                $r = $this->replace($this->relationDataOptionsTemplate,[
                  'fieldName'=>"${column['fieldName']}",
                  'valueField'=>$column['relation']['modelId'],
@@ -200,7 +201,7 @@ trait CrudCreate {
           return ['temp'=>$this->checkboxTemplate,'fieldType'=>'checkbox'];
             break;
               case 'ckeditor':
-          return ['temp'=>$this->ckeditorTemplate,'fieldType'=>'text'];
+          return ['temp'=>$this->ckeditorTemplate,'fieldType'=>'ckeditor'];
             break;
          
           case 'datetime':
@@ -234,17 +235,18 @@ trait CrudCreate {
         }
       }
   
-      public function createVueFile($replacements,$template,$PATH,$fileNameWithExt)
+      public function createVueFile($replacements,$template,$vuePath,$fileNameWithExt)
     {
+     
         
-        if (!$this->filesystem->exists(resource_path($PATH.$replacements['folderName']))) {
+        if (!$this->filesystem->exists(resource_path($vuePath.$replacements['folderName']))) {
 
-            $this->filesystem->makeDirectory(resource_path($PATH).$replacements["folderName"],0755);
+            $this->filesystem->makeDirectory(resource_path($vuePath).$replacements["folderName"],0755);
 
         }
-        if (!$this->filesystem->exists(resource_path($PATH.$replacements['folderName'].'/'.$fileNameWithExt))) {
+        if (!$this->filesystem->exists(resource_path($vuePath.$replacements['folderName'].'/'.$fileNameWithExt))) {
 
-                $this->filesystem->put(resource_path($PATH.$replacements['folderName'].'/'.$fileNameWithExt),$template);
+                $this->filesystem->put(resource_path($vuePath.$replacements['folderName'].'/'.$fileNameWithExt),$template);
                 return ['message'=> $fileNameWithExt .' file created'];
           }else{
                 return ['message'=> $fileNameWithExt .' exists . Not created'];
