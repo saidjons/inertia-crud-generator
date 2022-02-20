@@ -16,6 +16,8 @@ class ImageUploadController extends Controller
      
      public function articleImageUpload(Request $request)
      {
+
+            
       if ($request->hasFile('image')) {
              $originalName = $request->file('image')->getClientOriginalName();
 

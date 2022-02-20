@@ -107,7 +107,7 @@ trait CrudCreate {
                 
                 
                 ]);
-                $this->addFunctionToBeforeMount("set".ucfirst($v['fieldName']));
+                $this->addFunctionToBeforeMount("get".ucfirst($v['fieldName']));
               }
 
             $temp.= $this->replace($this->setFunctionTemplate,[
