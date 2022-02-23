@@ -11,7 +11,7 @@ window.notify = notify;
 import InputField from '@/Components/Fields/Input.vue';
 import OptionsField from '@/Components/Fields/Options.vue';
 import CheckboxField from '@/Components/Fields/Checkbox.vue';
-import CkeditorComponent from '@/Components/Fields/CkeditorImage.vue';
+import CkeditorComponent from '@/Components/Fields/CkeditorComponent.vue'
 import FilePondImageUpload from '@/Components/Fields/FilePondImageUpload.vue';
 import JsonEditorComponent from '@/Components/Fields/JsonEditor';
 import RelationField from '@/Components/Fields/RelationField.vue';
@@ -23,7 +23,7 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Inertia Crud';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

@@ -33,15 +33,7 @@ class {{controllerName}} extends Controller
          ]);
      }
 
-     public function show(int $id)
-     {
-         $model = {{upModel}}::find($id);
-
-         return Inertia::render('{{upModel}}/View',[
-             "model" =>$model,
-         ]);
-     }
-
+ 
 
      public function create()
      {

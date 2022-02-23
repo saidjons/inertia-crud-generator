@@ -11,23 +11,36 @@
     components: {
         TrashIcon,PencilIcon,EyeIcon,
     },
-     setup() {
-         
+     mounted() {
+         this.setUrl()
      },
      methods:{
+         setUrl(){
+             let url = this.$page.url
+             if (!url.match(/\/$/)) {
+                 url + '/'
+             }
+             this.url = url
+         },
          deleteItem(){
              this.$emit('deleteItem',this.id)
          },
          editItem(){
-             Inertia.visit(`/admin/category/${this.id}/edit`)
+             Inertia.visit(`${this.url}${this.id}/edit`)
              
          },
          viewItem(){
-             Inertia.visit(`/admin/category/${this.id}`)
+             Inertia.visit(`${this.url}${this.id}`)
              
-         }
+         },
+     data() {
+         return { 
+             url:null,
+
+         }}
      }
- }
+     }
+  
  </script>
 
 <template>

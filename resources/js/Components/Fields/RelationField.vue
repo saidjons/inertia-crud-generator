@@ -34,10 +34,10 @@ export default {
   },
   data() {
     return {
-       model:'App/Models/',
+       model:'users',
        modelShowCol:'title',
        modelId:'id',
-      visible:false,
+      visible:true,
       valueField:null,
       visibleField:null,
 

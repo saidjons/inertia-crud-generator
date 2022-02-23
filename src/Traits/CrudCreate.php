@@ -26,7 +26,7 @@ trait CrudCreate {
   public $optionsTemplate = "\t\t\t <options-field name='{{fieldName}}' :options='{{options}}' label='{{label}}' :initialValue='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}'/> \n"; 
   
   public $textareaTemplate = "\t\t\t <textarea-field name='{{fieldName}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}' :initialValue='{{fieldName}}' /> \n"; 
-  public $ckeditorTemplate = "\t\t\t  <ckeditor-component name='{{fieldName}}' label='Enter  {{fieldName}}' :initialValue='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}' /> \n"; 
+  public $ckeditorTemplate = "\t\t\t  <ckeditor-component name='{{fieldName}}' label='{{fieldName}}' :content='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}' /> \n"; 
   public $imageUploadTemplate = "\t\t\t 
   <file-pond-image-upload  name='{{fieldName}}' label='Upload Image' 
     @imageUploaded='set{{fieldNameUp}}' :initialValue='{{fieldName}}'

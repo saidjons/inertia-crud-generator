@@ -131,8 +131,8 @@ class InertiaCrudGenerator
         ->generateVueCreate()
         ->generateVueEdit()
         ->generateVueView()
-        ->generateVueList();
-        // ->generateController();
+        ->generateVueList()
+        ->generateController();
 
        
         $route = "Route::resource('/admin/".$this->replacements['model']."', 'App\Http\Controllers\Admin\\".$this->replacements['upModel']."CrudController', [

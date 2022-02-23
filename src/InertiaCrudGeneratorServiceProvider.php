@@ -36,7 +36,6 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
             __DIR__.'/../resources/js/Layouts' => resource_path('js/Layouts'),
             __DIR__.'/../resources/js/app' => resource_path('js'),
             __DIR__.'/../resources/js/root' => base_path(''),
-            __DIR__.'/../resources/js/publicJS' => public_path('js'),
             __DIR__.'/../resources/css' => resource_path('css'),
            __DIR__.'/../routes' => base_path('routes'),
           __DIR__.'/../database/migrations' => base_path('database/migrations'),
