@@ -34,6 +34,9 @@ fresh install laravel 8
         "vuedraggable": "^4.1.0",
         "vuex": "^4.0.2" 
         `
+        ### run 
+        `npm install --save @ckeditor/ckeditor5-vue @ckeditor/ckeditor5-build-classic
+`
       #### include routes/inertia-crud.php into routes/web.php
       
       ` include_once('inertia-crud.php'); `
