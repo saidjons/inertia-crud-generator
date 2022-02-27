@@ -8,7 +8,7 @@
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-    import {SimpleUploadAdapterPlugin} from './SimpleUploadAdapter'
+    import {SimpleUploadAdapterPlugin} from '@/plugins/SimpleUploadAdapter'
 
     export default {
           props:['name','label','content'],
