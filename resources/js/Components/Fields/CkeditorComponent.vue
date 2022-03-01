@@ -1,11 +1,26 @@
 <template>
-    <div>
+    
+   <div class="mb-4">
+      <label
+      @click="changeVisibility"
+        class="block pl-5 text-gray-600 text-sm font-semibold mb-2"
+        for="username"
+      >
+        {{label}}
+      </label>
+      <div
+        v-show="visible"
+        class="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      >
         <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+            
+      </div>
+       
     </div>
 </template>
 
 <script>
-import CKEditor from '@ckeditor/ckeditor5-vue';
+ 
 
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
     import {SimpleUploadAdapterPlugin} from '@/plugins/SimpleUploadAdapter'
@@ -13,18 +28,23 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
     export default {
           props:['name','label','content'],
           components:{
-              CKEditor
+               
           },
         beforeMount(){
-            if (this.content) {
+            // if (this.content) {
             
-                this.editorData = this.content
-            }
+            //     this.editorData = this.content
+            // }
          
         },
         mounted(){
             window.token = this.$page.props.user.token
             window.csrf = this.$page.props.csrf
+        },
+        methods: {
+            changeVisibility(){
+                this.visible = !this.visible
+            }
         },
         watch: {
             editorData(n,old){
@@ -36,6 +56,7 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
         },
         data() {
             return {
+                  visible:true,
                 editor: ClassicEditor,
                 editorData: null,
                 editorConfig: {

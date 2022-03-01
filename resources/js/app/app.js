@@ -20,6 +20,7 @@ import TextView from '@/Components/Fields/TextView.vue';
 import ErrorMessage from '@/Components/Error/Message.vue'
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
 
 
@@ -42,7 +43,9 @@ createInertiaApp({
          vueApp.component("RelationField", RelationField); 
          vueApp.component("TextView", TextView); 
          vueApp.component("ErrorMessage", ErrorMessage); 
-        return vueApp.use(plugin)
+        return vueApp
+        .use(plugin)
+        .use(CKEditor)
             .mixin({ methods: { route } })
             .mount(el);
     },

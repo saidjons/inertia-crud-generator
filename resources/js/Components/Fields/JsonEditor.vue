@@ -57,7 +57,7 @@ import {JSONEditor} from '@json-editor/json-editor';
       </label>
       <div
         v-show="visible"
-        class="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline z-1"
       >
             <div :id="name"></div>
       </div>
