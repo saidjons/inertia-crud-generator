@@ -14,7 +14,7 @@ trait CrudList {
    {
        $templateString = $this->generateTemplateFrom($this->replacements,'vue','List');
 
-      $message = $this->createVueFile($this->replacements,$templateString,$this->VUE_PATH,'List.vue');
+      $message = $this->createFile($templateString,$this->VUE_PATH,$this->replacements['folderName'],'List.vue');
           $this->messages[] = $message;
 
       return $this;
@@ -23,7 +23,7 @@ trait CrudList {
     public function makeTableHeadings()
     {
       $headingItems = '';
-      foreach ($this->columns as  $col) {
+      foreach ($this->postCols as  $col) {
           $temp = "{ key:'".$col['fieldName'] ."',cell:'text',visible:true, value: '".$col['fieldName']."'},\n";
           $headingItems .= "\t\t\t".$temp . "\n";
       }
@@ -36,9 +36,9 @@ trait CrudList {
 
 
       $temp = '';
-        foreach ($this->columns as  $v) {
+        foreach ($this->postCols as  $v) {
            
-            $temp.= $this->replace($this->columnsTemplate,[
+            $temp.= $this->replaceArray($this->columnsTemplate,[
                 'columnKey'=>$v['fieldName'],
                 ]);
 

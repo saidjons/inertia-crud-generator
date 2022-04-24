@@ -10,9 +10,7 @@ export default {
      
    	beforeMount() {
        
-       {{setFields}}
-
- 
+          {{onMountedSetField}}
 		
 	},
   methods: {
@@ -53,7 +51,7 @@ export default {
   
   data() {
     return {
-			{{dataFields}}
+			{{dataField}}
 			errors:[]
     }
   },
@@ -74,7 +72,7 @@ export default {
 	<error-message :error='error' />
 	</template>
  
-	 	{{viewFields}}
+	 	{{viewHtmlField}}
 
   </div><!-- end of wrapper-->
 

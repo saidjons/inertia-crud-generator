@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 
 trait CrudController {
 
- public  $CTL_PATH="app/Http/Controllers/Admin/"; //with trailing slash
+//  public  $CTL_PATH="app/Http/Controllers/Admin/"; //with trailing slash
 
   
     public function makeControllerName()
@@ -33,11 +33,13 @@ trait CrudController {
           File::makeDirectory(base_path($path), 0777, true, true);
 
         }
-        if (!$this->filesystem->exists(base_path($path.$fileNameWithExt))) {
+        if (!File::exists(base_path($path.$fileNameWithExt))) {
 
-                $this->filesystem->put(base_path($path.$fileNameWithExt),$template);
+                File::put(base_path($path.$fileNameWithExt),$template);
                 return ['message'=> $fileNameWithExt .' file created'];
-            }else{
+            } else 
+            
+            {
                 return ['message'=> $fileNameWithExt .' exist . Not Created'];
 
             }

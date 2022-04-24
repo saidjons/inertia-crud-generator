@@ -23,7 +23,6 @@ export default {
 			}) 
 				.then(res=> { 
 				res.data.data.forEach(el => {
-                    console.info(JSON.parse(el.data));
                     this.sidebarItems.push(JSON.parse(el.data))
                 });	 
 			  }) 

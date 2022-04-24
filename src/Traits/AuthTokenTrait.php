@@ -35,7 +35,10 @@ trait AuthTokenTrait{
     {
       // dd(auth()->user()->createToken('admin')->plainTextToken);
        $user = User::find(auth()->user()->id);
-       $user->tokens()->delete();
+       if( $user->tokens()){
+          $user->tokens()->delete();
+
+       }
        
     }
     public function newAuthToken():string
