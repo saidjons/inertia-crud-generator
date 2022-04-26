@@ -3,8 +3,8 @@
 fresh install laravel 8 
  
  #### install infyom api generator 
- `$ composer require infyomlabs/laravel-generator`
- `$ php artisan  infyom:install`
+ `$ composer require infyomlabs/laravel-generator^3.0`
+ `$ php artisan  infyom:publish`
 
 #### install jetstream
   `$ composer require laravel/jetstream`
