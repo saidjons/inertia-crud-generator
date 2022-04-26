@@ -51,7 +51,7 @@ fresh install laravel 8
    #### copy these to package.json . remove duplicates
     
    ```JSON   
-    "awesome-notifications": "^3.1.2",
+        "awesome-notifications": "^3.1.2",
         "filepond-plugin-file-validate-type": "^1.2.6",
         "@vue/babel-plugin-jsx": "^1.1.1",
         "@json-editor/json-editor": "^2.6.1",
