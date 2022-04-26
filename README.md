@@ -50,7 +50,7 @@ fresh install laravel 8
     
    #### copy these to package.json . remove duplicates
     
-   ```JSON   
+```JSON   
         "awesome-notifications": "^3.1.2",
         "filepond-plugin-file-validate-type": "^1.2.6",
         "@vue/babel-plugin-jsx": "^1.1.1",
@@ -59,7 +59,7 @@ fresh install laravel 8
         "vue-filepond": "^7.0.2",
         "vuedraggable": "^4.1.0",
         "vuex": "^4.0.2" 
-        ```
+```
 ### run 
 `$ npm install --save @ckeditor/ckeditor5-vue @ckeditor/ckeditor5-build-classic`
 `
