@@ -10,7 +10,7 @@ trait CrudEdit{
     public function generateVueEdit()
     {
         $generatedEditFile = $this->generateTemplateFrom($this->replacements,'vue','Edit');
-        $message = $this->createVueFile($this->replacements,$generatedEditFile,$this->VUE_PATH,'Edit.vue');
+        $message = $this->createFile($generatedEditFile,$this->VUE_PATH,$this->replacements['folderName'],'Edit.vue');
           $this->messages[] = $message;
         return $this;
     }

@@ -9,8 +9,8 @@ export default {
     },
      	beforeMount() {
 				 
-        {{beforeMountActions}}
-        {{setFields}}
+          {{onMountedSetField}}
+     
 				this.id = this.$page.props.model.id
 		
 	},
@@ -43,7 +43,7 @@ export default {
 			},
 
 				
-				{{setFunctions}}
+				{{setMethod}}
      
     edit(){
 			this.errors = null
@@ -54,7 +54,7 @@ export default {
       'Authorization' : 'Bearer ' + this.$page.props.user.token
 			
 			} ,
-					{{postFields}}
+					{{postField}}
 			}) 
 				.then(res=> { 
 					console.log(res);
@@ -81,7 +81,7 @@ export default {
   
   data() {
     return {
-			{{dataFields}}
+			{{dataField}}
 			errors:[],
 			id:null,
     }
@@ -103,7 +103,7 @@ export default {
 	<error-message :error='error' />
 	</template>
  
-	 	{{createFields}}
+	 	{{createHtmlField}}
 
   </div><!-- end of wrapper-->
 

@@ -24,7 +24,7 @@
     
       <h3 >{{col}}</h3>
       <h3 >{{ dbTableColumns[col] }}</h3>
-      <options-field name="category"  :options='catOptions' label='Select Field' 
+      <options-field :name="col"  :options='catOptions' label='Select Field' 
           @inputChanged='setColumns' :id="col" :initialValue="dbTableColumns[col]"
         />
        
@@ -34,6 +34,14 @@
           label="Relation data  "
           :id="col"
           @inputChanged='setRelationForColumn'
+         />
+
+         <textarea-field 
+          v-if="isOptionField(col)"
+          :name="col" 
+          label="Option data  "
+          :id="col"
+          @inputChanged='setOptionForColumn'
          />
 
        
@@ -69,11 +77,12 @@
 
 <script>
  
+ import TextareaField from '@/Components/Fields/Textarea';
  
 export default {
      
     components: {
-      
+      TextareaField,
     },
      methods: {
    
@@ -115,7 +124,19 @@ export default {
       let r = false
       this.postColumns.forEach(el=>{
        
-        if (d == el.fieldName && el.fieldType == 'relation') {
+        if (d == el.fieldName && el.className == 'RelationField') {
+          r = true
+        }
+        
+      })
+      return r 
+    },
+    isOptionField(d){
+
+      let r = false
+      this.postColumns.forEach(el=>{
+       
+        if (d == el.fieldName && el.fieldType == 'OptionField') {
           r = true
         }
         
@@ -124,8 +145,10 @@ export default {
     },
     setColumns(data){
       
-      
-        this.dbTableColumns[data.id] = data.value
+
+        this.dbTableColumns[data.name] = data.value
+       
+
     },
     setPostColumns(){
       this.postColumns = []
@@ -134,7 +157,7 @@ export default {
           this.postColumns[el] = this.dbTableColumns[el] 
         this.postColumns.push({
            fieldName:el,
-          fieldType:this.dbTableColumns[el],
+          className:this.dbTableColumns[el],
           relation:null,
         })
         
@@ -143,17 +166,36 @@ export default {
     },
     setRelationForColumn(d){
      
+        let id = null
+       this.postColumns.forEach((el,i)=>{
+         if (el.fieldName == d.name) {
+           id = i
+            this.postColumns[i].relation = d.value
+          } 
+       })
+
+       if(id){
+         this.postColumns[id]['relation'] = d.value
+       }
+    },
+    setOptionForColumn(d){
+     
 
        this.postColumns.forEach((el,i)=>{
          if (el.fieldName == d.name) {
-            this.postColumns[i].relation = d.value
-             
+            this.postColumns[i].option = JSON.stringify(d.value)
+
          } 
        })
     },
      
     generate(){
-      
+      console.info(this.postColumns);
+      this.postColumns = this.postColumns.filter(function(el){
+        return el.fieldName!='' &&el.className!=null
+      })
+      console.info(this.postColumns);
+
         axios.post('/admin/crud/generator', { 
         table:this.tableName,
         columns:this.postColumns,
@@ -164,7 +206,6 @@ export default {
           ) 
           .then(res=> { 
             if(res.status == 200 ){
-              console.log(res.data);
 
               if (res.data.messages) {
                  for (let index = 0; index < res.data.messages.length; index++) {
@@ -176,14 +217,18 @@ export default {
                  
               }
             }else{
-              window.notify(res.data.message,'warning')
-            }
+		let model = window.location.pathname.split('/')[2];		
+    		window.notify(`Please set up ${model} API  with Infyom.api:scaffold`,'warning')
+				}
           }) 
         .catch(error=> {
+          
+
          });
     },
     cutFields(){
        this.filterColumns()
+       this.postColumns = []
        this.setPostColumns()
     },
     filterColumns(){
@@ -195,6 +240,7 @@ export default {
 
         }
       });
+
       this.dbTableColumns = cols
       
     }
@@ -207,50 +253,72 @@ export default {
       dbTableColumns:{},
       catOptions:{
         visibleField:'name',
-        valueField:'name',
+        valueField:'className',
         items:[
         {
         name:'checkbox',
+        className:'CheckboxField',
+
 
         },
         {
         name:'ckeditor',
+        className:'CkeditorField',
+
 
         },
         {
         name:'date',
+        className:'DateField',
+
 
         },
         {
         name:'relation',
+        className:'RelationField',
+
 
         },
         {
         name:'dismiss',
+        className:'',
+
 
         },
         {
         name:'file',
+        className:'FileField',
+
 
         },
         {
         name:'imageUpload',
+        className:'ImageUploadField',
+
 
         },
         {
         name:'number',
+        className:'NumberField',
+
 
         },
         {
         name:'textarea',
+        className:'TextareaField',
+
 
         },
         {
         name:'text',
+        className:'TextField',
+
 
         },
         {
-        name:'options',
+        name:'option',
+        className:'OptionField',
+
 
         },
       ],

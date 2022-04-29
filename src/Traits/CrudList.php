@@ -14,7 +14,7 @@ trait CrudList {
    {
        $templateString = $this->generateTemplateFrom($this->replacements,'vue','List');
 
-      $message = $this->createVueFile($this->replacements,$templateString,$this->VUE_PATH,'List.vue');
+      $message = $this->createFile($templateString,$this->VUE_PATH,$this->replacements['folderName'],'List.vue');
           $this->messages[] = $message;
 
       return $this;
@@ -38,7 +38,7 @@ trait CrudList {
       $temp = '';
         foreach ($this->columns as  $v) {
            
-            $temp.= $this->replace($this->columnsTemplate,[
+            $temp.= $this->replaceArray($this->columnsTemplate,[
                 'columnKey'=>$v['fieldName'],
                 ]);
 
