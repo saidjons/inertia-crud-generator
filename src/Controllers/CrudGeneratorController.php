@@ -1,13 +1,14 @@
 <?php
 
- namespace Saidjon\InertiaCrudGenerator;
+ namespace Saidjon\InertiaCrudGenerator\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
  
  
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Schema;
+use Saidjon\InertiaCrudGenerator\Generator\Generator;
 use Saidjon\InertiaCrudGenerator\InertiaCrudGenerator;
 use Saidjon\InertiaCrudGenerator\Traits\AuthTokenTrait;
 
@@ -19,11 +20,7 @@ class CrudGeneratorController extends Controller
     public function create()
     {
         
-        $token = $this->ensureSessionSameWithAuthtokenCookie();
-        return Inertia::render('Generator/Create',[
-            'token' => $token,
-            'csrf'  => csrf_token(),
-        ]);
+        return Inertia::render('Generator/Create');
 
         
     }
@@ -33,9 +30,12 @@ class CrudGeneratorController extends Controller
 
         if (Schema::hasTable($request->input('tableName'))) {
             
-            $c = new InertiaCrudGenerator($request->input('tableName'));
-            $columns = $c->getFilteredColumns();
-            unset($c);
+            $gen = new Generator($request->input('tableName'));
+
+            $columns = $gen->setColumnTypes()
+                            ->filterColumns()
+                            ->getColumnTypes();
+            unset($gen);
             return  response()->json([
                 'message' => $request->input('tableName') . ' table exists',
                 'columns' => $columns,
@@ -54,17 +54,19 @@ class CrudGeneratorController extends Controller
     {   
         $columns = $r->input('columns');
         $table = $r->input('table');
-        $crud = new InertiaCrudGenerator($table);
+        $crud = new Generator($table);
 
-        $crud->setColumns($columns);
-        $result = $crud->handle();
+         $crud->setPostedColumns($columns);
+         $result = $crud->setReplacement()
+                ->handle();  
 
         if ($result) {
                 return  response()->json([
                  'messages' => [$result],
                  
             ]);
-        }else{
+        } else
+        {
                 return  response()->json([
                  'message' => 'error see  log',
                  

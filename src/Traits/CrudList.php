@@ -23,7 +23,7 @@ trait CrudList {
     public function makeTableHeadings()
     {
       $headingItems = '';
-      foreach ($this->columns as  $col) {
+      foreach ($this->postCols as  $col) {
           $temp = "{ key:'".$col['fieldName'] ."',cell:'text',visible:true, value: '".$col['fieldName']."'},\n";
           $headingItems .= "\t\t\t".$temp . "\n";
       }
@@ -36,7 +36,7 @@ trait CrudList {
 
 
       $temp = '';
-        foreach ($this->columns as  $v) {
+        foreach ($this->postCols as  $v) {
            
             $temp.= $this->replaceArray($this->columnsTemplate,[
                 'columnKey'=>$v['fieldName'],

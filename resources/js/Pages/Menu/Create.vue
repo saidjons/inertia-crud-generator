@@ -93,6 +93,9 @@ export default {
 				if(this.errors){
 					window.notify(this.errors[0],'tip')
 
+				}else{
+					let model = window.location.pathname.split('/')[2]
+					window.notify(`Please set up ${model} API  with Infyom.api:scaffold`,'warning')
 				}
 
 			 });
