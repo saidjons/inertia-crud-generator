@@ -42,7 +42,7 @@ export default {
 			},
 
 				
-				{{setMethod}}
+				{{method}}
      
     store(){
 			this.errors = null

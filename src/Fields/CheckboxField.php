@@ -9,8 +9,9 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
         protected $createHtmlTemp = "\t\t\t <checkbox-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}' :initialValue='{{fieldName}}' @inputChanged='set{{fieldNameUp}}'/> \n ";
 
-        protected $fieldType = 'checkbox';
+        public $fieldType = 'checkbox';
 
+        public $label = 'Check ';
          
 
         public function getData():array

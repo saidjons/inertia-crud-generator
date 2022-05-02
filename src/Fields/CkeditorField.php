@@ -10,8 +10,9 @@ class CkeditorField extends BaseField
 {
     protected $createHtmlTemp = "\t\t\t  <ckeditor-component name='{{fieldName}}' label='{{fieldName}}' :content='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}' /> \n"; 
 
-    protected $fieldType = 'ckeditor';
+    public $fieldType = 'ckeditor';
 
+    public $label = 'Fill ';
     
     
 

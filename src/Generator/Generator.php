@@ -4,8 +4,9 @@ namespace Saidjon\InertiaCrudGenerator\Generator;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Log;
 
+use Illuminate\Support\Facades\Schema;
 use Saidjon\InertiaCrudGenerator\Models\Menu;
 use Saidjon\InertiaCrudGenerator\Traits\Replacor;
 
@@ -57,7 +58,7 @@ class Generator extends BaseGenerator
             'mountedSet'       =>  "",
             'beforeMountSet'       =>  "",
             'onMountedSetField'       =>  "",
-            'setMethod'  => "",
+            'method'  => "",
 
         ];
 
@@ -193,9 +194,9 @@ class Generator extends BaseGenerator
               $type = DB::getSchemaBuilder()->getColumnType($this->table_name, $col);
                   $this->columnTypes[$col] = $type;
               }           
-          } catch (\Throwable ) {
+          } catch (\Throwable $th) {
              
-            return false;
+                Log::info(__CLASS__.' '.$th->getLine() .' '.$th->getMessage());
           }
 
 

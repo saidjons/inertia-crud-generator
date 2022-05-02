@@ -19,8 +19,9 @@ class DropdownField extends BaseField
         \t\t\t\t  ] ,\n ";
 
 
-    protected $fieldType = 'dropdown';
+    public $fieldType = 'dropdown';
 
+    public $label = 'Select ';
     
     
 

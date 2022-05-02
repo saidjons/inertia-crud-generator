@@ -10,8 +10,9 @@ class ImageUploadField extends BaseField
 {
     protected $createHtmlTemp = "\t\t\t <file-pond-image-upload  name='{{fieldName}}' label='Upload Image' @imageUploaded='set{{fieldNameUp}}' :initialValue='{{fieldName}}'
     /> \n"; 
-    protected $fieldType = 'imageUpload';
+    public $fieldType = 'imageUpload';
 
+    public $label = 'Upload Image  ';
     
     
 

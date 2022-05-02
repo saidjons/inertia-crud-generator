@@ -10,8 +10,9 @@ class TextareaField extends BaseField
 {
     protected $createHtmlTemp = "\t\t\t <textarea-field name='{{fieldName}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}' :initialValue='{{fieldName}}' /> \n"; 
 
-    protected $fieldType = 'textarea';
+    public $fieldType = 'textarea';
 
+    public $label = 'Enter ';
     
     
 

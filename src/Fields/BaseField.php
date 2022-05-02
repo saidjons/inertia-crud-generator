@@ -3,6 +3,7 @@
 namespace Saidjon\InertiaCrudGenerator\Fields;
 
 use Saidjon\InertiaCrudGenerator\Traits\Replacor;
+use Saidjon\InertiaCrudGenerator\Generator\BaseGenerator;
 
 abstract class BaseField 
 {
@@ -12,6 +13,11 @@ abstract class BaseField
 
     public $table ;
 
+    public $fieldType;
+    
+
+    public $label = ' '; 
+
     public $viewHtmlTemp = "\t\t\t <text-view  name='{{fieldName}}' label='{{label}}'     :initialValue='{{fieldName}}'/> \n "; 
 
     public   $setFunctionTemp = "\t\t\t 
@@ -19,35 +25,35 @@ abstract class BaseField
       \t\t\tthis.{{fieldName}} = data.value \n
       \t\t\t},\n"; 
 
+      
      public $onMountedMethodTemp = "\t\t\t this.{{fieldName}}();\n";
+
+     public $onMountedSetFieldTemp = "\t\t\t this.{{fieldName}} = this.\$page.props.model.{{fieldName}};\n ";
 
     public $postFieldTemp = "\t\t\t {{fieldName}} : this.{{fieldName}} ,\n ";
     
     public $dataFieldTemp =  "\t\t\t {{fieldName}} : null ,\n ";
 
 
-
-    public function __construct(array $a)
+    public function __construct(array $data)
         {
-            $data = [
-                'fieldName'=>'fieldName',
-                'fieldNameUp'=>ucfirst('fieldName'),
-               'fieldType' =>'input',
-               'label' => 'Enter fieldName',
-            ];
-
+      
             $this->data = 
                 [
                         'fieldName'=>$data['fieldName'],
+                        'fieldType'=>$this->fieldType,
                      'fieldNameUp'=>ucfirst($data['fieldName']),
-                    'fieldType' =>$this->fieldType,
-                    'label' => 'Enter '.$data['fieldName'],
-                    
+                    'label' => $this->label.$data['fieldName'],
+                    "relationTableName" =>$data['relation']['tableName']??'',
+                    "visibleField" =>$data['relation']['visibleField']??'',
+                    "valueField" =>$data['relation']['valueField']??'',
+
                     
                 ];
                 
         }
      
+        
 
     public function setTable(string $table) 
     {
