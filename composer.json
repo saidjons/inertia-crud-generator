@@ -35,7 +35,7 @@
     "autoload": {
         "psr-4": {
             "Saidjon\\InertiaCrudGenerator\\": "src",
-            "Saidjon\\InertiaCrudGenerator\\Tests": "tests",
+            "Saidjon\\InertiaCrudGenerator\\Tests\\": "tests",
             "Saidjon\\InertiaCrudGenerator\\Database\\Factories\\": "database/factories"
         }
     },
