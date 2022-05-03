@@ -46,30 +46,47 @@ class RelationFieldTest extends TestCase
     public function test_vue_create_template_has_relation_field()
     {
         $generatedCreateFileTemp = $this->gen->generateTemplateFrom($this->gen->replacements,'vue','Create');
-
+        // relation html field exixst
         $this->assertStringContainsString("name='cat_id'",$generatedCreateFileTemp);
+        // relation field exists in data({})
         $this->assertStringContainsString("cat_id : null",$generatedCreateFileTemp);
+        // relation onchange set function exists
         $this->assertStringContainsString("setCat_id(data)",$generatedCreateFileTemp);
+        // relation get data from api function exists
         $this->assertStringContainsString("getCat_id()",$generatedCreateFileTemp);
+        // relation tablename is set in get from api function
         $this->assertStringContainsString(" await fetch('/api/categories",$generatedCreateFileTemp);
+
+        // relation get api function is run on vue mounted
+        $this->assertStringContainsString("this.get".ucfirst($this->columns[1]['fieldName'])."()",$generatedCreateFileTemp);
         
     }
 
-    public function test_relation_field_has_relation_data()
+    public function test_vue_create_has_get_relation_method()
     {
-        $r = new RelationField($this->columns[1]);
-
-        $this->assertEquals($this->columns[1]['relation']['tableName'],$r->data['relationTableName']);
-
-        $this->assertMatchesRegularExpression(
-    '/Exception 40\d/', 
-    'Exception 401', 
-    'Check if it is exception 40x'
-);
-
+        $generatedCreateFileTemp = $this->gen->generateTemplateFrom($this->gen->replacements,'vue','Create');
+        
+        $this->assertStringContainsString("get".ucfirst($this->columns[1]['fieldName']),$generatedCreateFileTemp);
 
     }
 
+
+    public function test_edit_vue_has_relation_column()
+    {
+        $generatedEditFileTemp = $this->gen->generateTemplateFrom($this->gen->replacements,'vue','Edit');
+        $fieldNameUp = ucfirst($this->columns[1]['fieldName']);
+
+        // relation function run when mounted
+        $this->assertStringContainsString("this.get".$fieldNameUp."()",$generatedEditFileTemp);
+        // relation get function exists
+        $this->assertStringContainsString("get".$fieldNameUp."()",$generatedEditFileTemp);
+        // relation get from api
+        $this->assertStringContainsString(" await fetch('/api/".$this->columns[1]['relation']['tableName'],$generatedEditFileTemp);
+        // relation data :null set
+        $this->assertStringContainsString(strtolower($fieldNameUp)." : null",$generatedEditFileTemp);
+
+        
+    }
    
 
     

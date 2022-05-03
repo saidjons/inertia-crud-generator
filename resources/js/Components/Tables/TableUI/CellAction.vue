@@ -26,11 +26,11 @@
              this.$emit('deleteItem',this.id)
          },
          editItem(){
-             Inertia.visit(`${this.url}${this.id}/edit`)
+             Inertia.visit(`${this.url}/${this.id}/edit`)
              
          },
          viewItem(){
-             Inertia.visit(`${this.url}${this.id}`)
+             Inertia.visit(`${this.url}/${this.id}`)
              
          },
      data() {

@@ -35,9 +35,10 @@ class TextareaField extends BaseField
 
             "method" => $this->replaceArray($this->setFunctionTemp,$this->data),
 
-            "beforeMountedSet" => "",
+            "beforeMountSet" => "",
 
-            "mountedSet" => "",
+            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+
             
             "viewHtmlField" => "",
         ];

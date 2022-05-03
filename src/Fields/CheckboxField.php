@@ -25,9 +25,11 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
                 "setMethod" => $this->replaceArray($this->setFunctionTemp,$this->data),
 
-                "beforeMountedSet" => "",
+                "beforeMountSet" => "",
     
                 "mountedSet" => "",
+            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+
                 
                 "viewHtmlField" => "",
             ];

@@ -28,7 +28,9 @@ class CkeditorField extends BaseField
 
             "setMethod" => $this->replaceArray($this->setFunctionTemp,$this->data),
 
-            "beforeMountedSet" => "",
+            "beforeMountSet" => "",
+            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+
 
             "mountedSet" => "",
             

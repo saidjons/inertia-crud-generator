@@ -1,5 +1,6 @@
 <script>
 import { Inertia } from '@inertiajs/inertia'
+import { Link } from '@inertiajs/inertia-vue3'
 
 import {ChevronDownIcon} from '@/Components/Icons/hero';
 export default {
@@ -7,6 +8,7 @@ export default {
 
   components: {
 ChevronDownIcon,
+Link,
   },
   methods: {
     showSubs(){
@@ -45,9 +47,12 @@ ChevronDownIcon,
             <template v-for="(sub ,subIndex) in item.subs" :key="subIndex" >
              <li class="flex w-full justify-between   cursor-pointer items-center mb-2 hover:bg-green-200 ">
 
-              <a  :href="sub.link" class="  my-1 cursor-pointer items-center w-full  ">
+              <!-- <a  :href="sub.link" class="  my-1 cursor-pointer items-center w-full  ">
                 {{sub.title}}
-              </a>
+              </a> -->
+              <Link :href="sub.link" 
+               class="  my-1 cursor-pointer items-center w-full  "
+               method="get" as="button" type="button">{{sub.title}}</Link>
               <div v-if="item.badgeNumber" class="py-1 px-3   rounded   flex items-center justify-center text-xs">{{sub.badgeNumber}}</div>
              </li>
             </template >

@@ -21,6 +21,7 @@ class Generator extends BaseGenerator
      use Replacor,CrudController,CrudCreate,CrudEdit,CrudView,CrudList;
 
      public $postCols;
+     public $columnTypes = [];
     
   public $replacements = [];
     

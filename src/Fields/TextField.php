@@ -33,7 +33,7 @@ class TextField extends BaseField
 
             "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
 
-            "beforeMountedSet" => "",
+            "beforeMountSet" => "",
 
             "mountedSet" => "",
  

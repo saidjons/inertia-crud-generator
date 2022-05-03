@@ -25,25 +25,6 @@ class RelationField extends BaseField
         /*
        also create $onMountFunctionTemplate and append to onMountActions
        */
-<<<<<<< HEAD
-      
-        $setRelationFunctionTemplate = "\t\t\t get{{fieldNameUp}}(){
-            (async () => {
-            const rawResponse = await fetch('/api/{{relationTableName}}', {
-               method: 'GET',
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN' :this.\$page.props.csrf,
-            'Authorization' : 'Bearer ' + this.\$page.props.token,
-            }
-               });
-                const content = await rawResponse.json();
-                this.{{fieldName}}RelationOptions.items = content.data
-            })();
-    },";
-=======
->>>>>>> 8482fba5bfc92ad2fc68d4846e2d7c69d91a6415
 
     public $setRelationFunctionTemplate = "\t\t\t get{{fieldNameUp}}(){
         (async () => {
@@ -71,53 +52,44 @@ class RelationField extends BaseField
              \t\t\t	items:[]
              \t\t\t},  \n ";
 
+        public function __construct(array $data)
+        {
+    
+        $this->data = 
+        [
+                'fieldName'=>$data['fieldName'],
+                'fieldType'=>$this->fieldType,
+                'fieldNameUp'=>ucfirst($data['fieldName']),
+            'label' => $this->label.$data['fieldName'],
+            "relationTableName" =>$data['relation']['tableName']??'',
+            "visibleField" =>$data['relation']['visibleField']??'',
+            "valueField" =>$data['relation']['valueField']??'',
+        ];
+        }
+
       
     public function getData():array
     {
 
-        Log::info(json_encode($this->data));
         return [
             "createHtmlField" =>$this->makeField($this->createHtmlTemp,$this->data),
 
             "postField" => $this->replace($this->postFieldTemp,'fieldName',$this->data['fieldName']),
 
-<<<<<<< HEAD
-            "dataField" => $this->replace($this->dataFieldTemp,'fieldName',$this->data['fieldName']).
-                        $this->replaceArray($this->relationDataOptionsTemplate,$this->data)
-                ,
-            
-            "method" => $this->methodField(),
-=======
             "dataField" => $this->setDataField(),
 
             "method" => $this->setMethod(),
->>>>>>> 8482fba5bfc92ad2fc68d4846e2d7c69d91a6415
 
-            "beforeMountedSet" => "",
+            "beforeMountSet" => $this->replace($this->onMountedMethodTemp,'fieldName','get'.$this->data["fieldNameUp"]),
 
-            "mountedSet" => "",
+
+            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+
             
             "viewHtmlField" => "",
         ];
     }
 
-<<<<<<< HEAD
-    public function methodField()
-    {
-        $method = '';
-
-        $method .= $this->replaceArray($this->setFunctionTemp,$this->data);
-            try {
-        $method .=   $this->replaceArray($this->setRelationFunctionTemplate,$this->data);
-                
-            } catch (\Throwable $th) {
-                Log::info(__CLASS__ .'  Line :'.$th->getLine().$th->getMessage());
-            }
-            return $method;
-        
-    }
-
-=======
     public function setMethod():string
     {
         $t =   $this->replaceArray($this->setRelationFunctionTemplate,$this->data);
@@ -134,5 +106,4 @@ class RelationField extends BaseField
     }
 
 
->>>>>>> 8482fba5bfc92ad2fc68d4846e2d7c69d91a6415
 }
