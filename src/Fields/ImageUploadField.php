@@ -31,10 +31,11 @@ class ImageUploadField extends BaseField
             "beforeMountSet" => "",
 
             "mountedSet" => "",
-            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+            "onMountedSetFieldEdit" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+            "onMountedSetFieldView" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
 
             
-            "viewHtmlField" => "",
+            "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
 
         ];
     }

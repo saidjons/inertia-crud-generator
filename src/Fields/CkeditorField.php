@@ -29,12 +29,14 @@ class CkeditorField extends BaseField
             "setMethod" => $this->replaceArray($this->setFunctionTemp,$this->data),
 
             "beforeMountSet" => "",
-            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+            "onMountedSetFieldEdit" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+
+            "onMountedSetFieldView" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
 
 
             "mountedSet" => "",
             
-            "viewHtmlField" => "",
+            "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
         ];
     }
 

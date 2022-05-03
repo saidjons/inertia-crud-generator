@@ -56,7 +56,8 @@ class Generator extends BaseGenerator
             'postField'       =>  "",
             'mountedSet'       =>  "",
             'beforeMountSet'       =>  "",
-            'onMountedSetField'       =>  "",
+            'onMountedSetFieldEdit'       =>  "",
+            'onMountedSetFieldView'       =>  "",
             'method'  => "",
 
         ];

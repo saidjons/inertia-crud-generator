@@ -31,11 +31,13 @@ class TextField extends BaseField
 
             "method" => $this->replaceArray($this->setFunctionTemp,$this->data),
 
-            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+            "onMountedSetFieldEdit" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
 
             "beforeMountSet" => "",
 
             "mountedSet" => "",
+            "onMountedSetFieldView" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+
  
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),

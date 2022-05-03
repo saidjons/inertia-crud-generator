@@ -10,7 +10,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 class RelationField extends BaseField
 {
 
-    protected $createHtmlTemp = "\t\t\t  <options-field name='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
+    protected $createHtmlTemp = "\t\t\t  <options-field name='{{fieldName}}' :initialValue='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
 
     public $fieldType = 'relation';
 
@@ -83,10 +83,11 @@ class RelationField extends BaseField
             "beforeMountSet" => $this->replace($this->onMountedMethodTemp,'fieldName','get'.$this->data["fieldNameUp"]),
 
 
-            "onMountedSetField" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
+            "onMountedSetFieldEdit" => $this->setonMountedSetFieldEdit(),
 
+            "onMountedSetFieldView" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
             
-            "viewHtmlField" => "",
+            "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
         ];
     }
 
@@ -103,6 +104,16 @@ class RelationField extends BaseField
         $t.= $this->replace($this->dataFieldTemp,'fieldName',$this->data['fieldName']);
 
         return $t;
+    }
+
+    public function setonMountedSetFieldEdit()
+    {
+        $t = $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']);
+
+        $t.=  $this->replace($this->onMountedMethodTemp,'fieldName','get'.$this->data['fieldNameUp']);
+
+        return $t;
+
     }
 
 

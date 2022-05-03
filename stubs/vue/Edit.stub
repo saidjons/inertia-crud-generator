@@ -9,7 +9,7 @@ export default {
     },
      	beforeMount() {
 				 
-          {{onMountedSetField}}
+          {{onMountedSetFieldEdit}}
      
 				this.id = this.$page.props.model.id
 		

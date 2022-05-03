@@ -10,7 +10,7 @@ export default {
      
    	beforeMount() {
        
-          {{onMountedSetField}}
+          {{onMountedSetFieldView}}
 		
 	},
   methods: {
