@@ -44,7 +44,10 @@ abstract class BaseField
                         'fieldType'=>$this->fieldType,
                      'fieldNameUp'=>ucfirst($data['fieldName']),
                     'label' => $this->label.$data['fieldName'],
-                    
+                    "relationTableName" =>$data['relation']['tableName']??'',
+                    "visibleField" =>$data['relation']['visibleField']??'',
+                    "valueField" =>$data['relation']['valueField']??'',
+
                     
                 ];
                 

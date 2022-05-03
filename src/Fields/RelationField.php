@@ -12,26 +12,11 @@ class RelationField extends BaseField
 
     protected $createHtmlTemp = "\t\t\t  <options-field name='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
 
-    protected $fieldType = 'relation';
+    public $fieldType = 'relation';
+
+    public $label = 'Select ';
 
 
-    public function appendDataField()
-    {
-        
-        /*
-
-        $relationDataTemplate is appended with datafields and inserted into 	{{dataFields}}
-        */
-        $relationDataOptionsTemplate = "\t\t\t 	{{fieldName}}RelationOptions:{
-            \t\t\t	visibleField:'{{visibleField}}',
-            \t\t\t	valueField:'{{valueField}}',
-            \t\t\t	items:[]
-            \t\t\t},  \n ";
-
-    }
-    public function appendMethod()
-
-    {
         /*
         $setRelationFunctionTemplate is appended to setFunctionTemplate and 
         inserted into {{setFunctions}} 
@@ -40,6 +25,7 @@ class RelationField extends BaseField
         /*
        also create $onMountFunctionTemplate and append to onMountActions
        */
+<<<<<<< HEAD
       
         $setRelationFunctionTemplate = "\t\t\t get{{fieldNameUp}}(){
             (async () => {
@@ -56,10 +42,36 @@ class RelationField extends BaseField
                 this.{{fieldName}}RelationOptions.items = content.data
             })();
     },";
+=======
+>>>>>>> 8482fba5bfc92ad2fc68d4846e2d7c69d91a6415
 
-    }
-    
+    public $setRelationFunctionTemplate = "\t\t\t get{{fieldNameUp}}(){
+        (async () => {
+        const rawResponse = await fetch('/api/{{relationTableName}}', {
+           method: 'GET',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN' :this.\$page.props.csrf,
+        'Authorization' : 'Bearer ' + this.\$page.props.token,
+        }
+           });
+            const content = await rawResponse.json();
+            this.{{fieldName}}RelationOptions.items = content.data
+        })();
+         },";
 
+          /*
+
+         $relationDataTemplate is appended with datafields and inserted into 	{{dataFields}}
+         */
+         public $relationDataOptionsTemp = "\t\t\t 	{{fieldName}}RelationOptions:{
+             \t\t\t	visibleField:'{{visibleField}}',
+             \t\t\t	valueField:'{{valueField}}',
+             \t\t\t	items:[]
+             \t\t\t},  \n ";
+
+      
     public function getData():array
     {
 
@@ -69,11 +81,17 @@ class RelationField extends BaseField
 
             "postField" => $this->replace($this->postFieldTemp,'fieldName',$this->data['fieldName']),
 
+<<<<<<< HEAD
             "dataField" => $this->replace($this->dataFieldTemp,'fieldName',$this->data['fieldName']).
                         $this->replaceArray($this->relationDataOptionsTemplate,$this->data)
                 ,
             
             "method" => $this->methodField(),
+=======
+            "dataField" => $this->setDataField(),
+
+            "method" => $this->setMethod(),
+>>>>>>> 8482fba5bfc92ad2fc68d4846e2d7c69d91a6415
 
             "beforeMountedSet" => "",
 
@@ -83,6 +101,7 @@ class RelationField extends BaseField
         ];
     }
 
+<<<<<<< HEAD
     public function methodField()
     {
         $method = '';
@@ -98,4 +117,22 @@ class RelationField extends BaseField
         
     }
 
+=======
+    public function setMethod():string
+    {
+        $t =   $this->replaceArray($this->setRelationFunctionTemplate,$this->data);
+        $t.=$this->replaceArray($this->setFunctionTemp,$this->data);
+        return $t;
+    }
+
+    public function setDataField()
+    {
+        $t = $this->replaceArray($this->relationDataOptionsTemp,$this->data);
+        $t.= $this->replace($this->dataFieldTemp,'fieldName',$this->data['fieldName']);
+
+        return $t;
+    }
+
+
+>>>>>>> 8482fba5bfc92ad2fc68d4846e2d7c69d91a6415
 }

@@ -37,7 +37,7 @@ export default {
      },
      data() {
          return {
-             hidden:false,
+             hidden:true,
               sidebarItems:[
               ],
          }
@@ -52,7 +52,7 @@ export default {
  
  -->
                     <!-- Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] -->
-       <div style="min-height: 716px" class="w-64   sm:relative     md:h-full flex-col justify-between     "
+       <div style="min-height: 716px;z-index:99;" class="w-64  absolute      shadow md:h-full flex-col justify-between text-black     bg-gray-100    left-0 overflow-scroll   "
        
        :class="[hidden==true ? 'hidden flex':'sm:flex ']"
        >
@@ -65,14 +65,7 @@ export default {
                                 <sidebar-item  :item='item'/>
                                 </template >
                             </ul>
-                            <!-- <div class="flex justify-center mt-48 mb-4 w-full">
-                                <div class="relative">
-                                    <div class="text-gray-300 absolute ml-4 inset-0 m-auto w-4 h-4">
-                                      <img src="" alt="Search">
-                                    </div>
-                                    <input class=" focus:outline-none focus:ring-1 focus:ring-gray-100 rounded w-full text-sm text-gray-300 placeholder-gray-400 bg-gray-100 pl-10 py-2" type="text" placeholder="Search">
-                                </div>
-                            </div> -->
+                      <!-- search box  -->
                         </div>
                         <!-- sidebar bottom -->
         </div>
@@ -80,7 +73,7 @@ export default {
 
         <!-- second part start -->
         <!-- sidebar toggle button -->
-            <div class="w-64 z-40 absolute bg-gray-800 shadow md:h-full flex-col justify-between lg:hidden transition duration-150 ease-in-out" id="mobile-nav" style="transform: translateX(-260px);">
+            <div class="w-64   absolute bg-gray-800 shadow md:h-full flex-col justify-between   transition duration-150 ease-in-out" id="mobile-nav" style="transform: translateX(-260px);z-index:100;">
             <button aria-label="toggle sidebar" id="openSideBar" class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800" @click="sidebarHandler">
                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg7.svg" alt="toggler">
             </button>
