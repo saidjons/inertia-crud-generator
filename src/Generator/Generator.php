@@ -20,6 +20,7 @@ class Generator extends BaseGenerator
 {
      use Replacor,CrudController,CrudCreate,CrudEdit,CrudView,CrudList;
 
+     public $postCols;
     
   public $replacements = [];
     
@@ -27,15 +28,16 @@ class Generator extends BaseGenerator
     {
       $this->table_name=$table;
       $this->model_name = $this->buildClassName();
-
-      $this->setColumnTypes();
-
-      $this->setReplacement();
+ 
 
     }
    
     
     public function setReplacement(){
+
+        if (!$this->columnTypes) {
+            $this->setColumnTypes();
+        }
 
         $this->replacements=[
             'folderName'     =>    ucfirst(strtolower($this->model_name)),
@@ -43,7 +45,7 @@ class Generator extends BaseGenerator
             'modelPl'   =>  Str::plural(strtolower($this->model_name), 2),
             'modelUp'       =>  $this->model_name,
             'controllerName'       =>  $this->getControllerName(),
-            // 'tableColumns'    => $this->makeTableColumns(),
+            'tableColumns'    => $this->makeTableColumns(),
             'tableHeadingItems'    => $this->setTableHeading(),
              
 
@@ -58,15 +60,17 @@ class Generator extends BaseGenerator
 
         ];
 
+        return $this;
+
     }
 
     public function fillReplacements()
     {
-        if (count($this->columns) < 1 ) {
+        if (count($this->postCols) < 1 ) {
             throw new \Exception("Columns less than 1");
         }
 
-        foreach ($this->columns as $column) {
+        foreach ($this->postCols as $column) {
             try {
                 $resultArray = FieldFactory::getField($column['className'],$column);
                 foreach ($resultArray as $key => $value) {
@@ -91,7 +95,8 @@ class Generator extends BaseGenerator
     public function setTableHeading()
     {
         $template = '';
-        foreach ($this->columns as  $col) {
+
+        foreach ($this->postCols as  $col) {
             $temp = $this->replace($this->tableHeadingItemsTemp,'fieldName',$col['fieldName']);
 
             $template .= "\t\t\t".$temp . "\n";
@@ -104,6 +109,7 @@ class Generator extends BaseGenerator
     {
        
         if (!$this->tableExists()) {
+
             return false;
         }
 
@@ -164,15 +170,17 @@ class Generator extends BaseGenerator
         
         return ucfirst($this->model_name).'CrudController';
     }
+    
    
-    public function setColumns($d)
+
+    public function getColumnTypes()
     {
-        $this->columns = $d;
+        return $this->columnTypes;
     }
 
-    public function getColumns()
+    public function setPostedColumns($cols)
     {
-        return $this->columns;
+        $this->postCols = $cols;
     }
 
     public function setColumnTypes():self
@@ -197,13 +205,13 @@ class Generator extends BaseGenerator
     
     public function filterColumns():self
     {
-            if(empty($this->columnsAndTypes)){
+            if(empty($this->columnTypes)){
                $this->setColumnTypes();
             }
        
         foreach ($this->unwantedColumns as $col) {
-            if(isset($this->columnsAndTypes[$col])){
-                unset($this->columnsAndTypes[$col]);
+            if(isset($this->columnTypes[$col])){
+                unset($this->columnTypes[$col]);
                 
             }
         }
