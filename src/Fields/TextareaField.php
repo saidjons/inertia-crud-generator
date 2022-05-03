@@ -10,14 +10,17 @@ class TextareaField extends BaseField
 {
     protected $createHtmlTemp = "\t\t\t <textarea-field name='{{fieldName}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}' :initialValue='{{fieldName}}' /> \n"; 
 
-<<<<<<< HEAD
+ 
+    
+    public $label = 'Enter ';
+ 
+    
+ 
+ 
     public $fieldType = 'textarea';
 
-    public $label = 'Enter ';
-=======
-    protected $fieldType = 'textarea';
-
->>>>>>> 02d2ccd37d3376beef5169e576657b79650d9780
+    
+ 
     
     
 
@@ -30,11 +33,7 @@ class TextareaField extends BaseField
 
             "dataField" => $this->replace($this->dataFieldTemp,'fieldName',$this->data['fieldName']),
 
-<<<<<<< HEAD
-            "setMethod" => $this->replaceArray($this->setFunctionTemp,$this->data),
-=======
             "method" => $this->replaceArray($this->setFunctionTemp,$this->data),
->>>>>>> 02d2ccd37d3376beef5169e576657b79650d9780
 
             "beforeMountedSet" => "",
 
