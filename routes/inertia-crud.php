@@ -3,6 +3,7 @@
  namespace Saidjon\InertiaCrudGenerator;
 
 use Inertia\Inertia;
+use Saidjon\InertiaCrudGenerator\Controllers\CrudGeneratorController;
 use Illuminate\Support\Facades\Route;
 use Saidjon\InertiaCrudGenerator\Controllers\Admin\ImageUploadController;
 
