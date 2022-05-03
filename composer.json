@@ -19,7 +19,7 @@
         "php": "^8.0",
         "doctrine/dbal": "^3.2",
         "illuminate/contracts": "^8.0",
-        "inertiajs/inertia-laravel": "0.5.2|^0.4.5",
+        "inertiajs/inertia-laravel": "^0.5.2|^0.4.5",
         "laravel/jetstream": "^2.0",
         "laravel/sanctum": "^2.0",
         "spatie/laravel-package-tools": "^1.9.2"
