@@ -1,71 +1,80 @@
  <script>
- import {
-     TrashIcon,
-     PencilIcon,
-     EyeIcon,
-     
-     } from '@/Components/Icons/hero.jsx';
- import { Inertia } from '@inertiajs/inertia'
- export default {
-     props:['id'],
-    components: {
-        TrashIcon,PencilIcon,EyeIcon,
-    },
-     mounted() {
-         this.setUrl()
-     },
-     methods:{
-         setUrl(){
-             let url = this.$page.url
-                 url + '/'
-             this.url = url
-         },
-         deleteItem(){
-             this.$emit('deleteItem',this.id)
-         },
-         editItem(){
-             Inertia.visit(`${this.url}${this.id}/edit`)
-             
-         },
-         viewItem(){
-             Inertia.visit(`${this.url}${this.id}`)
-             
-         },
-     data() {
-         return { 
-             url:null,
+import { Link } from "@inertiajs/inertia-vue3";
 
-         }}
-     }
-     }
-  
- </script>
+import { TrashIcon, PencilIcon, EyeIcon } from "@/Components/Icons/hero.jsx";
+export default {
+  props: ["id"],
+  components: {
+    TrashIcon,
+    PencilIcon,
+    EyeIcon,
+    Link,
+  },
+  mounted() {
+    this.setUrl();
+  },
+  methods: {
+    setUrl() {
+      this.url = this.$page.url + "/";
+    },
+    deleteItem() {
+      this.$emit("deleteItem", this.id);
+    },
+    editItem() {
+      return `${this.url}${this.id}/edit`;
+    },
+    viewItem() {
+      return `${this.url}${this.id}`;
+    },
+    data() {
+      return {
+        url: null,
+      };
+    },
+  },
+};
+</script>
 
 <template>
-             <!-- :class='getObjectKey(item.slug,item)' -->
-      	<td class="border-dashed border-t border-gray-200 actions"
-								>
-								<span class="text-gray-700 px-6 py-3 flex items-center gap-2  "
-									> 
-                                <button @click='deleteItem'
-                                    class="hover:bg-red-300 transparent hover:text-black"
-                                >
-                                <trash-icon   />
-                                
-                                </button>
-                                <button @click='editItem'
-                                    class="hover:bg-yellow-300 transparent hover:text-black"
-                                >
-                                <pencil-icon />
-                                
-                                </button>
-                                <button @click='viewItem'
-                                    class="hover:bg-green-300 transparent hover:text-yellow-500"
-                                >
-                                <eye-icon />
-                                
-                                </button>
-                               
-									</span>
-							</td>
+  <!-- :class='getObjectKey(item.slug,item)' -->
+  <td class="border-dashed border-t border-gray-200 actions">
+    <span class="text-gray-700 px-6 py-3 flex items-center gap-2">
+      <button
+        @click="deleteItem"
+        class="hover:bg-red-300 transparent hover:text-black"
+      >
+        <trash-icon />
+      </button>
+      <button
+        @click="editItem"
+        class="hover:bg-yellow-300 transparent hover:text-black"
+      ></button>
+      <Link
+        :href="url + id + 'edit'"
+        class="my-1 cursor-pointer items-center"
+        method="get"
+        as="button"
+        type="button"
+      >
+        <pencil-icon
+      /></Link>
+
+      <Link
+        :href="viewItem()"
+        class="
+          my-1
+          cursor-pointer
+          items-center
+          hover:bg-green-300
+          transparent
+          hover:text-yellow-500
+        "
+        method="get"
+        as="button"
+        type="button"
+      >
+        <eye-icon
+      /></Link>
+    </span>
+  </td>
 </template>

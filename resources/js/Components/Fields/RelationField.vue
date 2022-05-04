@@ -7,7 +7,7 @@ export default {
     if(this.initialValue){
       this.content = this.initialValue
     }
-   
+   this.inputChanged()
 
   },
   methods: {
@@ -17,9 +17,9 @@ export default {
         id:this.id ?? '',
         name:this.name,
         value:{
-          tableName:this.model,
-          modelId:this.modelId,
-          modelText:this.modelShowCol,
+          tableName:this.tableName,
+          valueField:this.valueField,
+          visibleField:this.visibleField,
         },
         
       }
@@ -34,9 +34,9 @@ export default {
   },
   data() {
     return {
-       model:'users',
-       modelShowCol:'title',
-       modelId:'id',
+       tableName:'users',
+       visibleField:'title',
+       valueField:'id',
       visible:true,
       valueField:null,
       visibleField:null,
@@ -59,25 +59,26 @@ export default {
         <div v-if="visible" name="name" 
           
            class="flex flex-row justify-between">
-          <p >Model </p>
-          <input v-model="model"  @change="inputChanged" 
+          <p >TableName </p>
+          <input v-model="tableName"  @change="inputChanged" 
           type="text" class="h-6 w-2/3">
         </div>
         <div v-if="visible" name="name" 
           
            class="flex flex-row justify-between">
-          <p >Model Id </p>
-          <input class='h-6 w-2/3' v-model="modelId"  @change="inputChanged" 
+          <p >Value col </p>
+          <input class='h-6 w-2/3' v-model="valueField"  @change="inputChanged" 
           type="text">
         </div>
         <div v-if="visible" name="name" 
           
            class="flex flex-row justify-between" >
-          <p >show col </p>
-          <input v-model="modelShowCol"  @change="inputChanged" 
+          <p >visible col </p>
+          <input v-model="visibleField"  @change="inputChanged" 
           type="text" class="h-6 w-2/3">
         </div>
       </div>
+      
      
      
 
