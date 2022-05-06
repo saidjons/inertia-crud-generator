@@ -10,54 +10,72 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 class OptionField extends BaseField
 {
 
-    protected $createHtmlTemp = "\t\t\t  <options-field name='{{fieldName}}' :initialValue='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
+    protected $createHtmlTemp = "\t\t\t  <options-field name='{{fieldName}}' :initialValue='{{fieldName}}' :options='{{fieldName}}Options' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
 
     public $fieldType = 'option';
 
     public $label = 'Select ';
 
-
-        /*
-        $setRelationFunctionTemplate is appended to setFunctionTemplate and 
-        inserted into {{setFunctions}} 
-        */
-
-        /*
-       also create $onMountFunctionTemplate and append to onMountActions
-       */
-
+    public $optionItems;
+ 
   
-
-          /*
-
-         $relationDataTemplate is appended with datafields and inserted into 	{{dataFields}}
-         */
-         public $relationDataOptionsTemp = "\t\t\t 	{{fieldName}}RelationOptions:{
-             \t\t\t	visibleField:'{{visibleField}}',
-             \t\t\t	valueField:'{{valueField}}',
-             \t\t\t	items:[]
+ 
+         public $optionsTemp = "\t\t\t 	{{fieldName}}Options:{
+             \t\t\t	visibleField:'id',
+             \t\t\t	valueField:'title',
+             \t\t\t	items:[{{option}}]
              \t\t\t},  \n ";
 
         public function __construct(array $data)
         {
-    
-        $this->data = 
-        [
-                'fieldName'=>$data['fieldName'],
-                'fieldType'=>$this->fieldType,
-                'fieldNameUp'=>ucfirst($data['fieldName']),
-            'label' => $this->label.$data['fieldName'],
-
-            "visibleField" =>$data['option']['visibleField']??'',
-        ];
+            $this->data = 
+            [
+                    'fieldName' => $data['fieldName'],
+                    'fieldType' => $this->fieldType,
+                    'fieldNameUp' => ucfirst($data['fieldName']),
+                    'label' =>  $this->label.$data['fieldName'],
+                ];
+                
+                
+                $this->optionItems = $this->normaliseOption($data['option']??[]);
         }
 
-      
+    public $optionItemTemp = "{
+        \t\t\tid:'{{valueField}}',
+        \t\t\t title:'{{visibleField}}',
+        \t\t\t},";
+
+    public function normaliseOption(array $options ):array
+    {
+        $items = [];
+
+        foreach ($options as $key => $item) {
+            
+            if (!is_numeric($key)) {
+                /**
+                 * its sequensial array
+                 * here if key is not set it uses $value as $key => $value
+                 */ 
+                $item = ['valueField'=>$item , 'visibleField' => $item ];
+                $items[]=$item;
+            }else {
+
+            /**
+             * its assosiative array
+             * here if value field is different from the visible field . valueField is set to $key
+             */
+                $item = ['valueField'=>$key, 'visibleField' => $item];
+                $items[]=$item;
+
+            }
+        }
+        return $items;
+    }
     public function getData():array
     {
 
         return [
-            "createHtmlField" =>$this->makeField($this->createHtmlTemp,$this->data),
+            "createHtmlField" =>$this->replaceArray($this->createHtmlTemp,$this->data),
 
             "postField" => $this->replace($this->postFieldTemp,'fieldName',$this->data['fieldName']),
 
@@ -65,7 +83,7 @@ class OptionField extends BaseField
 
             "method" => $this->setMethod(),
 
-            "beforeMountSet" => $this->replace($this->onMountedMethodTemp,'fieldName','get'.$this->data["fieldNameUp"]),
+            // "beforeMountSet" => $this->replace($this->onMountedMethodTemp,'fieldName','get'.$this->data["fieldNameUp"]),
 
 
             "onMountedSetFieldEdit" => $this->setonMountedSetFieldEdit(),
@@ -78,13 +96,22 @@ class OptionField extends BaseField
 
     public function setMethod():string
     {
-        $t =   $this->replaceArray($this->setRelationFunctionTemplate,$this->data);
+        $t =   $this->replaceArray($this->setFunctionTemp,$this->data);
         return $t;
     }
 
     public function setDataField()
     {
-        $t = $this->replaceArray($this->relationDataOptionsTemp,$this->data);
+        $optionItems = " ";
+        
+        $optionsTemp = $this->replace($this->optionsTemp,'fieldName',$this->data['fieldName']);
+
+        foreach ($this->optionItems as $item) {
+            $optionItems.=$this->replaceArray($this->optionItemTemp,$item);
+        }
+
+        $t = $this->replace($optionsTemp,'option',$optionItems);
+
         $t.= $this->replace($this->dataFieldTemp,'fieldName',$this->data['fieldName']);
 
         return $t;
