@@ -1,7 +1,7 @@
 
 <script>
 import {JSONEditor} from '@json-editor/json-editor';
-
+import getEditorSettings from '@/plugins/getEditorSettings';
     export default {
         
           props:['name','label','initialValue','editorSettings'],
@@ -23,7 +23,9 @@ import {JSONEditor} from '@json-editor/json-editor';
                  
             },
             initEditor(){
-                	 this.jsonEditor =  new JSONEditor(document.getElementById(this.name),this.editorSettings); 
+                	 this.jsonEditor =  new JSONEditor(document.getElementById(this.name),
+                     getEditorSettings(this.editorSettings)
+                     ); 
                      	 
 				 this.jsonEditor.on('change',() => {
 					 	this.data = this.jsonEditor.getValue()

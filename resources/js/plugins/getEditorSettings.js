@@ -1,5 +1,18 @@
 
 export default function getEditorSettings(type){
+
+    let optionField = {
+          "theme":"tailwind",
+            "format": "grid",
+        schema:{
+  "title": "Options",
+  "type": "array",
+  "items": {
+    "type": "string"
+  }
+}
+}
+
   let menu = {
           "theme":"tailwind",
             "format": "grid",
@@ -184,15 +197,14 @@ export default function getEditorSettings(type){
          
          case 'menu':
            return menu;
-           break;
          
           case 'dropdown':
           return dropdown;
-          break;
 
           case 'matchToleft':
           return matchToleft;
-          break;
+          case 'optionField':
+          return optionField;
          
          default:
            break;

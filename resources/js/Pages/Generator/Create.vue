@@ -35,14 +35,16 @@
           :id="col"
           @inputChanged='setRelationForColumn'
          />
+          <json-editor-component 
+            v-if="isOptionField(col)"
+				    :name="col" 
+            :id="col"
+					 label='Add Options '
+					 @inputChanged='setOptionForColumn'
+					 editorSettings='optionField'
+				 />
 
-         <textarea-field 
-          v-if="isOptionField(col)"
-          :name="col" 
-          label="Option data  "
-          :id="col"
-          @inputChanged='setOptionForColumn'
-         />
+ 
 
        
 
@@ -56,7 +58,7 @@
       <button 
         @click="cutFields"
       class="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-        cutFields 
+        Get Ready
       </button>
       <button 
         @click="generate"
@@ -132,11 +134,10 @@ export default {
       return r 
     },
     isOptionField(d){
-
+      
       let r = false
       this.postColumns.forEach(el=>{
-       
-        if (d == el.fieldName && el.fieldType == 'OptionField') {
+        if (d == el.fieldName && el.className == 'OptionField') {
           r = true
         }
         
@@ -164,18 +165,32 @@ export default {
       });
        
     },
+    setOptionForColumn(d){
+     
+        let id = null
+       this.postColumns.forEach((el,i)=>{
+         if (el.fieldName == d.name) {
+           id = i
+              
+          } 
+       })
+
+       if(id){
+         this.postColumns[id].option = JSON.stringify(d.value)
+       }
+    },
     setRelationForColumn(d){
      
         let id = null
        this.postColumns.forEach((el,i)=>{
          if (el.fieldName == d.name) {
            id = i
-            this.postColumns[i].relation = d.value
+            
           } 
        })
 
        if(id){
-         this.postColumns[id]['relation'] = d.value
+       this.postColumns[id].relation = d.value
        }
     },
     setOptionForColumn(d){
@@ -190,11 +205,9 @@ export default {
     },
      
     generate(){
-      console.info(this.postColumns);
       this.postColumns = this.postColumns.filter(function(el){
         return el.fieldName!='' &&el.className!=null
       })
-      console.info(this.postColumns);
 
         axios.post('/admin/crud/generator', { 
         table:this.tableName,

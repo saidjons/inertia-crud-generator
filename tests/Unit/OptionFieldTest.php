@@ -1,6 +1,6 @@
 <?php
 
-namespace Saidjon\InertiaCrudGenerator\Tests\Unit;
+namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Facade;
@@ -22,11 +22,12 @@ class OptionFieldTest extends TestCase
             ],
             ['fieldName'=>'cat_id',
             'className'=>'OptionField',
-            'option'=>[
-                '1'=>"menga ber",
-                '2'=>'senga ol',
-                '3'=>'bizga beradi',
-            ]
+            'option'=> '[
+  "a1",
+  "b1",
+  "asas"
+  
+]'
             ],
            
         

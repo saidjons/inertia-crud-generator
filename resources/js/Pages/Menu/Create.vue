@@ -1,6 +1,5 @@
 
 <script>
-import getEditorSettings from '@/plugins/getEditorSettings';
 import stringToSlug from '@/plugins/stringToSlug';
 
 export default {
@@ -14,9 +13,7 @@ export default {
 	 
 	},
   methods: {
-		getEditorSettings(d){
-			return getEditorSettings(d)
-		},
+	 
 	 
 				setErrors(d){
 				 
@@ -137,7 +134,7 @@ export default {
 				 	name='data' 
 					 label='Set menu in json format'
 					 @inputChanged='setData'
-					 :editorSettings='getEditorSettings("menu")'
+					 editorSettings='menu'
 				 />
 				
 			 <checkbox-field  name='published' label=' Is published'
