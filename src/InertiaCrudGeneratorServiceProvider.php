@@ -21,12 +21,12 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
             ->name('inertia-crud-generator')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_inertia-crud-generator_table')
             ->hasCommand(InertiaCrudGeneratorCommand::class);
     }
 
     public function boot()
     {
+           $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         
   
        $this->publishes([

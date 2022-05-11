@@ -1,11 +1,10 @@
 <?php
 
-use Saidjon\InertiaCrudGenerator\Models\Menu;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenusTable extends Migration
+class AddRoleToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +13,9 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-         Schema::table('users', function (Blueprint $table) {
-             $table->smallInteger('role');
+        Schema::table('users', function (Blueprint $table) {
+             $table->smallInteger('role')->nullable();
         });
-
-     
-       
     }
 
     /**
@@ -29,7 +25,8 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-
-        Schema::drop('menus');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }

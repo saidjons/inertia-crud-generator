@@ -1,17 +1,49 @@
 
 export default function getEditorSettings(type){
 
-    let optionField = {
+   let optionField = {
           "theme":"tailwind",
             "format": "grid",
         schema:{
-  "title": "Options",
-  "type": "array",
-  "items": {
-    "type": "string"
-  }
-}
-}
+      
+      "title": "Person",
+      "type": "object",
+      "properties": {
+        "values": {
+          "title": "Options",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isWithKeys": {
+          "type": "string",
+          "default": false,
+          "enum": [
+            true,
+            false
+          ]
+        },
+        "keyValues": {
+          "type": "array",
+          "format": "table",
+          "title": "Key value pair",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "title": "  Key Value",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+  }}
 
   let menu = {
           "theme":"tailwind",

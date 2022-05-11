@@ -2,6 +2,7 @@
 
 namespace  Saidjon\InertiaCrudGenerator\Fields;
 
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
@@ -16,13 +17,14 @@ class OptionField extends BaseField
 
     public $label = 'Select ';
 
-    public $optionItems;
- 
+    public array $optionItems;
+    public array $optionDataRaw;
+
   
  
          public $optionsTemp = "\t\t\t 	{{fieldName}}Options:{
-             \t\t\t	visibleField:'id',
-             \t\t\t	valueField:'title',
+             \t\t\t	valueField:'id',
+             \t\t\t	visibleField:'title',
              \t\t\t	items:[{{option}}]
              \t\t\t},  \n ";
 
@@ -35,9 +37,12 @@ class OptionField extends BaseField
                     'fieldNameUp' => ucfirst($data['fieldName']),
                     'label' =>  $this->label.$data['fieldName'],
                 ];
+            //    dd(json_decode($data['option'],true));
                 
-                
-                $this->optionItems = $this->normaliseOption($data['option']??[]);
+                $this->optionDataRaw = json_decode($data['option'],true);
+
+                $this->optionItems = $this->normaliseOption( $this->optionDataRaw);
+              
         }
 
     public $optionItemTemp = "{
@@ -48,27 +53,32 @@ class OptionField extends BaseField
     public function normaliseOption(array $options ):array
     {
         $items = [];
+        if (filter_var($options['isWithKeys'], FILTER_VALIDATE_BOOLEAN)) {
 
-        foreach ($options as $key => $item) {
             
-            if (!is_numeric($key)) {
-                /**
-                 * its sequensial array
-                 * here if key is not set it uses $value as $key => $value
-                 */ 
-                $item = ['valueField'=>$item , 'visibleField' => $item ];
-                $items[]=$item;
-            }else {
-
-            /**
+              /**
              * its assosiative array
              * here if value field is different from the visible field . valueField is set to $key
              */
-                $item = ['valueField'=>$key, 'visibleField' => $item];
+        foreach ($options['keyValues'] as   $item) {
+              $item = ['valueField'=>$item['key'], 'visibleField' => $item['value']];
                 $items[]=$item;
-
-            }
         }
+
+        }else{
+
+           
+
+                            /**
+                 * its sequensial array
+                 * here if key is not set it uses $value as $key => $value
+                 */ 
+                foreach ($options['values'] as   $item) {
+                    $item = ['valueField'=>$item , 'visibleField' => $item ];
+                    $items[]=$item;
+                }
+        }
+    
         return $items;
     }
     public function getData():array
