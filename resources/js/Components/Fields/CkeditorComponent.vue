@@ -31,15 +31,14 @@
                
           },
         beforeMount(){
-            // if (this.content) {
+            if (this.content) {
             
-            //     this.editorData = this.content
-            // }
+                this.editorData = this.content
+            }
          
         },
         mounted(){
-            window.token = this.$page.props.user.token
-            window.csrf = this.$page.props.csrf
+          
         },
         methods: {
             changeVisibility(){

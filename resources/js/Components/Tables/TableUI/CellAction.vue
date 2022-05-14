@@ -21,10 +21,10 @@ export default {
       this.$emit("deleteItem", this.id);
     },
     editItem() {
-      return `${this.url}${this.id}/edit`;
+      return `${this.$page.url}/${this.id}/edit`;
     },
     viewItem() {
-      return `${this.url}${this.id}`;
+      return `${this.$page.url}/${this.id}`;
     },
     data() {
       return {
@@ -45,12 +45,9 @@ export default {
       >
         <trash-icon />
       </button>
-      <button
-        @click="editItem"
-        class="hover:bg-yellow-300 transparent hover:text-black"
-      ></button>
+     
       <Link
-        :href="url + id + 'edit'"
+        :href="editItem()"
         class="my-1 cursor-pointer items-center"
         method="get"
         as="button"
