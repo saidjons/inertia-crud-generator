@@ -70,7 +70,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $appends = [
-        'profile_photo_path',
         'token'
     ];
 
