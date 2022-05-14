@@ -7,6 +7,9 @@ window.axios = require('axios')
 import notify from '@/plugins/notify';
 window.notify = notify;
 // make  fields gloabal 
+import UploadMedia from '@/Components/Fields/uploader/UploadMedia.vue'
+
+
  import TextareaField from '@/Components/Fields/Textarea.vue';
 import InputField from '@/Components/Fields/Input.vue';
 import OptionsField from '@/Components/Fields/Options.vue';
@@ -44,6 +47,9 @@ createInertiaApp({
          vueApp.component("RelationField", RelationField); 
          vueApp.component("TextView", TextView); 
          vueApp.component("ErrorMessage", ErrorMessage); 
+        vueApp.component('upload-media' , UploadMedia);
+
+
         return vueApp
         .use(plugin)
         .use(CKEditor)

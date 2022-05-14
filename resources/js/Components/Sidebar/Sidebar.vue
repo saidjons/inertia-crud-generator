@@ -75,18 +75,10 @@ export default {
         <!-- sidebar toggle button -->
             <div class="w-64   absolute bg-gray-800 shadow md:h-full flex-col justify-between   transition duration-150 ease-in-out" id="mobile-nav" style="transform: translateX(-260px);z-index:100;">
             <button aria-label="toggle sidebar" id="openSideBar" class="h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800" @click="sidebarHandler">
-                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg7.svg" alt="toggler">
+                <!-- <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg7.svg" alt="toggler"> -->
             </button>
-                        <button aria-label="Close sidebar" id="closeSideBar" class="hidden h-10 w-10 bg-gray-800 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white" @click="sidebarHandler">
-                          <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg8.svg" alt="cross">
-                        </button>
-                        <div class="px-8">
-                            <div class="h-16 w-full flex items-center">
-                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg1.svg" alt="Logo">
-                            </div>
-                           
-                         
-                        </div>
+                   
+                     
                       
                     </div>
                     <!-- end sidebar toggle button -->

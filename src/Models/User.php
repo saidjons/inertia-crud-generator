@@ -25,10 +25,21 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+       public static $rules = [
+        'name' => 'required',
+        'role'=>' nullable|integer',
+        'email' => 'required|email',
+        'password' => 'required',
+        'profile_photo_path' => 'nullable|string'
+    ];
+
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'profile_photo_path',
     ];
 
     
@@ -59,7 +70,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $appends = [
-        'profile_photo_url',
+        'profile_photo_path',
         'token'
     ];
 

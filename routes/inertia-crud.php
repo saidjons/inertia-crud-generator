@@ -32,9 +32,12 @@ Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIC
 
  
 });
+ Route::post('/admin/upload/ckeditor-image',[ImageUploadController::class,
+ 'ckeditorImageUpload'])->middleware(['auth:sanctum']);
 
- Route::post('/admin/upload/article-image',[ImageUploadController::class,
- 'articleImageUpload'])->middleware(['auth:sanctum']);
+
+ Route::post('/admin/upload/image/{fieldName}',[ImageUploadController::class,
+ 'imageUpload'])->middleware(['auth:sanctum']);
 
 Route::resource('admin/article', 'App\Http\Controllers\Admin\ArticleCrudController', [
             'only' => ['index', 'create', 'show']

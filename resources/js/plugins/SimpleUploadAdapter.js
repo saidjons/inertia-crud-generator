@@ -17,7 +17,7 @@
         }
         _initRequest() {
             const xhr = this.xhr = new XMLHttpRequest();
-            xhr.open( 'POST', '/admin/upload/article-image', true );
+            xhr.open( 'POST', '/admin/upload/ckeditor-image', true );
             xhr.setRequestHeader('x-csrf-token', window.csrf);
             xhr.setRequestHeader('Authorization','Bearer '+ window.token);
             xhr.responseType = 'json';
