@@ -6,7 +6,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
 
 
-class ImageUploadField extends BaseField
+class FileUploadField extends BaseField
 {
     protected $createHtmlTemp = "\t\t\t  
     	<file-upload 
