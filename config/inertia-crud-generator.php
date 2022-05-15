@@ -5,5 +5,5 @@ return [
 
   
   'ckeditorImageFolder' =>'public/ckeditor_images/',
-  
+    'fileUploadFolder' =>'public/files/',
 ];

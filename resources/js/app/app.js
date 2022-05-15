@@ -8,6 +8,7 @@ import notify from '@/plugins/notify';
 window.notify = notify;
 // make  fields gloabal 
 import UploadMedia from '@/Components/Fields/uploader/UploadMedia.vue'
+import FileUpload from '@/Components/Fields/uploader/FileUpload.vue'
 
 
  import TextareaField from '@/Components/Fields/Textarea.vue';
@@ -48,6 +49,8 @@ createInertiaApp({
          vueApp.component("TextView", TextView); 
          vueApp.component("ErrorMessage", ErrorMessage); 
         vueApp.component('upload-media' , UploadMedia);
+        vueApp.component('file-upload' , FileUpload);
+
 
 
         return vueApp

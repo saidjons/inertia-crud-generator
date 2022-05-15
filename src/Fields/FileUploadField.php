@@ -9,10 +9,10 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 class ImageUploadField extends BaseField
 {
     protected $createHtmlTemp = "\t\t\t  
-    	<upload-media 
+    	<file-upload 
 		name='{{fieldName}}' 
-         label='Upload Image for {{fieldNameUp}}' 
-		 server='/admin/upload/image/'
+         label='Upload file for {{fieldNameUp}}' 
+		 server='/admin/upload/file/'
 		 multiple='false'
 		 @imageUploaded='set{{fieldNameUp}}'
 		  :initialValue='{{fieldName}}'

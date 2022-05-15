@@ -285,21 +285,17 @@ export default {
 
 
         },
-        {
-        name:'relation',
-        className:'RelationField',
-
-
-        },
-        {
+         {
         name:'dismiss',
         className:'',
 
 
         },
+     
+       
         {
-        name:'file',
-        className:'FileField',
+        name:'fileUpload',
+        className:'FileUploadField',
 
 
         },
@@ -315,6 +311,18 @@ export default {
 
 
         },
+           {
+        name:'option',
+        className:'OptionField',
+
+
+        },
+           {
+        name:'relation',
+        className:'RelationField',
+
+
+        },
         {
         name:'textarea',
         className:'TextareaField',
@@ -326,13 +334,8 @@ export default {
         className:'TextField',
 
 
-        },
-        {
-        name:'option',
-        className:'OptionField',
-
-
-        },
+        }
+     
       ],
         
       },//end of catOptions

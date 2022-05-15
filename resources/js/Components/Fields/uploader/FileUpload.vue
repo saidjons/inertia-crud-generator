@@ -55,7 +55,7 @@
          async delete(index){
              this.loading=true
                     let formData = new FormData
-                 formData.set(this.name,this.media[index].url)
+                 formData.set('fileName',this.media[index].url)
           
           
               
@@ -100,14 +100,15 @@
              for(var i=0; i < files.length; i++){
                  let formData = new FormData
                  let url = URL.createObjectURL(files[i])
-                 formData.set('profile_photo_path', files[i])
+                 formData.set(this.name, files[i])
 
                 
               
                  window.axios.post(this.server+this.name, formData,
                  {
                      	headers: {
-                        'Accept':'application/json',
+                        // 'Accept':'application/json',
+                              'Content-Type': 'multipart/form-data',
                         'X-CSRF-TOKEN' : this.$page.props.csrf,
                         'Authorization' : 'Bearer ' + this.$page.props.user.token
 
@@ -234,13 +235,14 @@
                                 </g>
                             </svg>
                         </label>
+                            <!-- accept="image/*" -->
                         <input
                             @change="fileChange"
                             id="images-upload"
                             type="file"
-                            accept="image/*"
                             multiple="false"
                             hidden
+                            max="100"
                         />
                     </div>
 
@@ -250,7 +252,7 @@
                         :key="index"
                         class="image-container image-margin"
                     >
-                        <img :src="image.url" alt="" class="images-preview" />
+                        <a  :href="image.url" :alt="url" :title="url" class="images-preview inline-block m-1 p-1 ">{{image.url}} </a>
                         <button
                             @click="remove(index)"
                             class="close-btn"

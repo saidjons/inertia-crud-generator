@@ -5,7 +5,7 @@
 use Inertia\Inertia;
 use Saidjon\InertiaCrudGenerator\Controllers\CrudGeneratorController;
 use Illuminate\Support\Facades\Route;
-use Saidjon\InertiaCrudGenerator\Controllers\Admin\ImageUploadController;
+use Saidjon\InertiaCrudGenerator\Controllers\Admin\UploadController;
 
 ##########    Inertia Crud  Generator
 Route::resource('/api/menus', \Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIController::class)->middleware(['auth:sanctum']);
@@ -32,11 +32,11 @@ Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIC
 
  
 });
- Route::post('/admin/upload/ckeditor-image',[ImageUploadController::class,
+ Route::post('/admin/upload/ckeditor-image',[UploadController::class,
  'ckeditorImageUpload'])->middleware(['auth:sanctum']);
 
 
- Route::post('/admin/upload/image/{fieldName}',[ImageUploadController::class,
+ Route::post('/admin/upload/image/{fieldName}',[UploadController::class,
  'imageUpload'])->middleware(['auth:sanctum']);
 
 Route::resource('admin/article', 'App\Http\Controllers\Admin\ArticleCrudController', [

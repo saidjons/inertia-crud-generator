@@ -9,6 +9,7 @@ export default {
     if(this.action){
       this.showBtn = true
     }
+    this.inputChanged()
 
   },
   methods: {

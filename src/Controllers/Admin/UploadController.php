@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
  
 
-class ImageUploadController extends Controller
+class UploadController extends Controller
 {
         public function ckeditorImageUpload(Request $request)
      {
@@ -76,6 +76,52 @@ class ImageUploadController extends Controller
              $file->storePubliclyAs(config('inertia-crud-generator.imageUploadFolder'),$imageTitle);
              
             $url =  Storage::url(config('inertia-crud-generator.imageUploadFolder').$imageTitle);
+             return response()->json([
+                'url'=>$url,
+            ],200);
+         ob_end_clean();
+           
+
+         }else{
+             
+               
+                return response()->json([
+                       'message' => 'No File attached'
+                ],203);
+         }
+     }
+      public function fileUpload(Request $request,$fieldName)
+     {
+            
+       $validator = Validator::make($request->all(), [
+            $fieldName => 'required|file|max:100000',
+        ]);
+     
+        if ($validator->fails()) {
+          
+          logger(json_encode($validator->errors()->first()));
+        return response()->json([
+               'error'=>$validator->errors()->first(),
+            ],203);
+        }
+           
+          
+      if ($request->hasFile($fieldName)) {
+
+          
+
+             $originalName = $request->file($fieldName)->getClientOriginalName();
+             $file = $request->file($fieldName);
+
+             $imageTitle = now()->timestamp.'-'.trim($originalName);
+
+              if (!file_exists(config('inertia-crud-generator.fileUploadFolder'))) {
+                     mkdir(config('inertia-crud-generator.fileUploadFolder'), 0777, true);
+              }
+
+             $file->storePubliclyAs(config('inertia-crud-generator.fileUploadFolder'),$imageTitle);
+             
+            $url =  Storage::url(config('inertia-crud-generator.fileUploadFolder').$imageTitle);
              return response()->json([
                 'url'=>$url,
             ],200);
