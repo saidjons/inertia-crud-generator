@@ -100,7 +100,7 @@
              for(var i=0; i < files.length; i++){
                  let formData = new FormData
                  let url = URL.createObjectURL(files[i])
-                 formData.set('profile_photo_path', files[i])
+                 formData.set(this.name, files[i])
 
                 
               
@@ -215,7 +215,7 @@
                     <div class="button-container image-margin">
                         <label
                             v-if="isMultiple()"
-                            for="images-upload"
+                            :for="name"
                             class="images-upload"
                         >
                             <svg
@@ -236,7 +236,7 @@
                         </label>
                         <input
                             @change="fileChange"
-                            id="images-upload"
+                            :id="name"
                             type="file"
                             accept="image/*"
                             multiple="false"

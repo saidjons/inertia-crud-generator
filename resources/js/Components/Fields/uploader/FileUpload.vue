@@ -188,7 +188,7 @@
       <label
       @click="changeVisibility"
         class="block pl-5 text-gray-600 text-sm font-semibold mb-2"
-        for="username"
+        :for="name"
       >
         {{label}}
       </label>
@@ -216,7 +216,7 @@
                     <div class="button-container image-margin">
                         <label
                             v-if="isMultiple()"
-                            for="images-upload"
+                            :for="name"
                             class="images-upload"
                         >
                             <svg
@@ -238,7 +238,7 @@
                             <!-- accept="image/*" -->
                         <input
                             @change="fileChange"
-                            id="images-upload"
+                            :id="name"
                             type="file"
                             multiple="false"
                             hidden
@@ -252,7 +252,7 @@
                         :key="index"
                         class="image-container image-margin"
                     >
-                        <a  :href="image.url" :alt="url" :title="url" class="images-preview inline-block m-1 p-1 ">{{image.url}} </a>
+                        <a  target='_blank' :href="image.url" :alt="url" :title="url" class="images-preview inline-block m-1 p-1 ">{{image.url}} </a>
                         <button
                             @click="remove(index)"
                             class="close-btn"

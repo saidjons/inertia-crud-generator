@@ -53,7 +53,7 @@ class UploadController extends Controller
      
         if ($validator->fails()) {
           
-          logger(json_encode($validator->errors()->first()));
+         
         return response()->json([
                'error'=>$validator->errors()->first(),
             ],203);
@@ -99,7 +99,7 @@ class UploadController extends Controller
      
         if ($validator->fails()) {
           
-          logger(json_encode($validator->errors()->first()));
+          
         return response()->json([
                'error'=>$validator->errors()->first(),
             ],203);
