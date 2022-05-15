@@ -38,7 +38,10 @@
          
         },
         mounted(){
-          
+             // this is for keditor to image upload 
+          // plugins/SimpleUploadAdapter uses it
+          window.token = this.$page.props.user.token
+          window.csrf = this.$page.props.csrf
         },
         methods: {
             changeVisibility(){

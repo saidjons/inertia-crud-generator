@@ -175,12 +175,12 @@ export default {
           } 
        })
 
-       if(id){
+       if(id!== null){
          this.postColumns[id].option = JSON.stringify(d.value)
        }
     },
     setRelationForColumn(d){
-     
+   
         let id = null
        this.postColumns.forEach((el,i)=>{
          if (el.fieldName == d.name) {
@@ -188,8 +188,8 @@ export default {
             
           } 
        })
-
-       if(id){
+      
+       if(id!== null){
        this.postColumns[id].relation = d.value
        }
     },
