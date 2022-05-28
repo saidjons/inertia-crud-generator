@@ -41,3 +41,6 @@ Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIC
 
   Route::post('/admin/upload/file/{fieldName}',[UploadController::class,
  'fileUpload'])->middleware(['auth:sanctum']);
+
+   Route::post('/admin/delete/image',[UploadController::class,
+ 'imageDelete'])->middleware(['auth:sanctum']);

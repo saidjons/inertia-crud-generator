@@ -76,6 +76,11 @@ class User extends Authenticatable
     public function getTokenAttribute()
     {
         
+             if(auth()->user()){
         return $this->getFromCacheOrNewToken(auth()->user()->id);
+
+        } else{
+            return "Guest";
+        }
     }
 }

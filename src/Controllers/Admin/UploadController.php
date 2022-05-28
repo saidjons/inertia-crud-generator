@@ -137,6 +137,54 @@ class UploadController extends Controller
          }
      }
 
+       public function imageDelete(Request $request)
+     {
+       $validator = Validator::make($request->all(), [
+            'image' => 'required|string',
+        ]);
+         
+            $image = $request->input('image');
+
+            
+     
+        if ($validator->fails()) {
+          
+         
+        return response()->json([
+               'error'=>$validator->errors()->first(),
+            ],203);
+        }
+           
+          
+      if ($request->has('image')) {
+
+          $imagePath = explode('storage',$image);
+
+
+              if (Storage::disk('public')->exists($imagePath[1])) {
+                     $r = Storage::disk('public')->delete($imagePath[1]);
+              }
+
+              if($r){
+                     return response()->json(['message'=>$r,],204);
+                     ob_end_clean();
+
+              }else{
+                     return response()->json(['message'=>$r,],401);
+
+              }
+                     
+
+         }else{
+             
+               
+                return response()->json([
+                       'message' => 'Invalid image path '
+                ],203);
+         }
+     }
+
+
 
 
 

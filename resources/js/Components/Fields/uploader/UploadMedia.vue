@@ -52,47 +52,32 @@
                  return true
              }
          },
-         async delete(index){
-             this.loading=true
-                    let formData = new FormData
-                 formData.set(this.name,this.media[index].url)
-          
-          
-              
-                 window.axios.post(this.server+'delete', formData,
-                 {
-                     	headers: {
-                        'Accept':'application/json',
-                        'X-CSRF-TOKEN' : this.$page.props.csrf,
-                        'Authorization' : 'Bearer ' + this.$page.props.user.token
+           async delete(index) {
+            this.loading = true;
+            let formData = new FormData();
+            formData.set("image", this.media[index].url);
 
-                        } 
-                   })
-                   	.then(res=> {
- 
-		   if (res.status ==200) {
+            window.axios
+                .post("/admin/delete/image", formData, {
+                    headers: {
+                        Accept: "application/json",
+                        "X-CSRF-TOKEN": this.$page.props.csrf,
+                        Authorization: "Bearer " + this.$page.props.user.token,
+                    },
+                })
+                .then((res) => {
+                    if (res.status == 204) {
+                        window.notify(res.message);
+                    } else {
+                        window.notify(res.data.error, "warn");
+                    }
+                })
+                .catch((error) => {
+                    console.warn(error);
+                });
 
-                           this.media.push({url:res.data.url})
-         this.emitImageUploaded()
-
-			 window.notify(res.message)
-		 }else{
-		 
-			 window.notify(res.data.error,'warn')
-                 this.loading = false
-
-		 }
-  })
-.catch(error=> {
-    console.warn(error);
-    this.loading = false
- 
-
- });
-              
-             this.loading=false
-             this.media_emit()
-         },
+            this.loading = false;
+        },
          async fileChange(event){
              this.loading=true
              let files = event.target.files
@@ -195,12 +180,6 @@
         v-show="visible"
         class="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       >
-          
-                  
- 
-    
-
-
     <div>
         <div class="">
             <div class="gallery width-100" :class="error ? 'red-border' : ''">
@@ -212,7 +191,7 @@
                 />
                 <div class="elements-wraper">
                     <!--UPLOAD BUTTON-->
-                    <div class="button-container image-margin">
+                    <div class="button-container relative image-margin">
                         <label
                             v-if="isMultiple()"
                             :for="name"
@@ -235,6 +214,7 @@
                             </svg>
                         </label>
                         <input
+                         class="absolute hidden"
                             @change="fileChange"
                             :id="name"
                             type="file"
