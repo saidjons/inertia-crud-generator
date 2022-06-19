@@ -24,8 +24,7 @@ class UpdateMenuAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = Menu::$rules;
-        $rules['role'] = $rules['role'].",".$this->route("menu");
-        return $rules;
+       return  Menu::$rules;
+      
     }
 }
