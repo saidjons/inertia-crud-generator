@@ -54,14 +54,10 @@ fresh install laravel 8
          "@ckeditor/ckeditor5-build-classic": "^34.0.0",
         "@ckeditor/ckeditor5-vue": "^4.0.0",
         "awesome-notifications": "^3.1.2",
-        "filepond-plugin-file-validate-type": "^1.2.6",
         "@vue/babel-plugin-jsx": "^1.1.1",
         "@json-editor/json-editor": "^2.6.1",
-        "filepond-plugin-image-preview": "^4.6.10",
-         "@suadelabs/vue3-multiselect": "^1.0.2",
-        "vue-filepond": "^7.0.2",
-        "vuedraggable": "^4.1.0",
-        "vuex": "^4.0.2" 
+        "vue-draggable-next": "^2.1.1",
+        "vue-multiselect": "^3.0.0-alpha.2",
 ```
  
 #### include routes/inertia-crud.php into routes/web.php
