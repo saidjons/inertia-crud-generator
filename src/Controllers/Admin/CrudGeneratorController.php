@@ -1,6 +1,6 @@
 <?php
 
- namespace Saidjon\InertiaCrudGenerator\Controllers;
+ namespace Saidjon\InertiaCrudGenerator\Controllers\Admin;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;

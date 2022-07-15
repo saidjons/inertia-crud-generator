@@ -137,7 +137,7 @@
             emitImageUploaded(){
 
                 if (this.multiple==false) {
-                    this.$emit('imageUploaded',{
+                    this.$emit('uploaded',{
                         name:this.name,
                         value:this.media[0].url,
                     })
