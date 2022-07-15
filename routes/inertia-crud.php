@@ -3,7 +3,7 @@
  namespace Saidjon\InertiaCrudGenerator;
 
 use Inertia\Inertia;
-use Saidjon\InertiaCrudGenerator\Controllers\CrudGeneratorController;
+use Saidjon\InertiaCrudGenerator\Controllers\Admin\CrudGeneratorController;
 use Illuminate\Support\Facades\Route;
 use Saidjon\InertiaCrudGenerator\Controllers\Admin\UploadController;
 
@@ -32,15 +32,24 @@ Route::post('/getMenus', ['Saidjon\InertiaCrudGenerator\Controllers\API\MenuAPIC
 
  
 });
+/*
+    file upload and delete routes
+
+*/
+
  Route::post('/admin/upload/ckeditor-image',[UploadController::class,
- 'ckeditorImageUpload'])->middleware(['auth:sanctum']);
+ 'ckeditorImageUpload'])->middleware(['auth:sanctum','admin']);
 
 
  Route::post('/admin/upload/image/{fieldName}',[UploadController::class,
- 'imageUpload'])->middleware(['auth:sanctum']);
+ 'imageUpload'])->middleware(['auth:sanctum','admin']);
+
+  Route::post('/admin/delete/image',[UploadController::class,
+ 'imageDelete'])->middleware(['auth:sanctum','admin']);
 
   Route::post('/admin/upload/file/{fieldName}',[UploadController::class,
- 'fileUpload'])->middleware(['auth:sanctum']);
-
-   Route::post('/admin/delete/image',[UploadController::class,
- 'imageDelete'])->middleware(['auth:sanctum']);
+ 'fileUpload'])->middleware(['auth:sanctum','admin']);
+ 
+  Route::post('/admin/delete/file/{filename}',[UploadController::class,
+ 'fileDelete'])->middleware(['auth:sanctum','admin']);
+ 

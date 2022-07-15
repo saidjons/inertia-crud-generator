@@ -12,9 +12,10 @@ class FileUploadField extends BaseField
     	<file-upload 
 		name='{{fieldName}}' 
          label='Upload file for {{fieldNameUp}}' 
-		 server='/admin/upload/file/'
-		 multiple='false'
-		 @imageUploaded='set{{fieldNameUp}}'
+		 upload='/admin/upload/file/'
+		 delete='/admin/delete/file/'
+		 :multiple='false'
+		 @uploaded='set{{fieldNameUp}}'
 		  :initialValue='{{fieldName}}'
 		 />
     

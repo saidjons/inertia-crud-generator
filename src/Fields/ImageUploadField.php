@@ -13,8 +13,8 @@ class ImageUploadField extends BaseField
 		name='{{fieldName}}' 
          label='Upload Image for {{fieldNameUp}}' 
 		 server='/admin/upload/image/'
-		 multiple='false'
-		 @imageUploaded='set{{fieldNameUp}}'
+		 :multiple='false'
+		 @uploaded='set{{fieldNameUp}}'
 		  :initialValue='{{fieldName}}'
 		 />
     
