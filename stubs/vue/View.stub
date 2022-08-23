@@ -75,8 +75,8 @@ export default {
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <div class="w-4/5 justify-center text-left mx-5 ">
   <div class="bg-white rounded px-2 pt-6 pb-8 mb-4">
-	<template v-if='errors' v-for='error in errors' :key='error'>
-	<error-message :error='error' />
+	<template v-if='errors' >
+	<error-message :error='error' v-for='error in errors' :key='error'/>
 	</template>
  
 	 	{{viewHtmlField}}

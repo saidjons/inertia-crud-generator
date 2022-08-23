@@ -19,7 +19,7 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('inertia-crud-generator')
-            ->hasConfigFile()
+            ->hasConfigFile('inertia-crud')
             ->hasViews()
             ->hasCommand(InertiaCrudGeneratorCommand::class);
     }
@@ -40,7 +40,9 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
            __DIR__.'/../routes' => base_path('routes'),
           __DIR__.'/../database/migrations' => base_path('database/migrations'),
         ],'inertia-crud');
-
+    $this->publishes([
+            __DIR__.'/../config'=>base_path('config'),
+        ],'inertia-crud-config');
         
         // $this->loadRoutesFrom(__DIR__.'/../routes/inertia-crud.php');
 

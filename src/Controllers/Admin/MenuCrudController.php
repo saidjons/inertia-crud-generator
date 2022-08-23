@@ -11,18 +11,19 @@ class MenuCrudController extends Controller
      
      public function index()
      {
-         return Inertia::render('Menu/List');
+         return Inertia::render(config('inertia-crud.menu_list_path'));
      }
 
      public function show($id)
      {
-         return Inertia::render('Menu/View');
+        return Inertia::render(config('inertia-crud.menu_view_path'));
+
      }
 
 
      public function create()
      {
-         return Inertia::render('Menu/Create');
+         return Inertia::render(config('inertia-crud.menu_create_path'));
          
      }
 }

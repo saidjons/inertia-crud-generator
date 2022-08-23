@@ -1,6 +1,6 @@
 <?php
 
- namespace Saidjon\InertiaCrudGenerator\Controllers\Admin;
+ namespace Saidjon\InertiaCrudGenerator\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class CrudGeneratorController extends Controller
     public function create()
     {
         
-        return Inertia::render('Generator/Create');
+        return Inertia::render(config('inertia-crud.generator_path'));
 
         
     }

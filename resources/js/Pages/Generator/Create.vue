@@ -334,6 +334,12 @@ export default {
         className:'TextField',
 
 
+        },
+        {
+        name:'jsonEditor',
+        className:'JsonEditorField',
+
+
         }
      
       ],
