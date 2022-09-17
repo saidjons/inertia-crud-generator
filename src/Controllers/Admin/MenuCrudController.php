@@ -2,9 +2,10 @@
 
 namespace Saidjon\InertiaCrudGenerator\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Saidjon\InertiaCrudGenerator\Models\Menu;
 
 class MenuCrudController extends Controller
 {
@@ -26,4 +27,14 @@ class MenuCrudController extends Controller
          return Inertia::render(config('inertia-crud.menu_create_path'));
          
      }
+       public function edit(int $id)
+    {
+        $menu = Menu::findOrFail($id);
+        return Inertia::render(config('inertia-crud.menu_edit_path'),
+            [
+                "menu" =>$menu
+            ]
+        );
+    }
 }
+
