@@ -20,19 +20,19 @@ import CellCheckbox from './CellCheckbox.vue';
 
 <template>
     <div class="antialiased sans-serif  ">
-        <div class="container mx-auto   px-4">
+        <div class="">
             <h1 class="text-3xl  border-b mb-3">{{tableName}}</h1>
 
             <!-- table start  -->
-            <up-heading :headings='headings' />
+            <!-- <up-heading :headings='headings' /> -->
             <!-- heading  -->
 
             <div
-                class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative"
-                style="height: 405px;"
+                class="  bg-white rounded-lg shadow  "
+                
             >
                 <table
-                    class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative"
+                    class="border-collapse table-auto   whitespace-no-wrap bg-white table-striped "
                 >
                     <heading :headings='headings' />
                     <tbody>

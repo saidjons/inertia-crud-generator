@@ -7,7 +7,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
     class CheckboxField extends BaseField
     {
 
-        protected $createHtmlTemp = "\t\t\t <checkbox-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}' :initialValue='{{fieldName}}' @inputChanged='set{{fieldNameUp}}'/> \n ";
+        protected $createHtmlTemp = "\t\t\t <CheckboxField  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}' :initialValue='{{fieldName}}' @inputChanged='set{{fieldNameUp}}'/> \n ";
 
         public $fieldType = 'checkbox';
 

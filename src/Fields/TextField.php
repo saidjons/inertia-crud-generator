@@ -8,7 +8,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
 class TextField extends BaseField
 {
-    protected $createHtmlTemp = "\t\t\t <input-field  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}' :initialValue='{{fieldName}}' @inputChanged='set{{fieldNameUp}}'/> \n "; 
+    protected $createHtmlTemp = "\t\t\t <InputField  name='{{fieldName}}' label='{{label}}'  fieldType='{{fieldType}}' :initialValue='{{fieldName}}' @inputChanged='set{{fieldNameUp}}'/> \n "; 
     
  
   

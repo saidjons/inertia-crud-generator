@@ -8,7 +8,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
 class CkeditorField extends BaseField
 {
-    protected $createHtmlTemp = "\t\t\t  <ckeditor-component name='{{fieldName}}' label='{{fieldName}}' :content='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}' /> \n"; 
+    protected $createHtmlTemp = "\t\t\t  <CkeditorField name='{{fieldName}}' label='{{fieldName}}' :content='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}' /> \n"; 
 
     public $fieldType = 'ckeditor';
 

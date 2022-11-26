@@ -58,13 +58,13 @@
        
 
             <template v-if="heading.cell=='text'">
-                <cell-text  :text='item[heading.value]'/>
+                <cell-text  :text='item.attributes[heading.value]'/>
             </template>
             <template v-if="heading.cell=='number'">
-                <cell-number  :text='item[heading.value]'/>
+                <cell-number  :text='item.attributes[heading.value]'/>
             </template>
              <template v-if="heading.cell=='image'">
-                <cell-image  :text='item[heading.value]'/>
+                <cell-image  :text='item.attributes[heading.value]'/>
                 <!-- {{item[heading.value]}} -->
             </template>
            

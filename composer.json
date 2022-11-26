@@ -16,12 +16,12 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.2|~8.0.0|~8.1.0|~8.2.0",
         "doctrine/dbal": "^3.2",
-         
-        "inertiajs/inertia-laravel": "^0",
-   
-        "laravel/sanctum": "^2.0",
+        "laravel/framework": "^6.0|^7.0|^8.74|^9.0",
+        "inertiajs/inertia-laravel": "*",
+        
+        "laravel/sanctum": "*",
         "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {

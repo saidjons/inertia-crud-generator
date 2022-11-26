@@ -13,24 +13,26 @@ export default {
   mounted() {
     this.setUrl();
   },
+  data() {
+    return {
+      url:null,
+    }
+  },
   methods: {
     setUrl() {
-      this.url = this.$page.url + "/";
+      this.url =  
+                    window.location.origin + window.location.pathname;
     },
     deleteItem() {
       this.$emit("deleteItem", this.id);
     },
     editItem() {
-      return `${this.$page.url}/${this.id}/edit`;
+      return this.url +'/'+this.id+'/'+'edit';
     },
     viewItem() {
-      return `${this.$page.url}/${this.id}`;
+      return this.url +"/"+this.id;
     },
-    data() {
-      return {
-        url: null,
-      };
-    },
+    
   },
 };
 </script>

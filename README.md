@@ -2,11 +2,13 @@
 
 fresh install laravel 8 
  
- #### install infyom api generator 
- `$ composer require infyomlabs/laravel-generator^3.0`
- `$ php artisan  infyom:publish`
+ #### we depend on laravel-restify generator for api endpoints and when searching.   
+ `$ composer require binaryk/laravel-restify`
+ `$ php artisan restify:setup`
+ 
 
-#### install jetstream
+
+#### authentication is easy with jetstream . install jetstream
   `$ composer require laravel/jetstream`
   
   `$ php artisan jetstream:install inertia`

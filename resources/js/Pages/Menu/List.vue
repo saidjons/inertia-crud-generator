@@ -33,7 +33,7 @@
         methods: {
             deleteItem(data){
                    
-                   axios.delete('/api/menus/'+data, { 
+                   axios.delete('/admin/api/menus/'+data, { 
                      headers:{
                          'Accept': 'application/json',
                             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@
              },
             setData() {
                 (async () => {
-                    const rawResponse = await fetch('/api/menus', {
+                    const rawResponse = await fetch('/admin/api/get/admin', {
                         method: 'get',
                         headers: {
                             'Accept': 'application/json',

@@ -10,7 +10,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 class RelationField extends BaseField
 {
 
-    protected $createHtmlTemp = "\t\t\t  <options-field name='{{fieldName}}' :initialValue='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
+    protected $createHtmlTemp = "\t\t\t  <OptionsField name='{{fieldName}}' :initialValue='{{fieldName}}' :options='{{fieldName}}RelationOptions' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
 
     public $fieldType = 'relation';
 

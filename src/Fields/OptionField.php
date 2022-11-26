@@ -11,7 +11,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 class OptionField extends BaseField
 {
 
-    protected $createHtmlTemp = "\t\t\t  <options-field name='{{fieldName}}' :initialValue='{{fieldName}}' :options='{{fieldName}}Options' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
+    protected $createHtmlTemp = "\t\t\t  <OptionsField name='{{fieldName}}' :initialValue='{{fieldName}}' :options='{{fieldName}}Options' label='Choose {{fieldName}}' @inputChanged='set{{fieldNameUp}}'/>";
 
     public $fieldType = 'option';
 

@@ -8,7 +8,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
 class DropdownField extends BaseField
 {
-    protected $createHtmlTemp  = "\t\t\t <options-field name='{{fieldName}}' :options='{{options}}' label='{{label}}' :initialValue='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}'/> \n"; 
+    protected $createHtmlTemp  = "\t\t\t <OptionsField name='{{fieldName}}' :options='{{options}}' label='{{label}}' :initialValue='{{fieldName}}'  @inputChanged='set{{fieldNameUp}}'/> \n"; 
   
     
    protected  $fieldDataTemp = "\t\t\t {{fieldName}} : {

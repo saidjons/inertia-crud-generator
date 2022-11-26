@@ -3,7 +3,7 @@
      props:['text'],
 
      created() {
-         console.info(this.text)
+          
      },
  }
  </script>

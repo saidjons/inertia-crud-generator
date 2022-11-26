@@ -8,7 +8,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
 class JsonEditorField extends BaseField
 {
-    protected $createHtmlTemp = "\t\t\t <json-editor-component  name='{{fieldName}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}' :initialValue='{{fieldName}}'
+    protected $createHtmlTemp = "\t\t\t <JsonEditorField  name='{{fieldName}}' label='{{label}}' @inputChanged='set{{fieldNameUp}}' :initialValue='{{fieldName}}'
     editorSettings='menu'/>\n";
 
 
