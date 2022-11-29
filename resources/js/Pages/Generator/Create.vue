@@ -81,8 +81,8 @@
 
 <script>
 
-import InputField from '@/Components/Fields/Input';
-import OptionsField from '@/Components/Fields/Options';
+import InputField from '@/Components/Fields/InputField';
+import OptionsField from '@/Components/Fields/OptionsField';
 
 export default {
    

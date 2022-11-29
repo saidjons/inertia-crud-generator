@@ -1,9 +1,9 @@
 
 <script>
 import stringToSlug from '@/plugins/stringToSlug';
-import InputField from '@/Components/Fields/Input.vue';
-import CheckboxField from '@/Components/Fields/Checkbox.vue';
-import JsonEditorComponent from '@/Components/Fields/JsonEditor';
+import InputField from '@/Components/Fields/InputField.vue';
+import CheckboxField from '@/Components/Fields/CheckboxField.vue';
+import JsonEditorComponent from '@/Components/Fields/JsonEditorField';
 export default {
    
     components: {
