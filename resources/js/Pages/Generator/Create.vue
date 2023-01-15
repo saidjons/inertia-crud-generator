@@ -81,8 +81,8 @@
 
 <script>
 
-import InputField from '@/Components/Fields/InputField';
-import OptionsField from '@/Components/Fields/OptionsField';
+import InputField from '@/Components/Fields/InputField.vue';
+import OptionsField from '@/Components/Fields/OptionsField.vue';
 
 export default {
    

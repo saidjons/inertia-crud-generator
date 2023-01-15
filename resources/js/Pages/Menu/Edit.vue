@@ -3,7 +3,7 @@
 import stringToSlug from '@/plugins/stringToSlug';
 import InputField from '@/Components/Fields/InputField.vue';
 import CheckboxField from '@/Components/Fields/CheckboxField.vue';
-import JsonEditorComponent from '@/Components/Fields/JsonEditorField';
+import JsonEditorComponent from '@/Components/Fields/JsonEditorField.vue';
 export default {
     components: {
 		stringToSlug,

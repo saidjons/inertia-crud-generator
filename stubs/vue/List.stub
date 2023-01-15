@@ -216,7 +216,7 @@ data() {
             px-4 mb-5
             ">
                 <h1 class="text-3xl  border-b mb-3">{{ modelPl }}</h1>
-                <InputField class="" action='Search' @action='searchAction' @inputChanged='setSearch' />
+                <InputField class="" action='Search' @btnClicked='searchAction' @inputChanged='setSearch' />
                 <!-- table start  -->
                 <up-heading :headings='headings' />
                 <!-- heading  -->
