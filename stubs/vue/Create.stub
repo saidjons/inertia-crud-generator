@@ -57,7 +57,7 @@ export default {
 			}) 
 				.then(res=> { 
 					console.log(res);
-					   if (res.status ==200) {
+					   if (res.status ==201) {
 						 window.notify(res.message)
 					 }else{
 						 this.setErrors(res.data)

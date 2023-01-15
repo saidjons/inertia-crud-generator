@@ -10,4 +10,6 @@ return [
     "menu_list_path"=>"Menu/List",
     "menu_show_path"=>"Menu/Show",
     "menu_edit_path"=>"Menu/Edit",
+	
+"stubFolder"=>'',
 ];

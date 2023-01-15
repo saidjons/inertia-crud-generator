@@ -31,8 +31,7 @@ fresh install laravel 8
 		
   ###then paste this in resourses/css/app.css. you can there is notify,css file
    `$ @import 'notify.css'`
-   + in your User model extend
-	`$  Saidjon\InertiaCrudGenerator\Models\User` it is a typical laravel User.php file, just token attribute added so that we can use in inertia  .props.user.token
+   + in your User model use AuthTokenTrait 
 + add csrf_token to use in inertia in app/Http/Middleware/HandleInertiaRequests 
 	```php
 	  public function share(Request $request)
@@ -60,6 +59,7 @@ fresh install laravel 8
         "@json-editor/json-editor": "^2.6.1",
         "vue-draggable-next": "^2.1.1",
         "vue-multiselect": "^3.0.0-alpha.2",
+		  "jodit-vue3": "^1.0.5",
 ```
  
 #### include routes/inertia-crud.php into routes/web.php

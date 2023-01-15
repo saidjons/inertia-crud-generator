@@ -316,6 +316,10 @@ export default {
 
 
       },
+	  {
+		name:"jodit",
+		className:"JoditField",
+	  },
       {
       name:'number',
       className:'NumberField',

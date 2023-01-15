@@ -57,7 +57,7 @@ export default {
                 });
         },
         async setData() {
-            var data = { per_page: this.per_page, page: this.page };
+            var data = { perPage: this.per_page, page: this.page };
             if (this.search.trim().length > 0) {
                 data['search'] = this.search
             }
