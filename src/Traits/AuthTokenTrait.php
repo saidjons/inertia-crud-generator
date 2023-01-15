@@ -3,6 +3,7 @@
 namespace Saidjon\InertiaCrudGenerator\Traits;
 
 use App\Models\User;
+
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -10,6 +11,17 @@ use Illuminate\Support\Facades\Session;
 trait AuthTokenTrait{
 
 
+    public function getTokenAttribute()
+    {
+        
+             if(auth()->user()){
+        return $this->getFromCacheOrNewToken(auth()->user()->id);
+
+        } else{
+            return "Guest";
+        }
+    }
+    
    public function ensureSessionSameWithAuthtokenCookie()
    {
      
@@ -44,7 +56,7 @@ trait AuthTokenTrait{
     public function newAuthToken():string
     {
         
-        $token =auth()->user()->createToken('admin')->plainTextToken;
+        $token =auth()->user()->createToken('api')->plainTextToken;
         $string =  explode('|',$token);
         return $string[1];
     }

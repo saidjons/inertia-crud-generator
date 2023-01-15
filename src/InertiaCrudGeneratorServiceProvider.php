@@ -38,12 +38,16 @@ class InertiaCrudGeneratorServiceProvider extends PackageServiceProvider
             __DIR__.'/../resources/js/root' => base_path(''),
             __DIR__.'/../resources/css' => resource_path('css'),
            __DIR__.'/../routes' => base_path('routes'),
+		   __DIR__.'../resources/model'=>base_path('app/Models'),
+		   __DIR__.'../resources/restify'=>base_path('app/Restify'),
           __DIR__.'/../database/migrations' => base_path('database/migrations'),
         ],'inertia-crud');
     $this->publishes([
             __DIR__.'/../config'=>base_path('config'),
         ],'inertia-crud-config');
-        
+		   $this->publishes([
+		   __DIR__.'../stubs/vue'=>base_path('package/inertia-crud/stubs')
+		   ]); 
         // $this->loadRoutesFrom(__DIR__.'/../routes/inertia-crud.php');
 
     }

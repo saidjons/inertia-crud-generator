@@ -12,6 +12,7 @@ use Saidjon\InertiaCrudGenerator\Traits\Replacor;
  class BaseGenerator
 {   
     use Replacor;
+	public $stubFolder ='package/inertia-crud/stubs/';
     
     public $table_name;
     public $columnsAndTypes = [];
@@ -96,13 +97,20 @@ use Saidjon\InertiaCrudGenerator\Traits\Replacor;
     }
      public function getStub($name)
     {
-        
+		
+$this->stubFolder=config('inetia-crud.stubFolder')??'';
+		if(config('inertia-crud.stubFolder') && file_exists(base_path($this->stubFolder))){
+
+
+        $template= File::get(base_path($this->stubFolder).$name.'.stub');
+        return  $template;
+		}    
 
         $template= File::get(__DIR__.$name.'.stub');
         return  $template;
 
     }
-
+	
     public function buildClassName()
     {
         return   Str::studly(Str::singular($this->table_name));

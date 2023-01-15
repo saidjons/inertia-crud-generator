@@ -1,23 +1,13 @@
 <?php
 
-namespace Saidjon\InertiaCrudGenerator\Models;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-
-
-/**
- * Class Menu
- * @package App\Models
- * @version January 6, 2022, 8:38 am UTC
- *
- * @property string $title
- * @property json $data
- * @property bool $published
- * @property json $permissions
- */
 class Menu extends Model
 {
+    use HasFactory;
     public $table = 'menus';
     public $fillable = [
         'role',
@@ -41,7 +31,7 @@ class Menu extends Model
      * @var array
      */
     public static $rules = [
-        'role' => 'required',
+        'role' => 'required|string|max:200',
         'data' => 'required|json',
         'published' => 'boolean|sometimes',
         'permissions' => 'sometimes|json'
