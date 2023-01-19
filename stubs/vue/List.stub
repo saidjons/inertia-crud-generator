@@ -221,7 +221,7 @@ data() {
                 <up-heading :headings='headings' />
                 <!-- heading  -->
 
-                <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="height: 405px;">
+                <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
                     <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
                         <heading :headings='headings' />
                         <tbody>
