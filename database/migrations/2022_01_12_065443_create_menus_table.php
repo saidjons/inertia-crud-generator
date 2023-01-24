@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Menu;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Saidjon\InertiaCrudGenerator\Models\Menu;
 
 class CreateMenusTable extends Migration
 {
@@ -14,7 +14,7 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-         Schema::create('menus', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id('id');
             $table->string('role');
             $table->json('data');
@@ -24,35 +24,30 @@ class CreateMenusTable extends Migration
         });
 
         Menu::create([
-            'role' =>'admin',
-            'published' =>1,
-            'data' =>json_encode([
-                'title' =>'Generator',
-                 'link' =>'/admin/generator/create',
+            'role' => 'admin',
+            'published' => 1,
+            'data' => json_encode([
+                'title' => 'Generator',
+                'link' => '/admin/generator/create',
                 'nested' => false,
-                'badgeNumber' => '',
-                'icon' =>'',
+                'icon' => '',
             ]),
         ]);
         Menu::create([
-            'role' =>'admin',
-            'published' =>1,
-            'data' =>json_encode([
-                'title' =>'Menu',
-                 'link' =>'',
+            'role' => 'admin',
+            'published' => 1,
+            'data' => json_encode([
+                'title' => 'Menu',
+                'link' => '',
                 'nested' => true,
-                'badgeNumber' => '',
-                'icon' =>'',
-                   'subs' =>[
-                        [ 'title'=>'create',
-                            'link'=>'/admin/menu/create',
-                            'badgeNumber' =>2,
-                        ],
-                           [ 'title' =>'List',
-                            'link' =>'/admin/menu',
-                            'badgeNumber' =>10,
-                           ]
-                      ]
+                'icon' => '',
+                'subs' => [
+                    ['title' => 'create',
+                    ],
+                    ['title' => 'List',
+                        'link' => '/admin/menu',
+                    ],
+                ],
             ]),
         ]);
     }
@@ -64,7 +59,7 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-
         Schema::drop('menus');
     }
 }
+
