@@ -87,7 +87,7 @@ use Saidjon\InertiaCrudGenerator\Traits\Replacor;
 
     public function generateTemplateFrom($replacements,$folder,$stubname):string
     {
-           $stub=$this->getStub("/../../stubs/${folder}/${stubname}");
+           $stub=$this->getStub("{$folder}/{$stubname}");
         $template= $this->replaceArray($stub,$replacements);
         
  
@@ -95,18 +95,18 @@ use Saidjon\InertiaCrudGenerator\Traits\Replacor;
       
        
     }
-     public function getStub($name)
+     public function getStub($path)
     {
-		
-$this->stubFolder=config('inetia-crud.stubFolder')??'';
-		if(config('inertia-crud.stubFolder') && file_exists(base_path($this->stubFolder))){
+
+        $this->stubFolder=is_dir(base_path($this->stubFolder))?? is_dir(__DIR__."/../../stubs/");
+		if($this->stubFolder && file_exists($this->stubFolder)){
 
 
-        $template= File::get(base_path($this->stubFolder).$name.'.stub');
+        $template= File::get($this->stubFolder).$path.".stub";
         return  $template;
 		}    
 
-        $template= File::get(__DIR__.$name.'.stub');
+        $template= File::get(__DIR__.$path.".stub");
         return  $template;
 
     }

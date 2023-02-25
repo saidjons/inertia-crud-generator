@@ -42,7 +42,23 @@ fresh install laravel 8
     }
 	```
  
-  
+ ### add this function  app/Restify/Repository.php
+  ```php
+
+            public function serializeForIndex(RestifyRequest $request): array
+        {
+            $data = parent::serializeForIndex($request);
+            // $attributes = $this->when((bool) $attrs = $this->resolveIndexAttributes($request), $attrs);
+            /**
+            * move attributes to one level up  and extract them , unset original attributes
+            */
+            $data = array_merge($data,$data['attributes']);
+            unset($data['attributes']);
+        
+              return $data;
+        }
+
+  ```
   
 
     
@@ -59,7 +75,8 @@ fresh install laravel 8
         "@json-editor/json-editor": "^2.6.1",
         "vue-draggable-next": "^2.1.1",
         "vue-multiselect": "^3.0.0-alpha.2",
-		  "jodit-vue3": "^1.0.5",
+        "jodit-vue3": "^1.0.5",
+        "vue3-easy-data-table": "^1.5.34",
 ```
  
 #### include routes/inertia-crud.php into routes/web.php
