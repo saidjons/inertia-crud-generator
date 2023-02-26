@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Saidjon\InertiaCrudGenerator\Models\Menu;
+use App\Models\Menu;
 
 class MenuCrudController extends Controller
 {

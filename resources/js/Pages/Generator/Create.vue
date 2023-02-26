@@ -37,7 +37,7 @@
         :id="col"
         @inputChanged='setRelationForColumn'
        />
-        <json-editor-component 
+        <json-editor-field
           v-if="isOptionField(col)"
           :name="col" 
           :id="col"

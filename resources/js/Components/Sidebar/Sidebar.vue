@@ -1,8 +1,9 @@
 <script>
 import SidebarItem from "./SidebarItem.vue";
-//import {MenuIcon} from "@/Components/Icons/hero";
+import MenuIcon from "@/Components/Icons/menu.vue";
 export default {
     components: {
+        MenuIcon,
         SidebarItem,
     },
     mounted() {
@@ -12,11 +13,11 @@ export default {
         setData() {
             this.errors = null;
             window.axios
-                .get("/admin/api/menu/get/admin", {
+                .get(this.$restifyApiUrl+"/menus?role=admin", {
                     headers: {
                         Accept: "application/json",
-                        "X-CSRF-TOKEN": window.csrf,
-                        Authorization: "Bearer " + window.token,
+                        "X-CSRF-TOKEN": this.$page.props.csrf,
+                        "Authorization": "Bearer " + this.$page.props.auth.user.token,
                     },
 
                 })
@@ -81,7 +82,9 @@ export default {
             class="h-10 w-10 absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800"
             @click="sidebarHandler"
         >
-          //  <MenuIcon />
+         <MenuIcon width="20px" height="15px" color="green" />
+  
+
         </button>
     </div>
     <!-- end sidebar toggle button -->

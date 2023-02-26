@@ -1,16 +1,20 @@
 <script>
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/vue3";
 import { getUrlWithoutQuery } from "@/plugins/functions";
-import { TrashIcon, PencilIcon, EyeIcon } from "@/Components/Icons/hero.jsx";
+import TrashIcon from "@/Components/Icons/trash.vue";
+import PencilIcon from "@/Components/Icons/pencil.vue";
+import EyeIcon from "@/Components/Icons/eye.vue";
 export default {
-  props: ["id"],
+   props: ["id"],
+
   components: {
     TrashIcon,
     PencilIcon,
     EyeIcon,
     Link,
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     setUrl() {
       return getUrlWithoutQuery();
@@ -19,10 +23,10 @@ export default {
       this.$emit("deleteItem", this.id);
     },
     editItem() {
-      return `${this.setUrl()}/${this.id}/edit`;
+      return `${this.setUrl()}${this.id}/edit`;
     },
     viewItem() {
-      return `${this.setUrl()}/${this.id}`;
+      return `${this.setUrl()}${this.id}`;
     },
     data() {
       return {
