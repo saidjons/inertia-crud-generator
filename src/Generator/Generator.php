@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Schema;
-use Saidjon\InertiaCrudGenerator\Models\Menu;
+use App\Models\Menu;
 use Saidjon\InertiaCrudGenerator\Traits\Replacor;
 
  use Saidjon\InertiaCrudGenerator\Traits\CrudController;
@@ -115,7 +115,9 @@ class Generator extends BaseGenerator
             return false;
         }
 
-        $this->fillReplacements()
+        
+        $this
+        ->fillReplacements()
         ->generateVueCreate()
         ->generateVueEdit()
         ->generateVueView()
@@ -150,16 +152,17 @@ class Generator extends BaseGenerator
                 'title' =>$data['modelUp'],
                  'link' =>'',
                 'nested' => true,
-                'badgeNumber' => '',
                 'icon' =>'',
                    'subs' =>[
                         [ 'title'=>'create',
-                            'link'=>"/admin/${data['model']}/create",
-                            'badgeNumber' =>2,
+                            'link'=>"/admin/{$data['model']}/create",
+                            'target_blank'=>false,
                         ],
                            [ 'title' =>'List',
-                            'link' =>"/admin/${data['model']}",
-                            'badgeNumber' =>10,
+                            'link' =>"/admin/{$data['model']}",
+                            'target_blank'=>false,
+
+
                            ], 
                            
                       ]

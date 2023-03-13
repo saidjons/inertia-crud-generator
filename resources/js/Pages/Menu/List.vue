@@ -2,11 +2,11 @@
 import InputField from "@/Components/Fields/InputField.vue";
 import CellAction from "@/Components/Tables/TableUI/CellAction.vue";
 import { getUrlWithoutQuery } from "@/plugins/functions";
-
+import Button2 from "@/Components/OtherUI/Button2.vue";
 export default {
   components: {
     InputField,
-    CellAction,
+    CellAction,Button2,
   },
   mounted() {
     if (this.getUrlParameter("per_page")) {
@@ -39,6 +39,9 @@ export default {
     },
     setSearch(d) {
       this.search = d.value;
+    },
+    deleteBulk(data){
+      
     },
     deleteItem(data) {
       axios
@@ -99,7 +102,6 @@ export default {
 
       const content = await rawResponse.json();
       this.items = content.data;
-      console.log(content);
       this.currentPage = content.meta.current_page;
       this.pagData = {
         links: content.links,
@@ -111,15 +113,7 @@ export default {
       this.lastPage = content.meta.last_page;
       this.currentPage = content.meta.current_page;
     },
-    getObjectKey(value, o) {
-      let returnValue = "";
-      Object.keys(o).forEach((el) => {
-        if (o[el] == value) {
-          returnValue = el;
-        }
-      });
-      return returnValue;
-    },
+ 
 
     nextPage() {
       if (this.currentPage < this.pagData.meta.last_page) {
@@ -231,7 +225,6 @@ export default {
 
 <template>
   <AdminLayout>
-    <template v-slot:content>
       <div
         class="container bg-white rounded-md shadow-md dark:bg-dark-eval-1 antialiased sans-serif px-4 mb-5"
       >
@@ -243,6 +236,10 @@ export default {
           @inputChanged="setSearch"
         />
 
+        <!-- header buttons  -->
+        <div class="flex flex-row gap-6 text-left my-3 mx-5">
+          <Button2 text="delete" color="text-red-600" @click="deleteBulk"></Button2>
+        </div>
         <!-- table start  -->
         <!-- heading  -->
         <EasyDataTable
@@ -279,6 +276,5 @@ export default {
           </template>
         </EasyDataTable>
       </div>
-    </template>
   </AdminLayout>
 </template>

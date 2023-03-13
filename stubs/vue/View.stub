@@ -1,7 +1,6 @@
 
 <script>
 import { Link } from "@inertiajs/inertia-vue3";
-import {  PencilIcon } from "@/Components/Icons/hero.jsx";
 
 import stringToSlug from '@/plugins/stringToSlug';
 export default {
@@ -9,7 +8,6 @@ export default {
     components: {
 		stringToSlug,
     	Link,
-		PencilIcon,
     },
      
    	beforeMount() {
@@ -69,8 +67,6 @@ export default {
 <template>
 
     <AdminLayout>
-         <template v-slot:content>
-     
 
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <div class="w-4/5 justify-center text-left mx-5 ">
@@ -103,7 +99,6 @@ export default {
 </div>
 
         </div>
-  </template>
 
     </AdminLayout>
 </template>

@@ -11,13 +11,13 @@ export default {
     JsonEditorComponent,
   },
   beforeMount() {
-    this.role = this.$page.props.menu.role;
-    this.modelId = this.$page.props.menu.id;
+    this.role = this.$page.props.model.role;
+    this.modelId = this.$page.props.model.id;
 
-    this.published = this.$page.props.menu.published;
-    this.data = JSON.parse(this.$page.props.menu.data);
+    this.published = this.$page.props.model.published;
+    console.log(this.$page.props.model.data);
+    this.jsonData = JSON.parse(this.$page.props.model.data);
 
-    console.info(this.data);
   },
   methods: {
     removeError(d) {
@@ -77,7 +77,6 @@ export default {
           published: this.published,
         })
         .then((res) => {
-          console.log(res);
           if (res.status == 200) {
             window.notify(res.message);
           } else {
@@ -103,7 +102,24 @@ export default {
     return {
       modelId: null,
       role: null,
-      data: null,
+      data: {
+                "title": "Menu",
+                "link": "",
+                "nested": true,
+                "subs": [
+                  {
+                    "title": "Create",
+                    "link": "/admin/menu/create",
+                    "target_blank": false
+                  },
+                  {
+                    "title": "List",
+                    "link": "/admin/menu",
+                    "target_blank": false
+                  }
+                ],
+                "published": true
+              },
       published: null,
 
       errors: [],
@@ -114,7 +130,6 @@ export default {
 
 <template>
   <AdminLayout>
-    <template v-slot:content>
       <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
         <div class="w-4/5 justify-center text-left mx-5">
           <div class="bg-white rounded px-2 pt-6 pb-8 mb-4">
@@ -135,7 +150,7 @@ export default {
               label="Set menu in json format"
               @inputChanged="setData"
               editorSettings="menu"
-              :initialValue="data"
+              :initialValue="jsonData"
             />
 
             <checkbox-field
@@ -166,6 +181,5 @@ export default {
           <!-- buttons end -->
         </div>
       </div>
-    </template>
   </AdminLayout>
 </template>

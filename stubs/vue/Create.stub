@@ -46,11 +46,11 @@ export default {
      
     store(){
 			this.errors = null
-			 window.axios.post('/api/{{modelPl}}',{
+			 window.axios.post(this.$restifyApiUrl+'{{modelPl}}',{
 				headers: { 
 					'Accept':'application/json',
 					'X-CSRF-TOKEN' : this.$page.props.csrf,
-      'Authorization' : 'Bearer ' + this.$page.props.user.token
+      'Authorization' : 'Bearer ' + this.$page.props.auth.user.token
 			
 			} ,
 					{{postField}}
@@ -94,8 +94,6 @@ export default {
 <template>
 
     <AdminLayout>
-         <template v-slot:content>
-     
 
         <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
             <div class="w-4/5 justify-center text-left mx-5 ">
@@ -124,7 +122,7 @@ export default {
 </div>
 
         </div>
-  </template>
+ 
 
     </AdminLayout>
 </template>

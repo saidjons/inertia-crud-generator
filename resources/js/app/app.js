@@ -21,7 +21,7 @@ import CkeditorField from '@/Components/Fields/CkeditorField.vue'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
 import JsonEditorField from '@/Components/Fields/JsonEditorField.vue';
-// import JoditField from '@/Components/Fields/JoditField.vue'
+import JoditField from '@/Components/Fields/JoditField.vue'
 import RelationField from '@/Components/Fields/RelationField.vue';
 import TextViewField from '@/Components/Fields/TextViewField.vue';
 
@@ -56,7 +56,7 @@ createInertiaApp({
        vueApp.component('ImageUpload' , ImageUpload);
         vueApp.component('EasyDataTable', Vue3EasyDataTable);
 
-        // vueApp.component('JoditField' , JoditField)
+        vueApp.component('JoditField' , JoditField)
        vueApp.component('FileUpload' , FileUpload);
        vueApp.config.globalProperties = {
         $restifyApiUrl :'/api/restify',

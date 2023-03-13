@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\Schema;
 use Saidjon\InertiaCrudGenerator\Traits\Replacor;
 
 
- class BaseGenerator
-{   
+class BaseGenerator
+{
     use Replacor;
-	public $stubFolder ='package/inertia-crud/stubs/';
-    
+    public $stubFolder = 'package/inertia-crud/stubs/';
+
     public $table_name;
     public $columnsAndTypes = [];
 
-    public  $VUE_PATH="js/Pages/"; //with trailing slash
+    public  $VUE_PATH = "js/Pages/"; //with trailing slash
 
- public  $CTL_PATH="app/Http/Controllers/Admin/"; //with trailing slash
+    public  $CTL_PATH = "app/Http/Controllers/Admin/"; //with trailing slash
 
 
     public $columns;
@@ -27,11 +27,11 @@ use Saidjon\InertiaCrudGenerator\Traits\Replacor;
     public $model_name;
 
     public $messages = [];
-    protected $replacements=[];
+    protected $replacements = [];
 
-    public  $tableHeadingItemsTemp = "{ key:'{{fieldName}}',cell:'text',visible:true, value: '{{fieldName}}'},\n";
+    public  $tableHeadingItemsTemp = "{ text:'{{fieldName}}',cell:'text',sortable:true, value: '{{fieldName}}'},\n";
 
-    
+
     protected $unwantedColumns = [
         'id',
         // 'password',
@@ -43,89 +43,80 @@ use Saidjon\InertiaCrudGenerator\Traits\Replacor;
         'uuid',
     ];
 
-   
-
-
-
-    public function fileAppend($file,$txt)
+    public function fileAppend($file, $txt)
     {
-         if(strpos(file_get_contents($file),$txt)){
+        if (strpos(file_get_contents($file), $txt)) {
             return false;
         }
-        
-        try {
-            file_put_contents($file,$txt.PHP_EOL , FILE_APPEND | LOCK_EX);
-            return true;
 
+        try {
+            file_put_contents($file, $txt . PHP_EOL, FILE_APPEND | LOCK_EX);
+            return true;
         } catch (\Throwable $th) {
             return false;
         }
-        
-
     }
 
-    public function createFile($template,$path,$folderName,$fileNameWithExt)
+    public function createFile($template, $path, $folderName, $fileNameWithExt)
     {
-     
-        
-        if (!File::exists(resource_path($path.$folderName))) {
 
-            File::makeDirectory(resource_path($path).$folderName,0755);
 
+        if (!File::exists(resource_path($path . $folderName))) {
+
+            File::makeDirectory(resource_path($path) . $folderName, 0755);
         }
-        if (!File::exists(resource_path($path.$folderName.'/'.$fileNameWithExt))) {
+        if (!File::exists(resource_path($path . $folderName . '/' . $fileNameWithExt))) {
 
-                File::put(resource_path($path.$folderName.'/'.$fileNameWithExt),$template);
-                return ['success'=> $fileNameWithExt .' file created'];
-          }else{
-                return ['error'=> $fileNameWithExt .' exists . Not created'];
-
-          }
-       
+            File::put(resource_path($path . $folderName . '/' . $fileNameWithExt), $template);
+            return ['success' => $fileNameWithExt . ' file created'];
+        } else {
+            return ['error' => $fileNameWithExt . ' exists . Not created'];
+        }
     }
 
 
-    public function generateTemplateFrom($replacements,$folder,$stubname):string
+    public function generateTemplateFrom($replacements, $folder, $stubname): string
     {
-           $stub=$this->getStub("{$folder}/{$stubname}");
-        $template= $this->replaceArray($stub,$replacements);
-        
- 
-            return $template;
-      
-       
+        $stub = $this->getStub("{$folder}/{$stubname}");
+        $template = $this->replaceArray($stub, $replacements);
+
+
+        return $template;
     }
-     public function getStub($path)
+    public function getStub($path)
     {
+        $folderExists = function (string $path) {
+            if (is_dir($path) && File::exists($path)) {
+                return $path;
+            }
+            return false;
+        };
 
-        $this->stubFolder=is_dir(base_path($this->stubFolder))?? is_dir(__DIR__."/../../stubs/");
-		if($this->stubFolder && file_exists($this->stubFolder)){
 
+        if ($folderExists(base_path($this->stubFolder))) {
+            $this->stubFolder = $folderExists(base_path($this->stubFolder));
+        } else {
+            $this->stubFolder = $folderExists(__DIR__ . "/../../stubs/");
+        }
+        $file = $this->stubFolder . $path . ".stub";
+         
+        if ($this->stubFolder && file_exists($file)) {
 
-        $template= File::get($this->stubFolder).$path.".stub";
-        return  $template;
-		}    
-
-        $template= File::get(__DIR__.$path.".stub");
-        return  $template;
-
+            $template = File::get($file);
+            return  $template;
+        }
+        throw new \Exception("Template not found");
     }
-	
+
     public function buildClassName()
     {
         return   Str::studly(Str::singular($this->table_name));
     }
 
-   
-    
+
+
     public function tableExists()
     {
         return Schema::hasTable($this->table_name);
     }
-    
-  
-    
-
-
-
 }
