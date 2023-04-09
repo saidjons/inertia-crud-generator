@@ -85,27 +85,20 @@ class BaseGenerator
     }
     public function getStub($path)
     {
-        $folderExists = function (string $path) {
-            if (is_dir($path) && File::exists($path)) {
-                return $path;
-            }
-            return false;
-        };
+        
 
-
-        if ($folderExists(base_path($this->stubFolder))) {
-            $this->stubFolder = $folderExists(base_path($this->stubFolder));
-        } else {
-            $this->stubFolder = $folderExists(__DIR__ . "/../../stubs/");
-        }
-        $file = $this->stubFolder . $path . ".stub";
+       
+        $file = $this->stubFolder.$path.".stub";
+        if ( File::exists(base_path($file))) {
          
-        if ($this->stubFolder && file_exists($file)) {
+            $template = File::get(base_path($file));
 
-            $template = File::get($file);
             return  $template;
-        }
-        throw new \Exception("Template not found");
+        } 
+            
+            
+            throw new \Exception("Template not found");
+         
     }
 
     public function buildClassName()

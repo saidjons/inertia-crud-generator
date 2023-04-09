@@ -18,9 +18,10 @@ class MenuCrudController extends Controller
 
     public function show($id)
     {
+
         $menu = Menu::findOrFail($id);
-        return Inertia::render(config('inertia-crud.menu_view_path'), [
-            "menu" => $menu,
+        return Inertia::render(config('inertia-crud.menu_show_path'), [
+            "model" => $menu,
         ]);
     }
 
@@ -107,3 +108,4 @@ class MenuCrudController extends Controller
         ]);
     }
 }
+
