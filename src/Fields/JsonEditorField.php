@@ -44,6 +44,7 @@ class JsonEditorField extends BaseField
 
 
             "viewHtmlField" => $this->replaceArray($this->viewHtmlTemp, $this->data),
+            "import"=>" \t\t\t import JsonEditorField from '@/Components/Fields/JsonEditorField.vue'\n "
         ];
     }
 }

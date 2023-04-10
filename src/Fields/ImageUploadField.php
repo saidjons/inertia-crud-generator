@@ -46,7 +46,7 @@ class ImageUploadField extends BaseField
 
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
-
+            "import"=>"\t\t\t import ImageUploadField from '@/Components/Fields/uploader/ImageUploadField.vue'\n " 
         ];
     }
 

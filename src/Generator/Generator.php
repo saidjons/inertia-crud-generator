@@ -32,7 +32,31 @@ class Generator extends BaseGenerator
  
 
     }
-   
+    public function handle()
+    {
+       
+        if (!$this->tableExists()) {
+
+            return false;
+        }
+
+        
+        $this
+        ->fillReplacements()
+        ->uniqueImportCols()
+        ->generateVueCreate()
+        ->generateVueEdit()
+        ->generateVueView()
+        ->generateVueList()
+        ->generateController()
+        ->addRoute()
+        ;
+
+        $this->addToDB($this->replacements);
+
+        return $this->messages;
+     
+    }
     
     public function setReplacement(){
 
@@ -59,13 +83,24 @@ class Generator extends BaseGenerator
             'onMountedSetFieldEdit'       =>  "",
             'onMountedSetFieldView'       =>  "",
             'method'  => "",
+            'import'  => "",
 
         ];
 
         return $this;
 
     }
+    public function uniqueImportCols(){
+        $arr = explode(" '\n ",$this->replacements["import"]);
 
+        $filtered = 
+            implode("'\n",
+                 array_filter(
+            array_unique($arr)
+        ));
+        $this->replacements["import"] = $filtered;
+        return $this;
+    }
     public function fillReplacements()
     {
         if (count($this->postCols) < 1 ) {
@@ -90,7 +125,6 @@ class Generator extends BaseGenerator
 
 
         }
-
         return $this;
     }
     
@@ -107,30 +141,7 @@ class Generator extends BaseGenerator
         
     }
 
-    public function handle()
-    {
-       
-        if (!$this->tableExists()) {
-
-            return false;
-        }
-
-        
-        $this
-        ->fillReplacements()
-        ->generateVueCreate()
-        ->generateVueEdit()
-        ->generateVueView()
-        ->generateVueList()
-        ->generateController()
-        ->addRoute()
-        ;
-
-        $this->addToDB($this->replacements);
-
-        return $this->messages;
-     
-    }
+   
     public function addRoute()
     {
         $route = "Route::resource('/admin/".$this->replacements['model']."', 'App\Http\Controllers\Admin\\".$this->getControllerName()."', [
@@ -152,7 +163,7 @@ class Generator extends BaseGenerator
                 'title' =>$data['modelUp'],
                  'link' =>'',
                 'nested' => true,
-                'icon' =>'',
+                 
                    'subs' =>[
                         [ 'title'=>'create',
                             'link'=>"/admin/{$data['model']}/create",

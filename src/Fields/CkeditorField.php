@@ -37,6 +37,8 @@ class CkeditorField extends BaseField
             "mountedSet" => "",
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import CkeditorField from '@/Components/Fields/CkeditorField.vue'\n "
+
         ];
     }
 

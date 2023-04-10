@@ -101,6 +101,7 @@ class OptionField extends BaseField
             "onMountedSetFieldView" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import OptionsField from '@/Components/Fields/OptionsField.vue'\n "
         ];
     }
 

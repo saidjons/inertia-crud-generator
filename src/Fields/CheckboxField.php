@@ -34,6 +34,7 @@ use Saidjon\InertiaCrudGenerator\Fields\BaseField;
 
                 
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import CheckboxField from '@/Components/Fields/CheckboxField.vue'\n "
             ];
         }
     }

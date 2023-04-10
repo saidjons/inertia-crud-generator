@@ -45,6 +45,7 @@ class DropdownField extends BaseField
             "mountedSet" => "",
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import DropdownField from '@/Components/Fields/DropdownField.vue'\n "
 
         ];
     }

@@ -1,4 +1,6 @@
 <script>
+ 
+
 import InputField from "@/Components/Fields/Input.vue";
 import CellAction from "@/Components/Tables/TableUI/CellAction.vue";
 import { getUrlWithoutQuery } from "@/plugins/functions";
@@ -49,7 +51,7 @@ export default {
             Accept: "application/json",
             "Content-Type": "application/json",
             "X-CSRF-TOKEN": this.$page.props.csrf,
-            "Authorization": "Bearer " + this.$page.props.auth.user.token,
+            "Authorization": "Bearer " + this.$page.props.user.token,
           },
           id: data,
         })
@@ -92,7 +94,7 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json",
           "X-CSRF-TOKEN": this.$page.props.csrf,
-          Authorization: "Bearer " + this.$page.props.auth.user.token,
+          Authorization: "Bearer " + this.$page.props.user.token,
         },
       });
 

@@ -43,6 +43,7 @@ class TextareaField extends BaseField
 
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import TextareaField from '@/Components/Fields/TextareaField.vue'\n "
         ];
     }
 

@@ -46,6 +46,7 @@ class TextField extends BaseField
  
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import InputField from '@/Components/Fields/InputField.vue'\n "
  
 
 

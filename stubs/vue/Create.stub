@@ -1,6 +1,6 @@
 
 <script>
-
+{{import}}
 import stringToSlug from '@/plugins/stringToSlug';
 export default {
      
@@ -50,7 +50,7 @@ export default {
 				headers: { 
 					'Accept':'application/json',
 					'X-CSRF-TOKEN' : this.$page.props.csrf,
-      'Authorization' : 'Bearer ' + this.$page.props.auth.user.token
+      'Authorization' : 'Bearer ' + this.$page.props.user.token
 			
 			} ,
 					{{postField}}

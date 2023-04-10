@@ -88,6 +88,7 @@ class RelationField extends BaseField
             "onMountedSetFieldView" => $this->replace($this->onMountedSetFieldTemp,'fieldName',$this->data['fieldName']),
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import RelationField from '@/Components/Fields/RelationField.vue'\n "
         ];
     }
 

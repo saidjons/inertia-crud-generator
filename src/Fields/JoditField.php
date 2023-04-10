@@ -37,6 +37,7 @@ class JoditField extends BaseField
             "mountedSet" => "",
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
+            "import"=>"\t\t\t import JoditField from '@/Components/Fields/JoditField.vue'\n "
         ];
     }
 
