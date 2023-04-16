@@ -12,8 +12,8 @@ class ImageUploadField extends BaseField
     	<ImageUpload 
 		name='{{fieldName}}' 
          label='Upload Image for {{fieldNameUp}}' 
-		 uploadURL='/admin/upload/image/'
-         deleteURL='/admin/delete/image/'
+		 uploadURL='/api/admin/upload/image/'
+         deleteURL='/api/admin/delete/image/'
          :multiple=false
 		 @uploaded='set{{fieldNameUp}}'
 		  :initialValue='{{fieldName}}'

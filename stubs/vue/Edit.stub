@@ -48,7 +48,7 @@ export default {
      
     edit(){
 			this.errors = null
-			 window.axios.put(this.$restifyApiUrl+"{{modelPl}}/${this.id}",{
+			 window.axios.put(this.$restifyApiUrl+`/{{modelPl}}/${this.id}`,{
 				headers: { 
 					'Accept':'application/json',
 					'X-CSRF-TOKEN' : this.$page.props.csrf,

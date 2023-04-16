@@ -12,8 +12,8 @@ class FileUploadField extends BaseField
     	<FileUpload
 		name='{{fieldName}}' 
          label='Upload file for {{fieldNameUp}}' 
-         uploadURL='/admin/upload/file/'
-         deleteURL='/admin/delete/file/'
+         uploadURL='/api/admin/upload/file/'
+         deleteURL='/api/admin/delete/file/'
          :multiple=false
 		 @uploaded='set{{fieldNameUp}}'
 		  :initialValue='{{fieldName}}'

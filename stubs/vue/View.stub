@@ -4,7 +4,6 @@ import { Link } from "@inertiajs/inertia-vue3";
 import TextView from "@/Components/Fields/TextViewField.vue"
 import stringToSlug from '@/plugins/stringToSlug';
 export default {
-    props:['token'],
     components: {
 		stringToSlug,TextView,
     	Link,
