@@ -17,7 +17,9 @@ export default {
       this.perPage = this.getUrlParameter("per_page");
     }
     this.setData();
+    if(this.items.length){
     this.serverItemsLength = this.items.length;
+    }
   },
 
   methods: {
@@ -99,7 +101,10 @@ export default {
       });
 
       const content = await rawResponse.json();
+      if(content.data){
       this.items = content.data;
+
+      }
       this.currentPage = content.meta.current_page;
       this.pagData = {
         links: content.links,
