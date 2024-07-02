@@ -74,13 +74,13 @@ trait AuthTokenTrait{
     }
        public function getFromCacheOrNewToken(int $userId)
     {
-          $token = Cache::get(`${userId}-token`);
+          $token = Cache::get(`{$userId}-token`);
           if($token){
              return $token;
           }
           $token = $this->ensureSessionSameWithAuthtokenCookie();
          
-         Cache::put(`${userId}-token`,$token);
+         Cache::put(`{$userId}-token`,$token);
          
          return $token;
 

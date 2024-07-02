@@ -67,7 +67,6 @@ class Generator extends BaseGenerator
         $this->replacements=[
             'folderName'     =>    ucfirst(strtolower($this->model_name)),
             'model'     =>  strtolower($this->model_name),//lowercase
-            'modelPl'   =>  Str::plural(strtolower($this->model_name), 2),
             'modelUp'       =>  $this->model_name,
             'controllerName'       =>  $this->getControllerName(),
             'tableColumns'    => $this->makeTableColumns(),
