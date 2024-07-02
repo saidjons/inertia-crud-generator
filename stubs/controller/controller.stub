@@ -15,14 +15,14 @@ class {{controllerName}} extends Controller
      
      public function index()
      {
-         return Inertia::render('{{modelUp}}/List');
+         return Inertia::render('{{folderName}}/List');
      }
 
      public function show(int $id)
      {
          $model = {{modelUp}}::find($id);
 
-         return Inertia::render('{{modelUp}}/View',[
+         return Inertia::render('{{folderName}}/View',[
              "model" =>$model,
          ]);
      }
@@ -31,7 +31,7 @@ class {{controllerName}} extends Controller
      {
          $model = {{modelUp}}::find($id);
 
-         return Inertia::render('{{modelUp}}/Edit',[
+         return Inertia::render('{{folderName}}/Edit',[
              "model" =>$model,
          ]);
      }
@@ -40,7 +40,7 @@ class {{controllerName}} extends Controller
 
      public function create()
      {
-         return Inertia::render('{{modelUp}}/Create');
+         return Inertia::render('{{folderName}}/Create');
          
      }
 }

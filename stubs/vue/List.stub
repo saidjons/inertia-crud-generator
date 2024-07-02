@@ -48,7 +48,7 @@ export default {
     },
     deleteItem(data) {
       axios
-        .delete(this.$restifyApiUrl + "/{{modelPl}}/" + data, {
+        .delete(this.$restifyApiUrl + "/{{modelUp}}/" + data, {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -105,7 +105,11 @@ export default {
       this.items = content.data;
 
       }
+        if(content.meta && content.meta.current_page){
+
       this.currentPage = content.meta.current_page;
+      this.lastPage = content.meta.last_page;
+      }
       this.pagData = {
         links: content.links,
         meta: content.meta,
@@ -113,8 +117,7 @@ export default {
       if (this.items.length == 0) {
         window.notify("Nothing found,Sorry", "info");
       }
-      this.lastPage = content.meta.last_page;
-      this.currentPage = content.meta.current_page;
+      
     },
     getObjectKey(value, o) {
       let returnValue = "";
