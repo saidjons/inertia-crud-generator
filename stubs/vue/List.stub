@@ -1,5 +1,5 @@
 <script>
- 
+
 
 import InputField from "@/Components/Fields/Input.vue";
 import CellAction from "@/Components/Tables/TableUI/CellAction.vue";
@@ -11,8 +11,8 @@ export default {
     CellAction,
   },
   mounted() {
-    
- 
+
+
     if (this.getUrlParameter("per_page")) {
       this.perPage = this.getUrlParameter("per_page");
     }
@@ -117,7 +117,7 @@ export default {
       if (this.items.length == 0) {
         window.notify("Nothing found,Sorry", "info");
       }
-      
+
     },
     getObjectKey(value, o) {
       let returnValue = "";
@@ -197,11 +197,11 @@ export default {
       this.serverItemsLength = this.items.length;
       this.updateUrlQuery();
     },
-    
+
   },
   data() {
     return {
-     
+
 
         headings: [
             {{tableHeadingItems}}
@@ -223,7 +223,9 @@ export default {
         sortBy: "id",
         sortType: "asc",
       },
-      pagData: null,
+      pagData: {
+        meta:{}
+      },
       isFirstPage: false,
       isLastPage: false,
       currentPaginationNumber: 1,
@@ -274,7 +276,7 @@ export default {
             }"
             @updatePage="updatePage"
           >
-            Current Page: {{ currentPage }} /
+            Current Page: {{ currentPage }} /{{pagData.meta.last_page}}
             <button class="px-2 py-1 mx-2 hover:bg-green-400 ring-1" @click="prevPage">
               prev page
             </button>
