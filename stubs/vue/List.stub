@@ -53,7 +53,7 @@ export default {
             Accept: "application/json",
             "Content-Type": "application/json",
             "X-CSRF-TOKEN": this.$page.props.csrf,
-            "Authorization": "Bearer " + this.$page.props.user.token,
+            "Authorization": "Bearer " + this.$page.props.auth.user.token,
           },
           id: data,
         })
@@ -96,7 +96,7 @@ export default {
           Accept: "application/json",
           "Content-Type": "application/json",
           "X-CSRF-TOKEN": this.$page.props.csrf,
-          Authorization: "Bearer " + this.$page.props.user.token,
+          Authorization: "Bearer " + this.$page.props.auth.user.token,
         },
       });
 
@@ -205,6 +205,8 @@ export default {
 
         headings: [
             {{tableHeadingItems}}
+          { text: "action", cell: "action", sortable: true, value: "action" },
+
           ],
       items: [],
       selectedRows: [],

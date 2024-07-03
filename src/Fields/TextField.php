@@ -42,7 +42,6 @@ class TextField extends BaseField
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
  
-            "viewHtmlField" => "",
  
             
             "viewHtmlField" =>$this->replaceArray($this->viewHtmlTemp,$this->data),
