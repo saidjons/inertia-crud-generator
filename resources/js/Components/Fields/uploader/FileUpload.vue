@@ -18,6 +18,7 @@ export default {
             type: String
         }
     },
+    emits:["upload"],
     components: { Loader },
     mounted() {
         if (this.initialValue) {
@@ -64,7 +65,7 @@ export default {
                     headers: {
                         Accept: 'application/json',
                         'X-CSRF-TOKEN': this.$page.props.csrf,
-                        Authorization: 'Bearer ' + this.$page.props.user.token
+                        Authorization: 'Bearer ' + this.$page.props.auth.user.token
                     }
                 })
                 .then(res => {
@@ -97,7 +98,7 @@ export default {
                             'Content-Type': 'multipart/form-data',
                             'X-CSRF-TOKEN': this.$page.props.csrf,
                             Authorization:
-                                'Bearer ' + this.$page.props.user.token
+                                'Bearer ' + this.$page.props.auth.user.token
                         }
                     })
                     .then(res => {
@@ -117,7 +118,7 @@ export default {
                     })
             }
             this.loading = false
-            this.media_emit()
+            this.emitUploaded()
         },
         remove(index) {
             this.deleteFile(index)
@@ -132,18 +133,11 @@ export default {
             this.visible = !this.visible
         },
         emitUploaded() {
-            if (this.multiple == false) {
-                this.$emit('uploaded', {
+                this.$emit('upload', {
                     name: this.name,
-                    value: this.media[0].url ?? null
+                    value: this.media ?? null
                 })
-            } else {
-                // later to be implemented
-                //  this.$emit('imageUploaded',{
-                //     name:this.name,
-                //     value:this.media[0].url,
-                // })
-            }
+
         }
     },
 

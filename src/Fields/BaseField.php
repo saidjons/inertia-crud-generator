@@ -22,8 +22,16 @@ abstract class BaseField
 
     public   $setFunctionTemp = "\t\t\t 
     \t\t\tset{{fieldNameUp}}(data){\n
+            console.log(data.value)
+        if(data.value.length){
+          this.audio = data.value[0].url;
+
+        }else{
+
+          this.audio = null;
+        }
       \t\t\tthis.{{fieldName}} = data.value \n
-      \t\t\t},\n"; 
+      \t\t\t},\n";  
 
       
      public $onMountedMethodTemp = "\t\t\t this.{{fieldName}}();\n";
