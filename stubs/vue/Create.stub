@@ -47,13 +47,16 @@ export default {
     store(){
 			this.errors = null
 			 window.axios.post(this.$restifyApiUrl+'{{modelUp}}',{
+				
+					{{postField}}
+			},
+			{
 				headers: { 
 					'Accept':'application/json',
 					'X-CSRF-TOKEN' : this.$page.props.csrf,
-      'Authorization' : 'Bearer ' + this.$page.props.user.token
+      'Authorization' : 'Bearer ' + this.$page.props.auth.user.token
 			
 			} ,
-					{{postField}}
 			}) 
 				.then(res=> { 
 					console.log(res);

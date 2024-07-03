@@ -49,13 +49,15 @@ export default {
     edit(){
 			this.errors = null
 			 window.axios.put(this.$restifyApiUrl+`/{{modelUp}}/${this.id}`,{
+			 
+					{{postField}}
+			},{
 				headers: { 
 					'Accept':'application/json',
 					'X-CSRF-TOKEN' : this.$page.props.csrf,
-      'Authorization' : 'Bearer ' + this.$page.props.user.token
+      'Authorization' : 'Bearer ' + this.$page.props.auth.user.token
 			
 			} ,
-					{{postField}}
 			}) 
 				.then(res=> { 
 					console.log(res);

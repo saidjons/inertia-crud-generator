@@ -34,7 +34,7 @@ class RelationField extends BaseField
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN' :this.\$page.props.csrf,
-        'Authorization' : 'Bearer ' + this.\$page.props.token,
+        'Authorization' : 'Bearer ' + this.\$page.props.auth.user.token,
         }
            });
             const content = await rawResponse.json();
